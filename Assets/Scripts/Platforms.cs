@@ -9,6 +9,8 @@ public class Platforms : MonoBehaviour
     // Variable that can be set in unity for the number of seconds before a platforms disappears
     public float countDown;
 
+    public bool spawnPlat = false;
+
     // How many platforms are placed consecutively
     private int consecutivePlaced;
     // The direction in which the platforms should spawn
@@ -31,6 +33,11 @@ public class Platforms : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (spawnPlat)
+        {
+            SpawnPlatform();
+        }
+        spawnPlat = false;
     }
 
     // Function to spawn a new platform
