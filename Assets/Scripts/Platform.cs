@@ -56,12 +56,11 @@ public class Platform : MonoBehaviour
         if (col.gameObject.tag == "Player")
         {
             // TODO: Fix this if statement so that it doesnt break the game trying to spawn another platform
-            /* 
             // If the countDown equals initialCountDown (which it will, only the first time that the player touches the platform) then spawn another platform
-            if(this.countDown == initialCountDown)
+            if(countDown == initialCountDown)
             {
-                platforms.SpawnPlatform();
-            } */
+                platforms.spawnPlat = true;
+            }
 
             // deltaY is the difference between the player's height and the platform's height
             float deltaY = col.gameObject.transform.position.y - transform.position.y;
