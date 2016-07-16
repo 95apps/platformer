@@ -61,11 +61,6 @@ public class Platform : MonoBehaviour
         // If the object that collided with this is the player (Which it always is, but its here for safety)...
         if (col.gameObject.tag == "Player")
         {
-            // If the countDown equals initialCountDown (which it will, only the first time that the player touches the platform) then spawn another platform
-            if(countDown == initialCountDown)
-            {
-                platforms.SpawnPlatform();
-            }
 
             // deltaY is the difference between the player's height and the platform's height
             float deltaY = col.gameObject.transform.position.y - transform.position.y;
@@ -73,6 +68,11 @@ public class Platform : MonoBehaviour
             // We need this because when the player lands on the platform it doesn't instantly level out, it goes below for a few frames because of momentum
             if ((deltaY >= 0.9f) && (deltaY <= 1f))
             {
+                // If the countDown equals initialCountDown (which it will, only the first time that the player touches the platform) then spawn another platform
+                if (countDown == initialCountDown)
+                {
+                    platforms.SpawnPlatform();
+                }
                 startDisappear = true;
             }
         }
