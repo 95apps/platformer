@@ -9,8 +9,6 @@ public class Platforms : MonoBehaviour
     // Variable that can be set in unity for the number of seconds before a platforms disappears
     public float countDown;
 
-    public bool spawnPlat = false;
-
     // How many platforms are placed consecutively
     private int consecutivePlaced;
     // The direction in which the platforms should spawn
@@ -33,11 +31,6 @@ public class Platforms : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (spawnPlat)
-        {
-            SpawnPlatform();
-        }
-        spawnPlat = false;
     }
 
     // Function to spawn a new platform
@@ -55,6 +48,10 @@ public class Platforms : MonoBehaviour
         float randomCord = Random.Range(-4f, 4f);
         // Instantiates a new platform prefab
         GameObject newPlat = Instantiate(Resources.Load("Platform")) as GameObject;
+
+        // This line calls the initialize funcition of the newley created platform and passes this to be the "platforms" variable
+        newPlat.GetComponent<Platform>().Initialize(this);
+
         // These if statements determine in which direction the tiles should spawn in. if the remainder of direction equals 0, spawn on z positive, etc.
         if(direction % 4 == 0)
         {

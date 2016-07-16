@@ -16,6 +16,12 @@ public class Platform : MonoBehaviour
     // The variable assigned to the "Platforms" empty in unity
     public Platforms platforms;
 
+    // This initialize funciton is called by the "platforms" empty when Instanciating a new platform 
+    //in order to pass the empty into the platform's "platforms" variable
+    public void Initialize(Platforms plats){
+        platforms = plats;
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -55,11 +61,10 @@ public class Platform : MonoBehaviour
         // If the object that collided with this is the player (Which it always is, but its here for safety)...
         if (col.gameObject.tag == "Player")
         {
-            // TODO: Fix this if statement so that it doesnt break the game trying to spawn another platform
             // If the countDown equals initialCountDown (which it will, only the first time that the player touches the platform) then spawn another platform
             if(countDown == initialCountDown)
             {
-                platforms.spawnPlat = true;
+                platforms.SpawnPlatform();
             }
 
             // deltaY is the difference between the player's height and the platform's height
