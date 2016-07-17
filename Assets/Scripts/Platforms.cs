@@ -13,10 +13,13 @@ public class Platforms : MonoBehaviour
     private int consecutivePlaced;
     // The direction in which the platforms should spawn
     private int direction;
+    // The player's score. It is in this file and not in the player script because it needs to be used by the platforms.
+    public int score;
 
     // Use this for initialization
     void Start()
     {
+        score = 0;
         // Define the platforms list as a new List of GameObjects
         platforms = new List<GameObject>();
         // Add the first platforms already in the scene to the list of platforms

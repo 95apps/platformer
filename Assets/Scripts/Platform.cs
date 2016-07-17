@@ -56,7 +56,7 @@ public class Platform : MonoBehaviour
         }
     }
 
-    void OnCollisionStay(Collision col)
+    void OnCollisionEnter(Collision col)
     {
         // If the object that collided with this is the player (Which it always is, but its here for safety)...
         if (col.gameObject.tag == "Player")
@@ -71,6 +71,8 @@ public class Platform : MonoBehaviour
                 // If the countDown equals initialCountDown (which it will, only the first time that the player touches the platform) then spawn another platform
                 if (countDown == initialCountDown)
                 {
+                    platforms.score++;
+                    print(platforms.score);
                     platforms.SpawnPlatform();
                 }
                 startDisappear = true;
