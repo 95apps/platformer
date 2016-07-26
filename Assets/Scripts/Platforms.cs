@@ -44,6 +44,9 @@ public class Platforms : MonoBehaviour
         {
             consecutivePlaced = 0;
             direction++;
+            if(direction >= 4){
+                direction = 0;
+            }
         }
         // Saves the position of the last platform spawned in a Vector3
         Vector3 lastPlatPosition = platforms[platforms.Count - 1].transform.localPosition;
@@ -56,17 +59,17 @@ public class Platforms : MonoBehaviour
         newPlat.GetComponent<Platform>().Initialize(this);
 
         // These if statements determine in which direction the tiles should spawn in. if the remainder of direction equals 0, spawn on z positive, etc.
-        if(direction % 4 == 0)
+        if(direction == 0)
         {
             // Positions the newly created platform respectively
             newPlat.transform.position = new Vector3(lastPlatPosition.x + randomCord, lastPlatPosition.y + 1, lastPlatPosition.z + 3);
-        } if (direction % 4 == 1)
+        } if (direction == 1)
         {
             newPlat.transform.position = new Vector3(lastPlatPosition.x + 3, lastPlatPosition.y + 1, lastPlatPosition.z + randomCord);
-        } if (direction % 4 == 2)
+        } if (direction == 2)
         {
             newPlat.transform.position = new Vector3(lastPlatPosition.x + randomCord, lastPlatPosition.y + 1, lastPlatPosition.z - 3);
-        } if (direction % 4 == 3)
+        } if (direction == 3)
         {
             newPlat.transform.position = new Vector3(lastPlatPosition.x - 3, lastPlatPosition.y + 1, lastPlatPosition.z + randomCord);
         }

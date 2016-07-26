@@ -11,7 +11,7 @@ public class Platform : MonoBehaviour
     private Renderer platRender;
 
     // Boolean variable to dictate whether the platform should start to disppear or not
-    private bool startDisappear = false;
+    public bool startDisappear = false;
 
     // The variable assigned to the "Platforms" empty in unity
     public Platforms platforms;
