@@ -8,17 +8,20 @@ public class Platforms : MonoBehaviour
     public List<GameObject> platforms;
     // Variable that can be set in unity for the number of seconds before a platforms disappears
     public float countDown;
+    // The direction in which the platforms should spawn
+    public int direction;
+    public int consecutiveJumped;
+    public float rotationAngleMultiplier;
 
     // How many platforms are placed consecutively
     private int consecutivePlaced;
-    // The direction in which the platforms should spawn
-    private int direction;
     // The player's score. It is in this file and not in the player script because it needs to be used by the platforms.
     public int score;
 
     // Use this for initialization
     void Start()
     {
+        rotationAngleMultiplier = 2;
         score = 0;
         // Define the platforms list as a new List of GameObjects
         platforms = new List<GameObject>();

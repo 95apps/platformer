@@ -3,13 +3,15 @@ using System.Collections;
 
 public class Player : MonoBehaviour
 {
+    // Platforms empty
+    public Platforms platforms;
     // Most of these variables are pretty self explanatory
-    // rb is the RigidBody component of the player
-    private Rigidbody rb;
     public float movingSpeed = 5.0f;
+    public int jumpHeight;
     // Don't change jumpSpeed, jumpHeight is the only one that should be changed for different jump heights
     private float jumpSpeed;
-    public int jumpHeight;
+    // rb is the RigidBody component of the player
+    private Rigidbody rb;
     // This velocity variable is used in the jump function
     private Vector3 velocity;
 
@@ -48,7 +50,16 @@ public class Player : MonoBehaviour
         float moveRightLeft = Input.GetAxis("Horizontal");
         float moveUpDown = Input.GetAxis("Vertical");
         // Sets the velocity of the player to moveSpeed times arrow key input (0 to 1 or -1)
-        rb.velocity = new Vector3(moveRightLeft * movingSpeed, rb.velocity.y, moveUpDown * movingSpeed);
+        
+        if(platforms.consecutiveJumped < 4){
+            rb.velocity = new Vector3(moveRightLeft * movingSpeed, rb.velocity.y, moveUpDown * movingSpeed);
+        } else if(platforms.consecutiveJumped >= 4 && platforms.consecutiveJumped <8){
+            rb.velocity = new Vector3(moveUpDown * movingSpeed, rb.velocity.y, -(moveRightLeft * movingSpeed));
+        } else if(platforms.consecutiveJumped >= 8 && platforms.consecutiveJumped <12){
+            rb.velocity = new Vector3(-(moveRightLeft * movingSpeed), rb.velocity.y, -(moveUpDown * movingSpeed));
+        } else if(platforms.consecutiveJumped >= 12 && platforms.consecutiveJumped <16){
+            rb.velocity = new Vector3(-(moveUpDown * movingSpeed), rb.velocity.y, moveUpDown * movingSpeed);
+        }
     }
 
     // Function to make the player jump

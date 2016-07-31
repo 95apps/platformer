@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Platform : MonoBehaviour
 {
@@ -71,6 +72,10 @@ public class Platform : MonoBehaviour
                 // If the countDown equals initialCountDown (which it will, only the first time that the player touches the platform) then spawn another platform
                 if (countDown == initialCountDown)
                 {
+                    platforms.consecutiveJumped++;
+		            if(Array.IndexOf(new [] {0, 4, 8, 12}, platforms.consecutiveJumped) > -1){
+			            platforms.rotationAngleMultiplier++;
+		            }
                     platforms.score++;
                     print(platforms.score);
                     platforms.SpawnPlatform();
