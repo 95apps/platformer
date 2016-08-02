@@ -58,7 +58,10 @@ public class Player : MonoBehaviour
         } else if(platforms.consecutiveJumped >= 8 && platforms.consecutiveJumped <12){
             rb.velocity = new Vector3(-(moveRightLeft * movingSpeed), rb.velocity.y, -(moveUpDown * movingSpeed));
         } else if(platforms.consecutiveJumped >= 12 && platforms.consecutiveJumped <16){
-            rb.velocity = new Vector3(-(moveUpDown * movingSpeed), rb.velocity.y, moveUpDown * movingSpeed);
+            rb.velocity = new Vector3(-(moveUpDown * movingSpeed), rb.velocity.y, moveRightLeft * movingSpeed);
+        }
+        if(platforms.consecutiveJumped == 16){
+            platforms.consecutiveJumped = 0;
         }
     }
 

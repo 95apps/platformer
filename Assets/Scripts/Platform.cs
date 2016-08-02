@@ -73,7 +73,7 @@ public class Platform : MonoBehaviour
                 if (countDown == initialCountDown)
                 {
                     platforms.consecutiveJumped++;
-		            if(Array.IndexOf(new [] {0, 4, 8, 12}, platforms.consecutiveJumped) > -1){
+		            if(platforms.consecutiveJumped % 4 == 0){
 			            platforms.rotationAngleMultiplier++;
 		            }
                     platforms.score++;

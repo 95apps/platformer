@@ -45,7 +45,7 @@ public class Platforms : MonoBehaviour
         // If 4 blocks have spawned changes direction in which the cubes spawn (adds 1 to the variable "direction")
         if(consecutivePlaced == 3)
         {
-            consecutivePlaced = 0;
+            consecutivePlaced = -1;
             direction++;
             if(direction >= 4){
                 direction = 0;
