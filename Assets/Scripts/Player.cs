@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
         if (rb.velocity.y == 0)
         {
             // If the spacebar is pressed...
-			if (Input.GetKeyDown(KeyCode.Space) && Raycast.onGround == true )
+			if (Input.GetKey(KeyCode.Space) && Raycast.onGround == true )
             {
                 velocity = rb.velocity;
                 // Changes the vertical velocity of the player to jumpSpeed
