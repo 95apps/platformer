@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
     // This velocity variable is used in the jump function
     private Vector3 velocity;
+	private Raycast Raycast;
+	public bool onGround;
 
     // Use this for initialization
     void Start()
@@ -24,6 +26,8 @@ public class Player : MonoBehaviour
         rb.freezeRotation = true;
         // Line I got from the internet, makes it so that jumpSpeed is euqal to the amount of force required to jump up to jumpHeight
         jumpSpeed = Mathf.Sqrt(-2 * Physics.gravity.y * jumpHeight) + 0.1f;
+		Raycast = GetComponent<Raycast> ();
+
     }
 
     // Update is called once per frame
@@ -72,7 +76,7 @@ public class Player : MonoBehaviour
         if (rb.velocity.y == 0)
         {
             // If the spacebar is pressed...
-            if (Input.GetKeyDown(KeyCode.Space))
+			if (Input.GetKeyDown(KeyCode.Space) && Raycast.onGround == true )
             {
                 velocity = rb.velocity;
                 // Changes the vertical velocity of the player to jumpSpeed
