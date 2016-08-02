@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: e08bbfeacd80b4d919dfeb1f8dae65a7
-timeCreated: 1468101992
+timeCreated: 1470172082
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - platforms: {instanceID: 0}
+  - bounceSound: {fileID: 8300000, guid: 7404ece12fa454977be245a1a30e9106, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

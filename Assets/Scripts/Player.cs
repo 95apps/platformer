@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+
 public class Player : MonoBehaviour
 {
     // Platforms empty
@@ -16,6 +18,8 @@ public class Player : MonoBehaviour
     private Vector3 velocity;
 	private Raycast Raycast;
 	public bool onGround;
+	public AudioClip[] bounceSounds;
+	AudioSource mySound;
 
     // Use this for initialization
     void Start()
@@ -27,6 +31,9 @@ public class Player : MonoBehaviour
         // Line I got from the internet, makes it so that jumpSpeed is euqal to the amount of force required to jump up to jumpHeight
         jumpSpeed = Mathf.Sqrt(-2 * Physics.gravity.y * jumpHeight) + 0.1f;
 		Raycast = GetComponent<Raycast> ();
+		mySound = GetComponent<AudioSource> ();
+
+
 
     }
 
@@ -78,10 +85,15 @@ public class Player : MonoBehaviour
             // If the spacebar is pressed...
 			if (Input.GetKey(KeyCode.Space) && Raycast.onGround == true )
             {
+				
                 velocity = rb.velocity;
                 // Changes the vertical velocity of the player to jumpSpeed
                 velocity.y = jumpSpeed;
                 rb.velocity = velocity;
+
+			
+				mySound.PlayOneShot (bounceSounds[Random.Range(0,bounceSounds.Length)], 0.8f);
+
             }
         }
     }
