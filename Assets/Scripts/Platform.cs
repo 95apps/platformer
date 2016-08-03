@@ -17,6 +17,8 @@ public class Platform : MonoBehaviour
     // The variable assigned to the "Platforms" empty in unity
     public Platforms platforms;
 
+    public GameObject scoreText;
+
     // This initialize funciton is called by the "platforms" empty when Instanciating a new platform 
     //in order to pass the empty into the platform's "platforms" variable
     public void Initialize(Platforms plats){

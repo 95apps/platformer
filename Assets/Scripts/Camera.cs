@@ -10,7 +10,7 @@ public class Camera : MonoBehaviour {
 
 	private bool smooth = true;
 	private bool firstRotate = false;
-	private Vector3 offset = new Vector3(0, 4f, -10f);
+	private Vector3 offset = new Vector3(0, 2.75f, -7.5f);
 	private float angle = 180f;
 	private float rotateToThis;
 
@@ -45,8 +45,8 @@ public class Camera : MonoBehaviour {
 			angle = rotateToThis;
 			transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotateToThis - 180, transform.eulerAngles.z);
 		}
-		double x = 10 * Mathf.Sin(angle * Mathf.PI / 180f);
-		double z = 10 * Mathf.Cos(angle * Mathf.PI / 180f);
-		offset = new Vector3((float) x, 4f, (float) z);
+		double x = 7.5 * Mathf.Sin(angle * Mathf.PI / 180f);
+		double z = 7.5 * Mathf.Cos(angle * Mathf.PI / 180f);
+		offset = new Vector3((float) x, 2.75f, (float) z);
 	}
 }

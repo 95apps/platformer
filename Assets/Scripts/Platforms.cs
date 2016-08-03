@@ -15,6 +15,8 @@ public class Platforms : MonoBehaviour
 
     // How many platforms are placed consecutively
     private int consecutivePlaced;
+
+    private int consecutiveSpawned;
     // The player's score. It is in this file and not in the player script because it needs to be used by the platforms.
     public int score;
 
@@ -66,15 +68,19 @@ public class Platforms : MonoBehaviour
         {
             // Positions the newly created platform respectively
             newPlat.transform.position = new Vector3(lastPlatPosition.x + randomCord, lastPlatPosition.y + 1, lastPlatPosition.z + 3);
+            newPlat.transform.eulerAngles = new Vector3(0, 0, 0);
         } if (direction == 1)
         {
             newPlat.transform.position = new Vector3(lastPlatPosition.x + 3, lastPlatPosition.y + 1, lastPlatPosition.z + randomCord);
+            newPlat.transform.eulerAngles = new Vector3(0, 90, 0);
         } if (direction == 2)
         {
             newPlat.transform.position = new Vector3(lastPlatPosition.x + randomCord, lastPlatPosition.y + 1, lastPlatPosition.z - 3);
+            newPlat.transform.eulerAngles = new Vector3(0, 180, 0);
         } if (direction == 3)
         {
             newPlat.transform.position = new Vector3(lastPlatPosition.x - 3, lastPlatPosition.y + 1, lastPlatPosition.z + randomCord);
+            newPlat.transform.eulerAngles = new Vector3(0, 270, 0);
         }
         // Makes this (the "Platforms" empty) the parent of the newly created platform
         newPlat.transform.parent = this.transform;
@@ -82,5 +88,7 @@ public class Platforms : MonoBehaviour
         platforms.Add(newPlat);
         // Adds 1 to consecutivePlaced
         consecutivePlaced++;
+        consecutiveSpawned++;
+        newPlat.GetComponent<Platform>().scoreText.GetComponent<TextMesh>().text = consecutiveSpawned.ToString();
     }
 }

@@ -11,20 +11,18 @@ public class Floor : MonoBehaviour {
 	// This is the platform object used to dictate when the floor should begin to disappear
 	public Platform platform;
 
-	// The renderer component of the platform used to change the color
-	private Renderer platRender;
+    private Rigidbody rb;
 
 	// Use this for initialization
 	void Start () {
         // Defines the platform renderer
-        platRender = GetComponent<Renderer>();
 		countDown = initialCountDown;
+        rb = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(platform.startDisappear){
-			countDown -= Time.deltaTime;
 			DestroyGround();
 		}
 	}
@@ -32,13 +30,7 @@ public class Floor : MonoBehaviour {
     // This funciton changes the colour of and destroys the platform
     private void DestroyGround()
     {
-        // Change the colour of the platform by linearly interpoplating between red and the original color by countDown / initialCountDown which will always return a number between 0 and 1
-		Color currentColor = platRender.material.color;
-        platRender.material.color = Color32.Lerp(Color.red, currentColor, (countDown / initialCountDown));
-        // If countDown reaches 0, destroy the platform
-        if (countDown <= 0f)
-        {
-            Destroy(this.gameObject);
-        }
+            rb.useGravity = true;
+            rb.isKinematic = false;
     }
 }
