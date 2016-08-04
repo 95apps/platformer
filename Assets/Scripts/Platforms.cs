@@ -12,11 +12,12 @@ public class Platforms : MonoBehaviour
     public int direction;
     public int consecutiveJumped;
     public float rotationAngleMultiplier;
+    public float platSpeed;
 
     // How many platforms are placed consecutively
-    private int consecutivePlaced;
+    public int consecutivePlaced;
 
-    private int consecutiveSpawned;
+    public int consecutiveSpawned;
     // The player's score. It is in this file and not in the player script because it needs to be used by the platforms.
     public int score;
 
@@ -45,7 +46,7 @@ public class Platforms : MonoBehaviour
     public void SpawnPlatform()
     {
         // If 4 blocks have spawned changes direction in which the cubes spawn (adds 1 to the variable "direction")
-        if(consecutivePlaced == 3)
+        if (consecutivePlaced == 3)
         {
             consecutivePlaced = -1;
             direction++;
@@ -53,6 +54,9 @@ public class Platforms : MonoBehaviour
                 direction = 0;
             }
         }
+        // Adds 1 to consecutivePlaced
+        consecutivePlaced++;
+        consecutiveSpawned++;
         // Saves the position of the last platform spawned in a Vector3
         Vector3 lastPlatPosition = platforms[platforms.Count - 1].transform.localPosition;
         // Creates a random number in a specified range to be used for platform spawning
@@ -61,34 +65,31 @@ public class Platforms : MonoBehaviour
         GameObject newPlat = Instantiate(Resources.Load("Platform")) as GameObject;
 
         // This line calls the initialize funcition of the newley created platform and passes this to be the "platforms" variable
-        newPlat.GetComponent<Platform>().Initialize(this);
+        newPlat.GetComponent<Platform>().Initialize(this, direction, consecutiveSpawned , consecutivePlaced);
 
         // These if statements determine in which direction the tiles should spawn in. if the remainder of direction equals 0, spawn on z positive, etc.
         if(direction == 0)
         {
             // Positions the newly created platform respectively
-            newPlat.transform.position = new Vector3(lastPlatPosition.x + randomCord, lastPlatPosition.y + 1, lastPlatPosition.z + 3);
+            newPlat.transform.position = new Vector3(lastPlatPosition.x + randomCord, lastPlatPosition.y + 1.1f, lastPlatPosition.z + 4);
             newPlat.transform.eulerAngles = new Vector3(0, 0, 0);
         } if (direction == 1)
         {
-            newPlat.transform.position = new Vector3(lastPlatPosition.x + 3, lastPlatPosition.y + 1, lastPlatPosition.z + randomCord);
+            newPlat.transform.position = new Vector3(lastPlatPosition.x + 4, lastPlatPosition.y + 1.1f, lastPlatPosition.z + randomCord);
             newPlat.transform.eulerAngles = new Vector3(0, 90, 0);
         } if (direction == 2)
         {
-            newPlat.transform.position = new Vector3(lastPlatPosition.x + randomCord, lastPlatPosition.y + 1, lastPlatPosition.z - 3);
+            newPlat.transform.position = new Vector3(lastPlatPosition.x + randomCord, lastPlatPosition.y + 1.1f, lastPlatPosition.z - 4);
             newPlat.transform.eulerAngles = new Vector3(0, 180, 0);
         } if (direction == 3)
         {
-            newPlat.transform.position = new Vector3(lastPlatPosition.x - 3, lastPlatPosition.y + 1, lastPlatPosition.z + randomCord);
+            newPlat.transform.position = new Vector3(lastPlatPosition.x - 4, lastPlatPosition.y + 1.1f, lastPlatPosition.z + randomCord);
             newPlat.transform.eulerAngles = new Vector3(0, 270, 0);
         }
         // Makes this (the "Platforms" empty) the parent of the newly created platform
         newPlat.transform.parent = this.transform;
         // Adds the newly created platform to the platforms list
         platforms.Add(newPlat);
-        // Adds 1 to consecutivePlaced
-        consecutivePlaced++;
-        consecutiveSpawned++;
         newPlat.GetComponent<Platform>().scoreText.GetComponent<TextMesh>().text = consecutiveSpawned.ToString();
     }
 }
