@@ -10,6 +10,8 @@ public class Platform : MonoBehaviour
     private float initialCountDown;
     // The renderer component of the platform used to change the color
     private Renderer platRender;
+    private Rigidbody rb;
+    private bool playSound = true;
 
     // Boolean variable to dictate whether the platform should start to disppear or not
     public bool startDisappear = false;
@@ -19,7 +21,6 @@ public class Platform : MonoBehaviour
     public int consecutivePlaced;
 
     public GameObject scoreText;
-    private Rigidbody rb;
 
     public AudioClip[] fallSounds;
     AudioSource src;
@@ -39,6 +40,7 @@ public class Platform : MonoBehaviour
         initialCountDown = platforms.countDown;
         countDown = initialCountDown;
         rb = GetComponent<Rigidbody>();
+        src = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -63,7 +65,10 @@ public class Platform : MonoBehaviour
         {
             rb.isKinematic = false;
             rb.useGravity = true;
-            src.PlayOneShot(fallSounds[UnityEngine.Random.Range(0, 2)], 0.8f);
+            if(playSound){
+                src.PlayOneShot(fallSounds[UnityEngine.Random.Range(0, fallSounds.Length)], 0.8f);
+                playSound = false;
+            }
 
 
         }
