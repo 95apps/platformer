@@ -16,8 +16,13 @@ public class Platform : MonoBehaviour
 
     // The variable assigned to the "Platforms" empty in unity
     public Platforms platforms;
+    public int consecutivePlaced;
 
     public GameObject scoreText;
+    private Rigidbody rb;
+
+    public AudioClip[] fallSounds;
+    AudioSource src;
 
     // This initialize funciton is called by the "platforms" empty when Instanciating a new platform 
     //in order to pass the empty into the platform's "platforms" variable
@@ -33,6 +38,7 @@ public class Platform : MonoBehaviour
         // Defines initialCountDown as the countDown on the "Platforms" empty, set in unity
         initialCountDown = platforms.countDown;
         countDown = initialCountDown;
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -55,7 +61,11 @@ public class Platform : MonoBehaviour
         // If countDown reaches 0, destroy the platform
         if (countDown <= 0f)
         {
-            Destroy(this.gameObject);
+            rb.isKinematic = false;
+            rb.useGravity = true;
+            src.PlayOneShot(fallSounds[UnityEngine.Random.Range(0, 2)], 0.8f);
+
+
         }
     }
 
