@@ -8,10 +8,16 @@ public class Platform : MonoBehaviour
     private float countDown;
     // countDown variable to be used as reference by the code as the beginning of the countDown time, this is set to the countdown variable of the "Platforms" empty
     private float initialCountDown;
+    private int direction;
+    private int platsSpawned;
+    private int platsPlaced;
+
     // The renderer component of the platform used to change the color
     private Renderer platRender;
     private Rigidbody rb;
     private bool playSound = true;
+    private bool startMoving = false;
+    private AudioSource src;
 
     // Boolean variable to dictate whether the platform should start to disppear or not
     public bool startDisappear = false;
@@ -23,12 +29,27 @@ public class Platform : MonoBehaviour
     public GameObject scoreText;
 
     public AudioClip[] fallSounds;
-    AudioSource src;
+
+    public Renderer top;
+    public Renderer bot;
 
     // This initialize funciton is called by the "platforms" empty when Instanciating a new platform 
     //in order to pass the empty into the platform's "platforms" variable
-    public void Initialize(Platforms plats){
+    public void Initialize(Platforms plats, int dir, int consecutiveSpawned, int consecutivePlaced)
+    {
         platforms = plats;
+        direction = dir;
+        platsSpawned = consecutiveSpawned;
+        platsPlaced = consecutivePlaced;
+        if (platsSpawned >= 8)
+        {
+            if (UnityEngine.Random.Range(-1, 2) == platsPlaced)
+            {
+                startMoving = true;
+            }
+            top.material = platforms.mats[1];
+            bot.material = platforms.mats[1];
+        }
     }
 
     // Use this for initialization
@@ -65,7 +86,8 @@ public class Platform : MonoBehaviour
         {
             rb.isKinematic = false;
             rb.useGravity = true;
-            if(playSound){
+            if (playSound)
+            {
                 src.PlayOneShot(fallSounds[UnityEngine.Random.Range(0, fallSounds.Length)], 0.8f);
                 playSound = false;
             }
@@ -90,9 +112,10 @@ public class Platform : MonoBehaviour
                 if (countDown == initialCountDown)
                 {
                     platforms.consecutiveJumped++;
-		            if(platforms.consecutiveJumped % 4 == 0){
-			            platforms.rotationAngleMultiplier++;
-		            }
+                    if (platforms.consecutiveJumped % 4 == 0)
+                    {
+                        platforms.rotationAngleMultiplier++;
+                    }
                     platforms.score++;
                     print(platforms.score);
                     platforms.SpawnPlatform();

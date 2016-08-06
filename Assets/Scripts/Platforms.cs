@@ -20,6 +20,8 @@ public class Platforms : MonoBehaviour
     // The player's score. It is in this file and not in the player script because it needs to be used by the platforms.
     public int score;
 
+    public Material[] mats;
+
     // Use this for initialization
     void Start()
     {
@@ -30,7 +32,7 @@ public class Platforms : MonoBehaviour
         // Add the first platforms already in the scene to the list of platforms
         platforms.Add(transform.GetChild(0).gameObject);
         // Spawn 10 platforms
-        for(int i = 0; i < 10; i++)
+        for (int i = 0; i < 10; i++)
         {
             SpawnPlatform();
         }
@@ -45,11 +47,12 @@ public class Platforms : MonoBehaviour
     public void SpawnPlatform()
     {
         // If 4 blocks have spawned changes direction in which the cubes spawn (adds 1 to the variable "direction")
-        if(consecutivePlaced == 3)
+        if (consecutivePlaced == 3)
         {
             consecutivePlaced = -1;
             direction++;
-            if(direction >= 4){
+            if (direction >= 4)
+            {
                 direction = 0;
             }
         }
@@ -61,23 +64,26 @@ public class Platforms : MonoBehaviour
         GameObject newPlat = Instantiate(Resources.Load("Platform")) as GameObject;
 
         // This line calls the initialize funcition of the newley created platform and passes this to be the "platforms" variable
-        newPlat.GetComponent<Platform>().Initialize(this);
+        newPlat.GetComponent<Platform>().Initialize(this, direction, consecutiveSpawned, consecutivePlaced);
 
         // These if statements determine in which direction the tiles should spawn in. if the remainder of direction equals 0, spawn on z positive, etc.
-        if(direction == 0)
+        if (direction == 0)
         {
             // Positions the newly created platform respectively
             newPlat.transform.position = new Vector3(lastPlatPosition.x + randomCord, lastPlatPosition.y + 1f, lastPlatPosition.z + 4);
             newPlat.transform.eulerAngles = new Vector3(0, 0, 0);
-        } if (direction == 1)
+        }
+        if (direction == 1)
         {
             newPlat.transform.position = new Vector3(lastPlatPosition.x + 4, lastPlatPosition.y + 1f, lastPlatPosition.z + randomCord);
             newPlat.transform.eulerAngles = new Vector3(0, 90, 0);
-        } if (direction == 2)
+        }
+        if (direction == 2)
         {
             newPlat.transform.position = new Vector3(lastPlatPosition.x + randomCord, lastPlatPosition.y + 1f, lastPlatPosition.z - 4);
             newPlat.transform.eulerAngles = new Vector3(0, 180, 0);
-        } if (direction == 3)
+        }
+        if (direction == 3)
         {
             newPlat.transform.position = new Vector3(lastPlatPosition.x - 4, lastPlatPosition.y + 1f, lastPlatPosition.z + randomCord);
             newPlat.transform.eulerAngles = new Vector3(0, 270, 0);
