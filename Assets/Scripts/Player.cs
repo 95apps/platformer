@@ -17,7 +17,6 @@ public class Player : MonoBehaviour
     // This velocity variable is used in the jump function
     private Vector3 velocity;
 	private Raycast Raycast;
-	public bool onGround;
 	public AudioClip[] bounceSounds;
 	AudioSource mySound;
 
