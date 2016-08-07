@@ -21,6 +21,8 @@ public class Platforms : MonoBehaviour
     // The player's score. It is in this file and not in the player script because it needs to be used by the platforms.
     public int score;
 
+    public Material[] mats;
+
     // Use this for initialization
     void Start()
     {

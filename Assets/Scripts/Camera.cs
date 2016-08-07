@@ -21,7 +21,6 @@ public class Camera : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update(){
-		print(platforms.consecutiveJumped);
 	}
 	void LateUpdate () {
 
@@ -39,7 +38,7 @@ public class Camera : MonoBehaviour {
 
 	private void RotateCamera(){
 		rotateToThis = platforms.rotationAngleMultiplier * 90;
-		angle += 10;
+		angle += 540 * Time.deltaTime;
 		transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 10, transform.eulerAngles.z);
 		if(angle >= rotateToThis){
 			angle = rotateToThis;

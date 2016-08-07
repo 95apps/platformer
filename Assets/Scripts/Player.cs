@@ -9,8 +9,7 @@ public class Player : MonoBehaviour
     public Platforms platforms;
     // Most of these variables are pretty self explanatory
     public float movingSpeed = 5.0f;
-    public int jumpHeight;
-    // Don't change jumpSpeed, jumpHeight is the only one that should be changed for different jump heights
+    public float jumpHeight;    // Don't change jumpSpeed, jumpHeight is the only one that should be changed for different jump heights
     private float jumpSpeed;
     // rb is the RigidBody component of the player
     private Rigidbody rb;

@@ -15,8 +15,10 @@ public class Platform : MonoBehaviour
 
     // The renderer component of the platform used to change the color
     private Renderer platRender;
-
+    private Rigidbody rb;
+    private bool playSound = true;
     private bool startMoving = false;
+    private AudioSource src;
 
     private Vector3 xPos1;
     private Vector3 xPos2;
@@ -28,9 +30,155 @@ public class Platform : MonoBehaviour
 
     // The variable assigned to the "Platforms" empty in unity
     public Platforms platforms;
+    public int consecutivePlaced;
 
     public GameObject scoreText;
-    
+
+    public AudioClip[] fallSounds;
+
+    public Renderer top;
+    public Renderer bot;
+
+ 
+
+    // This initialize funciton is called by the "platforms" empty when Instanciating a new platform 
+    //in order to pass the empty into the platform's "platforms" variable
+    public void Initialize(Platforms plats, int dir, int consecutiveSpawned, int consecutivePlaced)
+    {
+        platforms = plats;
+        direction = dir;
+        platsSpawned = consecutiveSpawned;
+        platsPlaced = consecutivePlaced;
+        if (platsSpawned >= 8)
+        {
+            int randomNumber = UnityEngine.Random.Range(-1, 2);
+            if (randomNumber == platsPlaced)
+            {
+                startMoving = true;
+            }
+            top.material = platforms.mats[0];
+            bot.material = platforms.mats[0];
+        }
+
+        if (platsSpawned >= 16)
+        {
+         
+            top.material = platforms.mats[1];
+            bot.material = platforms.mats[1];
+        }
+
+        if (platsSpawned >= 24)
+        {
+
+            top.material = platforms.mats[2];
+            bot.material = platforms.mats[2];
+        }
+
+        if (platsSpawned >= 32)
+        {
+
+            top.material = platforms.mats[3];
+            bot.material = platforms.mats[3];
+        }
+
+        if (platsSpawned >= 40)
+        {
+
+            top.material = platforms.mats[4];
+            bot.material = platforms.mats[4];
+        }
+
+        if (platsSpawned >= 48)
+        {
+
+            top.material = platforms.mats[5];
+            bot.material = platforms.mats[5];
+        }
+
+        if (platsSpawned >= 56)
+        {
+
+            top.material = platforms.mats[6];
+            bot.material = platforms.mats[6];
+        }
+
+        if (platsSpawned >= 64)
+        {
+
+            top.material = platforms.mats[7];
+            bot.material = platforms.mats[7];
+        }
+
+        if (platsSpawned >= 72)
+        {
+
+            top.material = platforms.mats[8];
+            bot.material = platforms.mats[8];
+        }
+
+        if (platsSpawned >= 80)
+        {
+
+            top.material = platforms.mats[9];
+            bot.material = platforms.mats[9];
+        }
+
+        if (platsSpawned >= 88)
+        {
+
+            top.material = platforms.mats[10];
+            bot.material = platforms.mats[10];
+        }
+
+        if (platsSpawned >= 96)
+        {
+
+            top.material = platforms.mats[11];
+            bot.material = platforms.mats[11];
+        }
+
+        if (platsSpawned >= 104)
+        {
+
+            top.material = platforms.mats[12];
+            bot.material = platforms.mats[12];
+        }
+
+        if (platsSpawned >= 112)
+        {
+
+            top.material = platforms.mats[13];
+            bot.material = platforms.mats[13];
+        }
+
+        if (platsSpawned >= 120)
+        {
+
+            top.material = platforms.mats[14];
+            bot.material = platforms.mats[14];
+        }
+
+        if (platsSpawned >= 128)
+        {
+
+            top.material = platforms.mats[15];
+            bot.material = platforms.mats[15];
+        }
+        if (platsSpawned >= 136)
+        {
+
+            top.material = platforms.mats[16];
+            bot.material = platforms.mats[16];
+        }
+
+        if (platsSpawned >= 144)
+        {
+
+            top.material = platforms.mats[16];
+            bot.material = platforms.mats[16];
+        }
+
+    }
 
     // Use this for initialization
     void Start()
@@ -44,6 +192,8 @@ public class Platform : MonoBehaviour
         // Defines initialCountDown as the countDown on the "Platforms" empty, set in unity
         initialCountDown = platforms.countDown;
         countDown = initialCountDown;
+        rb = GetComponent<Rigidbody>();
+        src = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -62,26 +212,8 @@ public class Platform : MonoBehaviour
         }
     }
 
-    // This initialize funciton is called by the "platforms" empty when Instanciating a new platform 
-    //in order to pass the empty into the platform's "platforms" variable
-    public void Initialize(Platforms plats, int dir, int consecutiveSpawned, int consecutivePlaced)
-    {
-        platforms = plats;
-        direction = dir;
-        platsSpawned = consecutiveSpawned;
-        platsPlaced = consecutivePlaced;
-        if (platsSpawned >= 8)
-        {
-            if (UnityEngine.Random.Range(-1, 2) == platsPlaced)
-            {
-                startMoving = true;
-            }
-        }
-    }
-
     private void Move()
     {
-
         switch (direction)
         {
             case 0:
@@ -110,7 +242,16 @@ public class Platform : MonoBehaviour
         // If countDown reaches 0, destroy the platform
         if (countDown <= 0f)
         {
-            Destroy(this.gameObject);
+            startMoving = false;
+            rb.isKinematic = false;
+            rb.useGravity = true;
+            if (playSound)
+            {
+                src.PlayOneShot(fallSounds[UnityEngine.Random.Range(0, fallSounds.Length)], 0.8f);
+                playSound = false;
+            }
+
+
         }
     }
 
@@ -132,9 +273,10 @@ public class Platform : MonoBehaviour
                 if (countDown == initialCountDown)
                 {
                     platforms.consecutiveJumped++;
-		            if(platforms.consecutiveJumped % 4 == 0){
-			            platforms.rotationAngleMultiplier++;
-		            }
+                    if (platforms.consecutiveJumped % 4 == 0)
+                    {
+                        platforms.rotationAngleMultiplier++;
+                    }
                     platforms.score++;
                     print(platforms.score);
                     platforms.SpawnPlatform();
