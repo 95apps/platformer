@@ -267,7 +267,7 @@ public class Platform : MonoBehaviour
             float deltaZ = col.gameObject.transform.position.z - transform.position.z;
             // If deltaY is greater than or equal to 0.9 (margin of error, there's probably a better way to do this) and less than or equal to 1 then make the platform start disappearing
             // We need this because when the player lands on the platform it doesn't instantly level out, it goes below for a few frames because of momentum
-            if ((deltaY >= 0.9f) && Math.Abs(deltaX) < 1.25f && Math.Abs(deltaZ) < 1.25f)
+            if ((deltaY >= 0.9f) && Math.Abs(deltaX) < 1.325f && Math.Abs(deltaZ) < 1.325f)
             {
                 // If the countDown equals initialCountDown (which it will, only the first time that the player touches the platform) then spawn another platform
                 if (countDown == initialCountDown)
