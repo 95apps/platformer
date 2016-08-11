@@ -27,7 +27,7 @@ public class Platforms : MonoBehaviour
     void Start()
     {
         rotationAngleMultiplier = 2;
-        score = 0;
+        score = -1;
         // Define the platforms list as a new List of GameObjects
         platforms = new List<GameObject>();
         // Add the first platforms already in the scene to the list of platforms

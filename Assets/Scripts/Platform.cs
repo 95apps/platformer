@@ -279,6 +279,12 @@ public class Platform : MonoBehaviour
                     }
                     platforms.score++;
                     print(platforms.score);
+
+                    if (PlayerPrefs.GetFloat("Highscore") < platforms.score)
+                    {
+                        PlayerPrefs.SetFloat("Highscore", platforms.score);
+                    }
+
                     platforms.SpawnPlatform();
                 }
                 startDisappear = true;
