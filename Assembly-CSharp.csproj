@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{29D532F8-85F7-B9B2-8A66-961332EF7B4B}</ProjectGuid>
+    <ProjectGuid>{2C1582E4-A19E-5DC7-6261-F3A51F271932}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -53,6 +53,8 @@
      <Compile Include="Assets\Scripts\Platforms.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Raycast.cs" />
+     <None Include="Assets\SimpleTown\Changelog.txt" />
+     <None Include="Assets\SimpleSky\ReadMe.txt" />
      <None Include="Assets\read me.txt" />
      <None Include="Assets\Visuals\Shaders\Text Shader.shader" />
  <Reference Include="UnityEngine.UI">

@@ -20,6 +20,8 @@ public class Platform : MonoBehaviour
     private bool startMoving = false;
     private AudioSource src;
 
+    public ParticleSystem ps;
+
     private Vector3 xPos1;
     private Vector3 xPos2;
     private Vector3 zPos1;
@@ -39,7 +41,11 @@ public class Platform : MonoBehaviour
     public Renderer top;
     public Renderer bot;
 
- 
+    private ParticleSystem.EmissionModule em;
+
+   
+
+
 
     // This initialize funciton is called by the "platforms" empty when Instanciating a new platform 
     //in order to pass the empty into the platform's "platforms" variable
@@ -178,6 +184,8 @@ public class Platform : MonoBehaviour
             bot.material = platforms.mats[16];
         }
 
+       
+
     }
 
     // Use this for initialization
@@ -194,6 +202,10 @@ public class Platform : MonoBehaviour
         countDown = initialCountDown;
         rb = GetComponent<Rigidbody>();
         src = GetComponent<AudioSource>();
+        em = ps.emission;
+        em.enabled = false;
+
+
     }
 
     // Update is called once per frame
@@ -210,6 +222,18 @@ public class Platform : MonoBehaviour
         {
             Move();
         }
+
+        if (platsSpawned == PlayerPrefs.GetFloat("Highscore"))
+        {
+
+            top.material = platforms.mats[16];
+            bot.material = platforms.mats[16];
+
+            em.enabled = true;
+
+
+        }
+
     }
 
     private void Move()
