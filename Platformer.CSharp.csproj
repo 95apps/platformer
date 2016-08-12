@@ -58,6 +58,12 @@
     <Reference Include="UnityEngine.Networking">
       <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.Networking">
+      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
@@ -72,12 +78,15 @@
     <Compile Include="Assets\Scripts\Camera.cs" />
     <Compile Include="Assets\Scripts\DeathCube.cs" />
     <Compile Include="Assets\Scripts\Floor.cs" />
+    <Compile Include="Assets\Scripts\Highscore.cs" />
     <Compile Include="Assets\Scripts\Platform.cs" />
     <Compile Include="Assets\Scripts\Platforms.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\Raycast.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\SimpleSky\ReadMe.txt" />
+    <None Include="Assets\SimpleTown\Changelog.txt" />
     <None Include="Assets\Visuals\Shaders\Text Shader.shader" />
     <None Include="Assets\read me.txt" />
   </ItemGroup>
