@@ -42,8 +42,8 @@ public class Platform : MonoBehaviour
     public Renderer bot;
 
     private ParticleSystem.EmissionModule em;
+    float highscore;
 
-   
 
 
 
@@ -68,7 +68,7 @@ public class Platform : MonoBehaviour
 
         if (platsSpawned >= 16)
         {
-         
+
             top.material = platforms.mats[1];
             bot.material = platforms.mats[1];
         }
@@ -184,7 +184,7 @@ public class Platform : MonoBehaviour
             bot.material = platforms.mats[16];
         }
 
-       
+
 
     }
 
@@ -204,6 +204,10 @@ public class Platform : MonoBehaviour
         src = GetComponent<AudioSource>();
         em = ps.emission;
         em.enabled = false;
+
+        
+        highscore = PlayerPrefs.GetFloat("Highscore");
+        
 
 
     }
@@ -261,6 +265,9 @@ public class Platform : MonoBehaviour
     // This funciton changes the colour of and destroys the platform
     private void DestroyPlatform()
     {
+
+
+
         // Change the colour of the platform by linearly interpoplating between red and white by countDown / initialCountDown which will always return a number between 0 and 1
         platRender.material.color = Color32.Lerp(Color.red, Color.white, (countDown / initialCountDown));
         // If countDown reaches 0, destroy the platform
@@ -269,10 +276,13 @@ public class Platform : MonoBehaviour
             startMoving = false;
             rb.isKinematic = false;
             rb.useGravity = true;
+
+
             if (playSound)
             {
-                src.PlayOneShot(fallSounds[UnityEngine.Random.Range(0, fallSounds.Length)], 0.8f);
+                src.PlayOneShot(fallSounds[UnityEngine.Random.Range(0, 3)], 0.8f);
                 playSound = false;
+
             }
 
 
@@ -281,6 +291,8 @@ public class Platform : MonoBehaviour
 
     void OnCollisionStay(Collision col)
     {
+  
+    
         // If the object that collided with this is the player (Which it always is, but its here for safety)...
         if (col.gameObject.tag == "Player")
         {
@@ -306,7 +318,14 @@ public class Platform : MonoBehaviour
 
                     if (PlayerPrefs.GetFloat("Highscore") < platforms.score)
                     {
+ 
                         PlayerPrefs.SetFloat("Highscore", platforms.score);
+
+                    }
+
+                    if (platforms.score == highscore)
+                    {
+                        src.PlayOneShot(fallSounds[fallSounds.Length - 1], 0.8f);
                     }
 
                     platforms.SpawnPlatform();
@@ -316,3 +335,4 @@ public class Platform : MonoBehaviour
         }
     }
 }
+       
