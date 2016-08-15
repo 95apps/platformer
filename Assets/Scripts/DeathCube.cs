@@ -11,7 +11,8 @@ public class DeathCube : MonoBehaviour
     private Rigidbody playerRb;
     private Vector3 initialPos;
     private Vector3 playerVelocity;
-
+    public GameObject canvas;
+    public GameObject city;
     // Use this for initialization
     void Start()
     {
@@ -26,7 +27,11 @@ public class DeathCube : MonoBehaviour
     {
         if (playerDead)
         {
-            if (Input.GetMouseButton(0))
+            city.SetActive(false);
+            //canvas.SetActive(true);
+
+
+            if (Input.GetMouseButton(0) || Input.GetKey("space"))
             {
                 UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
             }

@@ -317,8 +317,12 @@ public class Platform : MonoBehaviour
 
                     if(platforms.score % 2 == 0)
                     {
-                        //clouds.SpawnClouds(); //rekt
-                      
+                        clouds.SpawnClouds(); //rekt
+                        clouds.SpawnClouds();
+                        clouds.SpawnClouds();
+                        clouds.SpawnClouds();
+                        clouds.SpawnClouds();
+
                     }
 
 

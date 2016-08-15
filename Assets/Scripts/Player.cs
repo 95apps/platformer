@@ -41,16 +41,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (platforms.consecutiveJumped > 0 && !deathCube.playerDead)
-        {
-            distanceTravelled += Vector3.Distance(transform.position, lastFramePosition);
-            lastFramePosition = transform.position;
-        }
-
-        if (deathCube.playerDead)
-        {
-            print(distanceTravelled);
-        }
+        
         // This if statement wakes the player so that even if the player is idle the collisions functions will run
         if (rb.IsSleeping())
         {
@@ -69,14 +60,20 @@ public class Player : MonoBehaviour
     // Function to move the player.
     private void Move()
     {
+        
+
         // Sets variables to the arrow key inputs
         float moveRightLeft = Input.GetAxis("Horizontal");
         float moveUpDown = Input.GetAxis("Vertical");
         // Sets the velocity of the player to moveSpeed times arrow key input (0 to 1 or -1)
 
+        
+
+
         if (platforms.consecutiveJumped < 4)
         {
             rb.velocity = new Vector3(moveRightLeft * movingSpeed, rb.velocity.y, moveUpDown * movingSpeed);
+            
         }
         else if (platforms.consecutiveJumped >= 4 && platforms.consecutiveJumped < 8)
         {
