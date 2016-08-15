@@ -1,17 +1,13 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class DeathCube : MonoBehaviour {
 
 	// This is the player object used to move the platform.
 	public Player player;
-
 	public GameObject playerRef;
-
+    public bool playerDead = false;
 	private Rigidbody playerRb;
-
-    private bool playerDead = false;
 	private Vector3 initialPos;
 	private Vector3 playerVelocity;
 
@@ -20,6 +16,7 @@ public class DeathCube : MonoBehaviour {
 		initialPos = transform.position;
 		initialPos.y -= 0.5f;
 		playerRb = player.GetComponent<Rigidbody>();
+		//cameraComponent = mainCamera.GetComponent<UnityEngine.Camera>();
 	}
 
     // Update is called once per frame
@@ -33,15 +30,14 @@ public class DeathCube : MonoBehaviour {
 			float deltaY = playerPos.y - transform.position.y;
 			if (deltaY < -10f){
 				Destroy(player.gameObject);
-
-
-             
-            }
+			}
 		}
 	}
 
 	void OnTriggerEnter(Collider col){
 		if(col.gameObject.tag == "Player"){
+			//cameraComponent.ViewportPointToRay()
+			playerDead = true;
 			playerRef.transform.parent = transform.parent;
 			playerVelocity = playerRb.velocity;
 		}
