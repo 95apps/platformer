@@ -21,6 +21,9 @@ public class Platforms : MonoBehaviour
     // The player's score. It is in this file and not in the player script because it needs to be used by the platforms.
     public int score;
 
+    public Clouds clouds;
+
+
     public Material[] mats;
 
     // Use this for initialization
@@ -68,7 +71,7 @@ public class Platforms : MonoBehaviour
         GameObject newPlat = Instantiate(Resources.Load("Platform")) as GameObject;
 
         // This line calls the initialize funcition of the newley created platform and passes this to be the "platforms" variable
-        newPlat.GetComponent<Platform>().Initialize(this, direction, consecutiveSpawned, consecutivePlaced);
+        newPlat.GetComponent<Platform>().Initialize(this, direction, consecutiveSpawned, consecutivePlaced, clouds);
 
         // These if statements determine in which direction the tiles should spawn in. if the remainder of direction equals 0, spawn on z positive, etc.
         if (direction == 0)

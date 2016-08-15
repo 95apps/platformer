@@ -44,13 +44,17 @@ public class Platform : MonoBehaviour
     private ParticleSystem.EmissionModule em;
     float highscore;
 
+    private Clouds clouds;
+
 
 
 
     // This initialize funciton is called by the "platforms" empty when Instanciating a new platform 
     //in order to pass the empty into the platform's "platforms" variable
-    public void Initialize(Platforms plats, int dir, int consecutiveSpawned, int consecutivePlaced)
+    public void Initialize(Platforms plats, int dir, int consecutiveSpawned, int consecutivePlaced, Clouds clouds)
     {
+        this.clouds = clouds;
+
         platforms = plats;
         direction = dir;
         platsSpawned = consecutiveSpawned;
@@ -205,9 +209,9 @@ public class Platform : MonoBehaviour
         em = ps.emission;
         em.enabled = false;
 
-        
+
         highscore = PlayerPrefs.GetFloat("Highscore");
-        
+
 
 
     }
@@ -277,6 +281,10 @@ public class Platform : MonoBehaviour
             rb.isKinematic = false;
             rb.useGravity = true;
 
+            if (transform.position.y < -20)
+            {
+                Destroy(this.gameObject);
+            }
 
             if (playSound)
             {
@@ -284,15 +292,13 @@ public class Platform : MonoBehaviour
                 playSound = false;
 
             }
-
-
         }
     }
 
     void OnCollisionStay(Collision col)
     {
-  
-    
+
+
         // If the object that collided with this is the player (Which it always is, but its here for safety)...
         if (col.gameObject.tag == "Player")
         {
@@ -308,6 +314,14 @@ public class Platform : MonoBehaviour
                 // If the countDown equals initialCountDown (which it will, only the first time that the player touches the platform) then spawn another platform
                 if (countDown == initialCountDown)
                 {
+
+                    if(platforms.score % 2 == 0)
+                    {
+                        //clouds.SpawnClouds(); //rekt
+                      
+                    }
+
+
                     platforms.consecutiveJumped++;
                     if (platforms.consecutiveJumped % 4 == 0)
                     {
@@ -318,7 +332,7 @@ public class Platform : MonoBehaviour
 
                     if (PlayerPrefs.GetFloat("Highscore") < platforms.score)
                     {
- 
+
                         PlayerPrefs.SetFloat("Highscore", platforms.score);
 
                     }
@@ -335,4 +349,3 @@ public class Platform : MonoBehaviour
         }
     }
 }
-       
