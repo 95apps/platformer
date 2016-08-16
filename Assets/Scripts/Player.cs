@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     private AudioSource mySound;
     private TrailRenderer trail;
 
+
     // Use this for initialization
     void Start()
     {
@@ -48,6 +49,9 @@ public class Player : MonoBehaviour
             rb.WakeUp();
         }
         trail.time += Time.deltaTime;
+
+        
+
     }
 
     // Fixed update is called at consistant intervals(for example, every 0.1 seconds) instead of every frame, making the physics smoother.
