@@ -15,6 +15,7 @@ public class Raycast : MonoBehaviour {
 	}
 
 
+
 	void Update () {
 		Vector3 dwn = transform.TransformDirection (new Vector3(0, -0.6f, 0)); // Length and direction of line.
 		// -0.5 would work but we want to give users fluidity when jumping.
@@ -34,7 +35,7 @@ public class Raycast : MonoBehaviour {
 			Physics.Raycast (transform.position + corner2, dwn, 0.6f) ||
 			Physics.Raycast (transform.position + corner3, dwn, 0.6f) ||
 			Physics.Raycast (transform.position + corner4, dwn, 0.6f)) {
-
+          
 			onGround = true;
 
 		} else {

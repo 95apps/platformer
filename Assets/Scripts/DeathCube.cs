@@ -13,12 +13,15 @@ public class DeathCube : MonoBehaviour
     private Vector3 playerVelocity;
     public GameObject canvas;
     public GameObject city;
+    private TrailRenderer trail;
+    private float startWidth;
     // Use this for initialization
     void Start()
     {
         initialPos = transform.position;
         initialPos.y -= 0.5f;
         playerRb = player.GetComponent<Rigidbody>();
+        trail = player.GetComponent<TrailRenderer>();
         //cameraComponent = mainCamera.GetComponent<UnityEngine.Camera>();
     }
 
@@ -28,6 +31,14 @@ public class DeathCube : MonoBehaviour
         if (playerDead)
         {
             city.SetActive(false);
+
+            if (trail.startWidth <= 0.5)
+            {
+
+                trail.startWidth = startWidth += Time.deltaTime/2;
+                trail.endWidth = startWidth += Time.deltaTime/2;
+
+            }
             //canvas.SetActive(true);
 
 
