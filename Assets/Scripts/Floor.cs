@@ -1,17 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class Floor : MonoBehaviour {
 
-	// countDown variable that will tell how long it will take for the floor to disappear
-	public float initialCountDown;
+    public DeathCube deathCube;
+
+    // countDown variable that will tell how long it will take for the floor to disappear
+    public float initialCountDown;
 
 	private float countDown;
 
 	// This is the platform object used to dictate when the floor should begin to disappear
 	public Platform platform;
-
+    public Platforms platforms;
     private Rigidbody rb;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -24,13 +28,17 @@ public class Floor : MonoBehaviour {
 	void Update () {
 		if(platform.startDisappear){
 			DestroyGround();
+            
 		}
 	}
 
     // This funciton changes the colour of and destroys the platform
     private void DestroyGround()
     {
-            rb.useGravity = true;
-            rb.isKinematic = false;
+            
+            rb.useGravity = false;
+            rb.isKinematic = true;
     }
+
+  
 }

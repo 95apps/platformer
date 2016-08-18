@@ -15,6 +15,7 @@ public class DeathCube : MonoBehaviour
     public GameObject city;
     private TrailRenderer trail;
     private float startWidth;
+    public Platforms platforms;
     // Use this for initialization
     void Start()
     {
@@ -31,6 +32,8 @@ public class DeathCube : MonoBehaviour
         if (playerDead)
         {
             city.SetActive(false);
+
+          
 
             if (trail.startWidth <= 0.5)
             {
@@ -73,6 +76,10 @@ public class DeathCube : MonoBehaviour
             playerDead = true;
             playerRef.transform.parent = transform.parent;
             playerVelocity = playerRb.velocity;
+            for (int i = 0; i < 20; i++)
+            {
+                platforms.SpawnPlatform();
+            }
         }
     }
 }
