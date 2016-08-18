@@ -28,17 +28,13 @@ public class Floor : MonoBehaviour {
 	void Update () {
 		if(platform.startDisappear){
 			DestroyGround();
-            
 		}
 	}
 
     // This funciton changes the colour of and destroys the platform
     private void DestroyGround()
     {
-            
-            rb.useGravity = false;
-            rb.isKinematic = true;
+            rb.useGravity = true;
+            rb.isKinematic = false;
     }
-
-  
 }

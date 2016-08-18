@@ -7,14 +7,17 @@ public class Camera : MonoBehaviour
 
     public Transform lookAt;
     public float smoothSpeed = 0.125f;
+    public float deathStep;
     public Platforms platforms;
     public DeathCube deathCube;
     public Vector3 deathRotateTarget;
     public UnityEngine.Camera cameraComponent;
 
+    private int distance;
     private bool smooth = true;
     private bool firstRotate = false;
     private bool setPositions = true;
+    private bool beginRevolving = false;
     private Vector3 offset = new Vector3(0, 2.75f, -7.5f);
     private Vector3 playerStartPos;
     private Vector3 playerEndPos;
@@ -25,7 +28,7 @@ public class Camera : MonoBehaviour
     private float midCamDistance;
     private float angle = 180f;
     private float rotateToThis;
-    private float deathStep;
+    private float revolvingAngle;
 
     // Use this for initialization
     void Start()
@@ -45,38 +48,48 @@ public class Camera : MonoBehaviour
                 midCamDistance = Vector3.Distance(playerAvgPos, transform.position);
                 playerDeadRotateStart = cameraComponent.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, midCamDistance));
                 startDeathPos = transform.position;
+                distance = platforms.score + 20;
+                if (platforms.consecutiveJumped < 4)
+                {
+                    deathTarget = playerAvgPos + new Vector3(0, distance, -distance);
+                    revolvingAngle = 180f;
+                }
+                else if (platforms.consecutiveJumped >= 4 && platforms.consecutiveJumped < 8)
+                {
+                    deathTarget = playerAvgPos + new Vector3(-distance, distance, 0);
+                    revolvingAngle = 270f;
+                }
+                else if (platforms.consecutiveJumped >= 8 && platforms.consecutiveJumped < 12)
+                {
+                    deathTarget = playerAvgPos + new Vector3(0, distance, distance);
+                    revolvingAngle = 0f;
+                }
+                else if (platforms.consecutiveJumped >= 12 && platforms.consecutiveJumped < 16)
+                {
+                    deathTarget = playerAvgPos + new Vector3(distance, distance, 0);
+                    revolvingAngle = 90f;
+                }
                 setPositions = false;
             }
             transform.LookAt(Hermite(playerDeadRotateStart, playerAvgPos, deathStep));
-            int distance = platforms.score + 20;
-            if (platforms.consecutiveJumped < 4)
-            {
-                deathTarget = playerAvgPos + new Vector3(0, distance, -distance);
-            }
-            else if (platforms.consecutiveJumped >= 4 && platforms.consecutiveJumped < 8)
-            {
-                deathTarget = playerAvgPos + new Vector3(-distance, distance, 0);
-            }
-            else if (platforms.consecutiveJumped >= 8 && platforms.consecutiveJumped < 12)
-            {
-                deathTarget = playerAvgPos + new Vector3(0, distance, distance);
-            }
-            else if (platforms.consecutiveJumped >= 12 && platforms.consecutiveJumped < 16)
-            {
-                deathTarget = playerAvgPos + new Vector3(distance, distance, 0);
-            }
             transform.position = Hermite(startDeathPos, deathTarget, deathStep);
             deathStep += Time.deltaTime * 0.3f;
             if (deathStep > 1f)
             {
+                revolvingAngle += Time.deltaTime * 10;
                 deathStep = 1f;
+                double x = distance * Mathf.Sin(revolvingAngle * Mathf.PI / 180f) + playerAvgPos.x;
+                double z = distance * Mathf.Cos(revolvingAngle * Mathf.PI / 180f) + playerAvgPos.z;
+                deathTarget = new Vector3((float) x, deathTarget.y, (float) z);
+                beginRevolving = true;
             }
         }
     }
     void LateUpdate()
     {
-
-        RotateCamera();
+        if(!beginRevolving){
+            RotateCamera();
+        }
 
         Vector3 desiredPosition = lookAt.transform.position + offset;
 
