@@ -24,6 +24,7 @@ public class Platforms : MonoBehaviour
     public Clouds clouds;
 
 
+
     public Material[] mats;
 
     // Use this for initialization
@@ -40,6 +41,9 @@ public class Platforms : MonoBehaviour
         {
             SpawnPlatform();
         }
+
+
+
     }
 
     // Update is called once per frame
@@ -72,6 +76,27 @@ public class Platforms : MonoBehaviour
 
         // This line calls the initialize funcition of the newley created platform and passes this to be the "platforms" variable
         newPlat.GetComponent<Platform>().Initialize(this, direction, consecutiveSpawned, consecutivePlaced, clouds);
+
+        if(consecutiveSpawned < 8)
+        {
+            newPlat.transform.localScale = new Vector3(2f, 1, 2f);
+
+        }
+
+        if (consecutiveSpawned >= 8 && consecutiveSpawned < 16)
+        {
+            newPlat.transform.localScale = new Vector3(1.8f, 1, 1.8f);
+
+        }
+
+        if (consecutiveSpawned >= 16 && consecutiveSpawned < 24)
+        {
+            newPlat.transform.localScale = new Vector3(1.65f, 1, 1.65f);
+
+        }
+
+       
+
 
         // These if statements determine in which direction the tiles should spawn in. if the remainder of direction equals 0, spawn on z positive, etc.
         if (direction == 0)

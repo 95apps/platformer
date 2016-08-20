@@ -9,7 +9,7 @@ public class Platform : MonoBehaviour
     private float countDown;
     // countDown variable to be used as reference by the code as the beginning of the countDown time, this is set to the countdown variable of the "Platforms" empty
     private float initialCountDown;
-    private int direction;
+    public int direction;
     private int platsSpawned;
     private int platsPlaced;
 
@@ -49,6 +49,7 @@ public class Platform : MonoBehaviour
     float highscore;
 
     public Clouds clouds;
+    public GameObject swiper;
 
 
 
@@ -62,6 +63,13 @@ public class Platform : MonoBehaviour
         direction = dir;
         platsSpawned = consecutiveSpawned;
         platsPlaced = consecutivePlaced;
+        
+
+        if(UnityEngine.Random.Range(0,3) == 1) {
+            swiper.SetActive(true);
+        }
+
+
         if (platsSpawned >= 8)
         {
             int randomNumber = UnityEngine.Random.Range(-1, 2);
@@ -246,6 +254,9 @@ public class Platform : MonoBehaviour
 
     private void Move()
     {
+
+        
+
         if(setIndicatorPosition && (platsSpawned >= 8 && platsSpawned <= 24)){
             leftIndicator.SetActive(true);
             rightIndicator.SetActive(true);
