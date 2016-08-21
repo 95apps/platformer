@@ -12,7 +12,7 @@ public class Camera : MonoBehaviour
     public DeathCube deathCube;
     public Vector3 deathRotateTarget;
     public UnityEngine.Camera cameraComponent;
-
+    
     private int distance;
     private bool smooth = true;
     private bool firstRotate = false;
@@ -30,15 +30,29 @@ public class Camera : MonoBehaviour
     private float rotateToThis;
     private float revolvingAngle;
 
+    public AudioSource src;
+    public AudioClip[] backgroundSounds;
+    private int randomMusic;
+
     // Use this for initialization
     void Start()
     {
         playerStartPos = lookAt.transform.position;
+        src = GetComponent<AudioSource>();
+       
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
+
+        if (!src.isPlaying)
+        {
+            src.PlayOneShot(backgroundSounds[UnityEngine.Random.Range(0, backgroundSounds.Length - 1)]);
+        }
+
         if (deathCube.playerDead)
         {
             if (setPositions)

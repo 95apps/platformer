@@ -65,7 +65,7 @@ public class Platform : MonoBehaviour
         platsPlaced = consecutivePlaced;
         
 
-        if(UnityEngine.Random.Range(0,3) == 1) {
+        if(UnityEngine.Random.Range(0,6) == 1) {
             swiper.SetActive(true);
         }
 
@@ -218,6 +218,7 @@ public class Platform : MonoBehaviour
         countDown = initialCountDown;
         rb = GetComponent<Rigidbody>();
         src = GetComponent<AudioSource>();
+
         em = ps.emission;
         em.enabled = false;
 
@@ -227,6 +228,10 @@ public class Platform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+
+
         // If the player has landed on the platform, make it start disappearing
         if (startDisappear)
         {

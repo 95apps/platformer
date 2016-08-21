@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\RotaryBlade.cs" />
      <Compile Include="Assets\Scripts\Camera.cs" />
+     <Compile Include="Assets\Scripts\Canvas.cs" />
      <Compile Include="Assets\Scripts\Clouds.cs" />
      <Compile Include="Assets\Scripts\DeathCube.cs" />
      <Compile Include="Assets\Scripts\Floor.cs" />
