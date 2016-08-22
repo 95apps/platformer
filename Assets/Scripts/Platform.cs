@@ -51,6 +51,7 @@ public class Platform : MonoBehaviour
 
     public Clouds clouds;
     public GameObject swiper;
+    public GameObject bulletsGroup;
 
 
 
@@ -72,6 +73,9 @@ public class Platform : MonoBehaviour
 
         if(UnityEngine.Random.Range(0,6) == 1) {
             swiper.SetActive(true);
+        }
+        if(UnityEngine.Random.Range(0,6) == 1 && !swiper.activeInHierarchy){
+            bulletsGroup.SetActive(true);
         }
 
 

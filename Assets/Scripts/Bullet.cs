@@ -4,29 +4,41 @@ using System.Collections;
 public class Bullet : MonoBehaviour {
 
 public Bullets bullets;
+public Platform platform;
 
-private bool spawnBullet = true;
-private float step;
+private Rigidbody rb;
+private float countDown = 5f;
 
 	// Use this for initialization
 	void Start () {
-	
+		rb = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.localPosition = Vector3.Lerp(new Vector3(-2f, transform.localPosition.y, 0), new Vector3(2f, transform.localPosition.y, 0), step);
-		if(transform.localPosition.x >= -1f && spawnBullet && bullets.spawnBullets){
-			bullets.SpawnBullet(transform.localPosition.y);
-			spawnBullet = false;
+		//rb.AddForce(Vector3.right * 50, ForceMode.Impulse);
+		switch (platform.direction){
+			case 0:
+				rb.velocity = Vector3.right * 10;
+				break;
+			case 1:
+				rb.velocity = Vector3.back * 10;
+				break;
+			case 2:
+				rb.velocity = Vector3.left * 10;
+				break;
+			case 3:
+				rb.velocity = Vector3.forward * 10;
+				break;
 		}
-		if(transform.localPosition.x >= 2f){
+		if(countDown <= 0f){
 			Destroy(this.gameObject);
 		}
-		step += Time.deltaTime;
+		countDown -= Time.deltaTime;
 	}
 
-	public void Initialize(Bullets bullets){
+	public void Initialize(Bullets bullets, Platform plat){
 		this.bullets = bullets;
+		platform = plat;
 	}
 }
