@@ -8,23 +8,18 @@ public class Platforms : MonoBehaviour
     public List<GameObject> platforms;
     // Variable that can be set in unity for the number of seconds before a platforms disappears
     public float countDown;
+    public float rotationAngleMultiplier;
+    public float platSpeed;
+    public float pitch = 0.5f;
     // The direction in which the platforms should spawn
     public int direction;
     public int consecutiveJumped;
-    public float rotationAngleMultiplier;
-    public float platSpeed;
-
     // How many platforms are placed consecutively
     public int consecutivePlaced;
-
     public int consecutiveSpawned;
     // The player's score. It is in this file and not in the player script because it needs to be used by the platforms.
     public int score;
-
     public Clouds clouds;
-
-
-
     public Material[] mats;
 
     // Use this for initialization
@@ -41,9 +36,6 @@ public class Platforms : MonoBehaviour
         {
             SpawnPlatform();
         }
-
-
-
     }
 
     // Update is called once per frame
@@ -75,28 +67,23 @@ public class Platforms : MonoBehaviour
         GameObject newPlat = Instantiate(Resources.Load("Platform")) as GameObject;
 
         // This line calls the initialize funcition of the newley created platform and passes this to be the "platforms" variable
-        newPlat.GetComponent<Platform>().Initialize(this, direction, consecutiveSpawned, consecutivePlaced, clouds);
+        newPlat.GetComponent<Platform>().Initialize(this, direction, consecutiveSpawned, consecutivePlaced, clouds, pitch);
+        pitch += 0.05f;
 
         if(consecutiveSpawned < 8)
         {
             newPlat.transform.localScale = new Vector3(2f, 1, 2f);
-
         }
 
         if (consecutiveSpawned >= 8 && consecutiveSpawned < 16)
         {
             newPlat.transform.localScale = new Vector3(1.8f, 1, 1.8f);
-
         }
 
         if (consecutiveSpawned >= 16 && consecutiveSpawned < 24)
         {
             newPlat.transform.localScale = new Vector3(1.65f, 1, 1.65f);
-
         }
-
-       
-
 
         // These if statements determine in which direction the tiles should spawn in. if the remainder of direction equals 0, spawn on z positive, etc.
         if (direction == 0)

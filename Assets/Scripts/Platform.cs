@@ -9,6 +9,7 @@ public class Platform : MonoBehaviour
     private float countDown;
     // countDown variable to be used as reference by the code as the beginning of the countDown time, this is set to the countdown variable of the "Platforms" empty
     private float initialCountDown;
+    private float audioPitch;
     public int direction;
     private int platsSpawned;
     private int platsPlaced;
@@ -56,14 +57,18 @@ public class Platform : MonoBehaviour
 
     // This initialize funciton is called by the "platforms" empty when Instanciating a new platform 
     //in order to pass the empty into the platform's "platforms" variable
-    public void Initialize(Platforms plats, int dir, int consecutiveSpawned, int consecutivePlaced, Clouds clouds)
+    public void Initialize(Platforms plats, int dir, int consecutiveSpawned, int consecutivePlaced, Clouds clouds, float pitch)
     {
         this.clouds = clouds;
         platforms = plats;
+        audioPitch = pitch;
+        if(pitch >= 2f){
+            platforms.pitch = 0.5f;
+            audioPitch = 2f;
+        }
         direction = dir;
         platsSpawned = consecutiveSpawned;
         platsPlaced = consecutivePlaced;
-        
 
         if(UnityEngine.Random.Range(0,6) == 1) {
             swiper.SetActive(true);
@@ -228,10 +233,6 @@ public class Platform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-
-
-
         // If the player has landed on the platform, make it start disappearing
         if (startDisappear)
         {
@@ -246,22 +247,15 @@ public class Platform : MonoBehaviour
 
         if (platsSpawned == PlayerPrefs.GetFloat("Highscore"))
         {
-
             top.material = platforms.mats[16];
             bot.material = platforms.mats[16];
 
             em.enabled = true;
-
-
         }
-
     }
 
     private void Move()
     {
-
-        
-
         if(setIndicatorPosition && (platsSpawned >= 8 && platsSpawned <= 24)){
             leftIndicator.SetActive(true);
             rightIndicator.SetActive(true);
@@ -313,9 +307,6 @@ public class Platform : MonoBehaviour
     // This funciton changes the colour of and destroys the platform
     private void DestroyPlatform()
     {
-
-
-
         // Change the colour of the platform by linearly interpoplating between red and white by countDown / initialCountDown which will always return a number between 0 and 1
         platRender.material.color = Color32.Lerp(Color.red, Color.white, (countDown / initialCountDown));
         // If countDown reaches 0, drop the platform
@@ -332,9 +323,9 @@ public class Platform : MonoBehaviour
 
             if (playSound)
             {
-                src.PlayOneShot(fallSounds[UnityEngine.Random.Range(0, 3)], 0.8f);
+                src.pitch = audioPitch;
+                src.PlayOneShot(fallSounds[0], 0.8f);
                 playSound = false;
-
             }
         }
     }
@@ -388,7 +379,9 @@ public class Platform : MonoBehaviour
 
                     if (platforms.score == highscore)
                     {
+                        src.pitch = 1f;
                         src.PlayOneShot(fallSounds[fallSounds.Length - 1], 0.8f);
+                        src.pitch = audioPitch;
                     }
 
                     platforms.SpawnPlatform();
