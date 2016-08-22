@@ -30,15 +30,13 @@ public class Camera : MonoBehaviour
     private float rotateToThis;
     private float revolvingAngle;
 
-    public AudioSource src;
-    public AudioClip[] backgroundSounds;
-    private int randomMusic;
+
 
     // Use this for initialization
     void Start()
     {
         playerStartPos = lookAt.transform.position;
-        src = GetComponent<AudioSource>();
+   
        
 
     }
@@ -48,10 +46,7 @@ public class Camera : MonoBehaviour
     {
 
 
-        if (!src.isPlaying)
-        {
-            src.PlayOneShot(backgroundSounds[UnityEngine.Random.Range(0, backgroundSounds.Length - 1)]);
-        }
+     
 
         if (deathCube.playerDead)
         {
