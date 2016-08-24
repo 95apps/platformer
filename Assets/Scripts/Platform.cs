@@ -52,6 +52,7 @@ public class Platform : MonoBehaviour
     public Clouds clouds;
     public GameObject swiper;
     public GameObject bulletsGroup;
+    public GameObject coin;
 
 
 
@@ -71,7 +72,9 @@ public class Platform : MonoBehaviour
         platsSpawned = consecutiveSpawned;
         platsPlaced = consecutivePlaced;
 
-        if(UnityEngine.Random.Range(0,6) == 1) {
+        
+
+        if (UnityEngine.Random.Range(0,6) == 1) {
             swiper.SetActive(true);
         }
         if(UnityEngine.Random.Range(0,6) == 1 && !swiper.activeInHierarchy){

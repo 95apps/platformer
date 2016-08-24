@@ -12,7 +12,7 @@ public class Jukebox : MonoBehaviour {
     // Use this for initialization
     void Start () {
         src = GetComponent<AudioSource>();
-        src.clip = backgroundSounds[UnityEngine.Random.Range(0, backgroundSounds.Length - 1)];
+        
 
         
 
@@ -36,6 +36,7 @@ public class Jukebox : MonoBehaviour {
 	void Update () {
         if (!src.isPlaying)
         {
+            src.clip = backgroundSounds[UnityEngine.Random.Range(0, backgroundSounds.Length - 1)];
             src.Play();
             
         }

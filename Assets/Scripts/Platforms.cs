@@ -70,7 +70,9 @@ public class Platforms : MonoBehaviour
         newPlat.GetComponent<Platform>().Initialize(this, direction, consecutiveSpawned, consecutivePlaced, clouds, pitch);
         pitch += 0.05f;
 
-        if(consecutiveSpawned < 8)
+        
+
+        if (consecutiveSpawned < 8)
         {
             newPlat.transform.localScale = new Vector3(2f, 1, 2f);
         }
@@ -112,5 +114,11 @@ public class Platforms : MonoBehaviour
         // Adds the newly created platform to the platforms list
         platforms.Add(newPlat);
         newPlat.GetComponent<Platform>().scoreText.GetComponent<TextMesh>().text = consecutiveSpawned.ToString();
+
+        if (Random.Range(0, 2) == 1)
+        {
+            GameObject newCoin = Instantiate(Resources.Load("Coin")) as GameObject;
+            newCoin.transform.position = newPlat.transform.position + new Vector3(0, 1.3f, 0);
+        }
     }
 }
