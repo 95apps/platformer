@@ -7,7 +7,8 @@ public Bullets bullets;
 public Platform platform;
 
 private Rigidbody rb;
-private float countDown = 5f;
+private float countDown = 3f;
+private Vector3 forceDirection;
 
 	// Use this for initialization
 	void Start () {
@@ -16,21 +17,25 @@ private float countDown = 5f;
 	
 	// Update is called once per frame
 	void Update () {
-		//rb.AddForce(Vector3.right * 50, ForceMode.Impulse);
 		switch (platform.direction){
 			case 0:
-				rb.velocity = Vector3.right * 10;
+				forceDirection = Vector3.right;
+				transform.eulerAngles = new Vector3(0, 0, 0);
 				break;
 			case 1:
-				rb.velocity = Vector3.back * 10;
+				forceDirection = Vector3.back;
+				transform.eulerAngles = new Vector3(0, 90, 0);
 				break;
 			case 2:
-				rb.velocity = Vector3.left * 10;
+				forceDirection = Vector3.left;
+				transform.eulerAngles = new Vector3(0, 180, 0);
 				break;
 			case 3:
-				rb.velocity = Vector3.forward * 10;
+				forceDirection = Vector3.forward;
+				transform.eulerAngles = new Vector3(0, 270, 0);
 				break;
 		}
+		rb.AddForce(forceDirection * 10, ForceMode.Impulse);
 		if(countDown <= 0f){
 			Destroy(this.gameObject);
 		}
@@ -40,5 +45,10 @@ private float countDown = 5f;
 	public void Initialize(Bullets bullets, Platform plat){
 		this.bullets = bullets;
 		platform = plat;
+	}
+	void OnCollisionEnter(Collision col){
+		if(col.gameObject.tag == "Player"){
+			col.gameObject.GetComponent<Rigidbody>().freezeRotation = false;
+		}
 	}
 }

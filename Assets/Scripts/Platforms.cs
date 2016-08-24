@@ -10,7 +10,7 @@ public class Platforms : MonoBehaviour
     public float countDown;
     public float rotationAngleMultiplier;
     public float platSpeed;
-    public float pitch = 0.5f;
+    public float pitch = 1f;
     // The direction in which the platforms should spawn
     public int direction;
     public int consecutiveJumped;
@@ -68,9 +68,7 @@ public class Platforms : MonoBehaviour
 
         // This line calls the initialize funcition of the newley created platform and passes this to be the "platforms" variable
         newPlat.GetComponent<Platform>().Initialize(this, direction, consecutiveSpawned, consecutivePlaced, clouds, pitch);
-        pitch += 0.05f;
-
-        
+        pitch += 0.2f;
 
         if (consecutiveSpawned < 8)
         {
