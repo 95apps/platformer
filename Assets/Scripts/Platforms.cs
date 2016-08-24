@@ -118,7 +118,7 @@ public class Platforms : MonoBehaviour
         if (Random.Range(0, 2) == 1)
         {
             GameObject newCoin = Instantiate(Resources.Load("Coin")) as GameObject;
-            newCoin.transform.position = newPlat.transform.position + new Vector3(0, 1.3f, 0);
+            newCoin.transform.position = newPlat.transform.position + new Vector3(Random.Range(-2.5f,2.5f), 1.6f, Random.Range(-2.5f, 2.5f));
         }
     }
 }
