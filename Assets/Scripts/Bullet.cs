@@ -7,7 +7,7 @@ public Bullets bullets;
 public Platform platform;
 
 private Rigidbody rb;
-private float countDown = 3f;
+private float countDown = 5f;
 private Vector3 forceDirection;
 
 	// Use this for initialization
