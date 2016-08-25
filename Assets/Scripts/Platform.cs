@@ -76,23 +76,8 @@ public class Platform : MonoBehaviour
         direction = dir;
         platsSpawned = consecutiveSpawned;
         platsPlaced = consecutivePlaced;
-        if (UnityEngine.Random.Range(0, 8) == 1 && !startMoving && platsSpawned >= 8 && platsSpawned <= 31)
-        {
-            swiper.SetActive(true);
-        }
-        else if (UnityEngine.Random.Range(0, 6) == 1 && !startMoving && platsSpawned >= 32 && ! swiper.activeInHierarchy)
-        {
-            swiper.SetActive(true);
-        }
+       
 
-        if (UnityEngine.Random.Range(0, 6) == 1 && !swiper.activeInHierarchy && platsSpawned >= 24)
-        {
-            bulletsGroup.SetActive(true);
-        }
-
-        if(UnityEngine.Random.Range(0, 8) == 1 && !swiper.activeInHierarchy && !bulletsGroup.activeInHierarchy){
-            trafficLight = true;
-        }
 
         if (platsSpawned % 8 == 0)
         {
@@ -101,6 +86,8 @@ public class Platform : MonoBehaviour
                 platforms.countDown -= 0.1f;
             }
         }
+
+
 
         initialCountDown = platforms.countDown;
         countDown = initialCountDown;
@@ -114,6 +101,25 @@ public class Platform : MonoBehaviour
             }
             top.material = platforms.mats[0];
             bot.material = platforms.mats[0];
+        }
+
+        if (UnityEngine.Random.Range(0, 8) == 1 && !startMoving && platsSpawned >= 8 && platsSpawned <= 31)
+        {
+            swiper.SetActive(true);
+        }
+        else if (UnityEngine.Random.Range(0, 6) == 1 && !startMoving && platsSpawned >= 32 && !swiper.activeInHierarchy)
+        {
+            swiper.SetActive(true);
+        }
+
+        if (UnityEngine.Random.Range(0, 6) == 1 && !swiper.activeInHierarchy && platsSpawned >= 24)
+        {
+            bulletsGroup.SetActive(true);
+        }
+
+        if (UnityEngine.Random.Range(0, 8) == 1 && !swiper.activeInHierarchy && !bulletsGroup.activeInHierarchy)
+        {
+            trafficLight = true;
         }
 
         if (platsSpawned >= 16)
@@ -343,7 +349,7 @@ public class Platform : MonoBehaviour
     {
         // Change the colour of the platform by linearly interpoplating between its starting color and white by countDown / initialCountDown which will always return a number between 0 and 1
         if(trafficDestroy){
-            platRender.material.color = Color32.Lerp(trafficColors[colorCounter], Color.white, (countDown / initialCountDown));
+            platRender.material.color = Color32.Lerp(Color.red, trafficColors[colorCounter], (countDown / initialCountDown));
         } else{
             platRender.material.color = Color32.Lerp(Color.red, Color.white, (countDown / initialCountDown));
         }
@@ -374,14 +380,7 @@ public class Platform : MonoBehaviour
         // If the object that collided with this is the player (Which it always is, but its here for safety)...
         if (col.gameObject.tag == "Player")
         {
-            if(trafficLight){
-                if(colorCounter == 2){
-                    player.canJump = false;
-                    player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-                }
-                trafficDestroy = true;
-                trafficLight = false;
-            }
+            
             // deltas are the differences between the player's xyz and the platform's xys axes
             float deltaX = col.gameObject.transform.position.x - transform.position.x;
             float deltaY = col.gameObject.transform.position.y - transform.position.y;
@@ -391,6 +390,18 @@ public class Platform : MonoBehaviour
             // We need this because when the player lands on the platform it doesn't instantly level out, it goes below for a few frames because of momentum
             if ((deltaY >= 0.9f) && Math.Abs(deltaX) < target.x && Math.Abs(deltaZ) < target.z)
             {
+
+                if (trafficLight)
+                {
+                    if (colorCounter == 2)
+                    {
+                        player.canJump = false;
+                        player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+                    }
+                    trafficDestroy = true;
+                    trafficLight = false;
+                }
+
                 // If the countDown equals initialCountDown (which it will, only the first time that the player touches the platform) then spawn another platform
                 if (countDown == initialCountDown)
                 {
@@ -428,7 +439,7 @@ public class Platform : MonoBehaviour
 
                     platforms.SpawnPlatform();
                 } else if(trafficDestroy){
-                    player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                    player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 }
                 startDisappear = true;
             }
