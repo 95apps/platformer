@@ -21,6 +21,7 @@ public class Platforms : MonoBehaviour
     public int score;
     public Clouds clouds;
     public Material[] mats;
+    public Player player;
 
     // Use this for initialization
     void Start()
@@ -67,7 +68,7 @@ public class Platforms : MonoBehaviour
         GameObject newPlat = Instantiate(Resources.Load("Platform")) as GameObject;
 
         // This line calls the initialize funcition of the newley created platform and passes this to be the "platforms" variable
-        newPlat.GetComponent<Platform>().Initialize(this, direction, consecutiveSpawned, consecutivePlaced, clouds, pitch);
+        newPlat.GetComponent<Platform>().Initialize(this, direction, consecutiveSpawned, consecutivePlaced, clouds, pitch, player);
         pitch += 0.2f;
 
         if (consecutiveSpawned < 8)

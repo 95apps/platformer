@@ -10,9 +10,11 @@ public class Platform : MonoBehaviour
     // countDown variable to be used as reference by the code as the beginning of the countDown time, this is set to the countdown variable of the "Platforms" empty
     private float initialCountDown =2;
     private float audioPitch;
+    private float trafficTimer;
     public int direction;
     private int platsSpawned;
     private int platsPlaced;
+    private int colorCounter;
 
     // The renderer component of the platform used to change the color
     private Renderer platRender;
@@ -21,6 +23,8 @@ public class Platform : MonoBehaviour
     private bool startMoving = false;
     private bool setIndicatorPosition = true;
     private bool highScorePlaying = false;
+    private bool trafficLight = false;
+    private bool trafficDestroy = false;
     private AudioSource src;
 
     public ParticleSystem ps;
@@ -54,14 +58,14 @@ public class Platform : MonoBehaviour
     public GameObject swiper;
     public GameObject bulletsGroup;
     public GameObject coin;
-
-
-
+    public Color32[] trafficColors;
+    public Player player;
 
     // This initialize funciton is called by the "platforms" empty when Instanciating a new platform 
     //in order to pass the empty into the platform's "platforms" variable
-    public void Initialize(Platforms plats, int dir, int consecutiveSpawned, int consecutivePlaced, Clouds clouds, float pitch)
+    public void Initialize(Platforms plats, int dir, int consecutiveSpawned, int consecutivePlaced, Clouds clouds, float pitch, Player player)
     {
+        this.player = player;
         this.clouds = clouds;
         platforms = plats;
         audioPitch = pitch;
@@ -72,11 +76,22 @@ public class Platform : MonoBehaviour
         direction = dir;
         platsSpawned = consecutiveSpawned;
         platsPlaced = consecutivePlaced;
-        if (UnityEngine.Random.Range(0,6) == 1) {
+        if (UnityEngine.Random.Range(0, 8) == 1 && !startMoving && platsSpawned >= 8 && platsSpawned <= 31)
+        {
             swiper.SetActive(true);
         }
-        if(UnityEngine.Random.Range(0,6) == 1 && !swiper.activeInHierarchy){
+        else if (UnityEngine.Random.Range(0, 6) == 1 && !startMoving && platsSpawned >= 32 && ! swiper.activeInHierarchy)
+        {
+            swiper.SetActive(true);
+        }
+
+        if (UnityEngine.Random.Range(0, 6) == 1 && !swiper.activeInHierarchy && platsSpawned >= 24)
+        {
             bulletsGroup.SetActive(true);
+        }
+
+        if(UnityEngine.Random.Range(0, 8) == 1 && !swiper.activeInHierarchy && !bulletsGroup.activeInHierarchy){
+            trafficLight = true;
         }
 
         if (platsSpawned % 8 == 0)
@@ -89,7 +104,6 @@ public class Platform : MonoBehaviour
 
         initialCountDown = platforms.countDown;
         countDown = initialCountDown;
-
 
         if (platsSpawned >= 8)
         {
@@ -208,6 +222,7 @@ public class Platform : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        colorCounter = UnityEngine.Random.Range(0, 2);
         boxColDimensions = new Vector3(transform.localScale.x * 1.1f, transform.localScale.y, transform.localScale.z * 1.1f);
         xPos1 = new Vector3(transform.position.x + 3f, transform.position.y, transform.position.z);
         xPos2 = new Vector3(transform.position.x - 3f, transform.position.y, transform.position.z);
@@ -229,6 +244,9 @@ public class Platform : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(trafficLight){
+            TrafficLight();
+        }
         if(highScorePlaying && !src.isPlaying){
             src.pitch = audioPitch;
         }
@@ -303,15 +321,34 @@ public class Platform : MonoBehaviour
         }
     }
 
+    private void TrafficLight(){
+        platRender.material.color = trafficColors[colorCounter];
+        trafficTimer += Time.deltaTime;
+        if(trafficTimer >= 1f){
+            trafficTimer = 0f;
+            colorCounter ++;
+            if(colorCounter > 2){
+                colorCounter = 0;
+            }
+        }
+        if(colorCounter == 2){
+            countDown = 0;
+        } else {
+            countDown = initialCountDown;
+        }
+    }
+
     // This funciton changes the colour of and destroys the platform
     private void DestroyPlatform()
     {
-
-       
-        // Change the colour of the platform by linearly interpoplating between red and white by countDown / initialCountDown which will always return a number between 0 and 1
-        platRender.material.color = Color32.Lerp(Color.red, Color.white, (countDown / initialCountDown));
+        // Change the colour of the platform by linearly interpoplating between its starting color and white by countDown / initialCountDown which will always return a number between 0 and 1
+        if(trafficDestroy){
+            platRender.material.color = Color32.Lerp(trafficColors[colorCounter], Color.white, (countDown / initialCountDown));
+        } else{
+            platRender.material.color = Color32.Lerp(Color.red, Color.white, (countDown / initialCountDown));
+        }
         // If countDown reaches 0, drop the platform
-        if (countDown <= 0f)
+        if (countDown < 0f)
         {
             startMoving = false;
             rb.isKinematic = false;
@@ -319,6 +356,8 @@ public class Platform : MonoBehaviour
 
             if (transform.position.y < -20)
             {
+                Destroy(leftIndicator);
+                Destroy(rightIndicator);
                 Destroy(this.gameObject);
             }
 
@@ -332,13 +371,17 @@ public class Platform : MonoBehaviour
 
     void OnCollisionStay(Collision col)
     {
-        
-
-
         // If the object that collided with this is the player (Which it always is, but its here for safety)...
         if (col.gameObject.tag == "Player")
         {
-
+            if(trafficLight){
+                if(colorCounter == 2){
+                    player.canJump = false;
+                    player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+                }
+                trafficDestroy = true;
+                trafficLight = false;
+            }
             // deltas are the differences between the player's xyz and the platform's xys axes
             float deltaX = col.gameObject.transform.position.x - transform.position.x;
             float deltaY = col.gameObject.transform.position.y - transform.position.y;
@@ -384,6 +427,8 @@ public class Platform : MonoBehaviour
                     }
 
                     platforms.SpawnPlatform();
+                } else if(trafficDestroy){
+                    player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 }
                 startDisappear = true;
             }
