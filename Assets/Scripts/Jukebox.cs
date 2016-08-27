@@ -12,11 +12,6 @@ public class Jukebox : MonoBehaviour {
     // Use this for initialization
     void Start () {
         src = GetComponent<AudioSource>();
-        
-
-        
-
-
     }
 
     void Awake()

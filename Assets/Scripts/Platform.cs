@@ -59,6 +59,7 @@ public class Platform : MonoBehaviour
     public GameObject bulletsGroup;
     public GameObject coin;
     public Color32[] trafficColors;
+    public Color32 fallColor;
     public Player player;
 
     // This initialize funciton is called by the "platforms" empty when Instanciating a new platform 
@@ -361,9 +362,9 @@ public class Platform : MonoBehaviour
     {
         // Change the colour of the platform by linearly interpoplating between its starting color and white by countDown / initialCountDown which will always return a number between 0 and 1
         if(trafficDestroy){
-            platRender.material.color = Color32.Lerp(Color.red, trafficColors[colorCounter], (countDown / initialCountDown));
+            platRender.material.color = Color32.Lerp(fallColor, trafficColors[colorCounter], (countDown / initialCountDown));
         } else{
-            platRender.material.color = Color32.Lerp(trafficColors[2], Color.white, (countDown / initialCountDown));
+            platRender.material.color = Color32.Lerp(fallColor, Color.white, (countDown / initialCountDown));
         }
         // If countDown reaches 0, drop the platform
         if (countDown < 0f)
