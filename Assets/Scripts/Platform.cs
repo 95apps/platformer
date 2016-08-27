@@ -330,7 +330,19 @@ public class Platform : MonoBehaviour
     private void TrafficLight(){
         platRender.material.color = trafficColors[colorCounter];
         trafficTimer += Time.deltaTime;
-        if(trafficTimer >= 1f){
+
+        float limit;
+        if (colorCounter == 0)
+        {
+            limit = 2f;
+        }
+        else
+        {
+            limit = 1f;
+        }
+
+        if (trafficTimer >= limit)
+        {
             trafficTimer = 0f;
             colorCounter ++;
             if(colorCounter > 2){
@@ -351,7 +363,7 @@ public class Platform : MonoBehaviour
         if(trafficDestroy){
             platRender.material.color = Color32.Lerp(Color.red, trafficColors[colorCounter], (countDown / initialCountDown));
         } else{
-            platRender.material.color = Color32.Lerp(Color.red, Color.white, (countDown / initialCountDown));
+            platRender.material.color = Color32.Lerp(trafficColors[2], Color.white, (countDown / initialCountDown));
         }
         // If countDown reaches 0, drop the platform
         if (countDown < 0f)
