@@ -12,6 +12,6 @@ public class DisplayAmountOfCoins : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        myText.text = "Coins Collected:" + PlayerPrefs.GetInt("Coins").ToString();
+        myText.text = "Coins : " + PlayerPrefs.GetInt("Coins").ToString();
 	}
 }

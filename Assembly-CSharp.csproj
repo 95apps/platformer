@@ -63,6 +63,8 @@
      <Compile Include="Assets\Scripts\RotaryBlade.cs" />
      <Compile Include="Assets\Scripts\Skydome.cs" />
      <Compile Include="Assets\Scripts\rotation.cs" />
+     <Compile Include="Assets\Scroll.cs" />
+     <Compile Include="Assets\StoreTrigger.cs" />
      <None Include="Assets\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />

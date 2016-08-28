@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public AudioClip[] bounceSounds;
     private AudioSource mySound;
     private TrailRenderer trail;
+    public Skydome skydome;
 
 
     // Use this for initialization
@@ -38,6 +39,8 @@ public class Player : MonoBehaviour
         Raycast = GetComponent<Raycast>();
         mySound = GetComponent<AudioSource>();
         trail = GetComponent<TrailRenderer>();
+        skydome = GameObject.Find("SkyDome").GetComponent<Skydome>();
+        skydome.SetPlayer(gameObject);
     }
 
     // Update is called once per frame

@@ -19,14 +19,21 @@ public class Skydome : MonoBehaviour {
         currentColor = UnityEngine.Random.Range(0, 7);
     }
 
+    public void SetPlayer(GameObject player)
+    {
+        this.player = player;
+    }
+
     void Awake()
     {
         if (Instance)
         {
             DestroyImmediate(gameObject);
+            
         }
         else
         {
+            
             DontDestroyOnLoad(gameObject);
             Instance = this;
         }
@@ -34,6 +41,7 @@ public class Skydome : MonoBehaviour {
 
     void Update()
     {
+        
         transform.position = player.transform.position + new Vector3(0, 118, 0);
         ChangeColor();
         scrollSpeed += Time.deltaTime * 0.1f;
