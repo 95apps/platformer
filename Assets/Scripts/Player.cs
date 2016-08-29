@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     // Platforms empty
     public Platforms platforms;
     public DeathCube deathCube;
-    public bool canJump = true;
     // Most of these variables are pretty self explanatory
     public float movingSpeed = 5.0f;
     public float jumpHeight;    // Don't change jumpSpeed, jumpHeight is the only one that should be changed for different jump heights
@@ -108,7 +107,7 @@ public class Player : MonoBehaviour
         if (rb.velocity.y == 0)
         {
             // If the spacebar is pressed...
-            if (Input.GetKey(KeyCode.Space) && Raycast.onGround == true && canJump)
+            if (Input.GetKey(KeyCode.Space) && Raycast.onGround == true)
             {
 
                 velocity = rb.velocity;

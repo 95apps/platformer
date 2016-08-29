@@ -29,7 +29,8 @@ public class Raycast : MonoBehaviour {
 		Debug.DrawLine (transform.position + corner3, transform.position + corner3 + dwn, Color.yellow);
 		Debug.DrawLine (transform.position + corner4, transform.position + corner4 + dwn, Color.white);
 
-		if (
+
+        if (
             Physics.Raycast(transform.position, dwn, 0.6f) || //center raycast to fix potential bugs.
             Physics.Raycast (transform.position + corner1, dwn, 0.6f) ||
 			Physics.Raycast (transform.position + corner2, dwn, 0.6f) ||

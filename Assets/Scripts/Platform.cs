@@ -352,8 +352,10 @@ public class Platform : MonoBehaviour
         }
         if(colorCounter == 2){
             countDown = 0;
+            gameObject.layer = 2;
         } else {
             countDown = initialCountDown;
+            gameObject.layer = 0;
         }
     }
 
@@ -393,7 +395,6 @@ public class Platform : MonoBehaviour
         // If the object that collided with this is the player (Which it always is, but its here for safety)...
         if (col.gameObject.tag == "Player")
         {
-            
             // deltas are the differences between the player's xyz and the platform's xys axes
             float deltaX = col.gameObject.transform.position.x - transform.position.x;
             float deltaY = col.gameObject.transform.position.y - transform.position.y;
@@ -406,11 +407,6 @@ public class Platform : MonoBehaviour
 
                 if (trafficLight)
                 {
-                    if (colorCounter == 2)
-                    {
-                        player.canJump = false;
-                        player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-                    }
                     trafficDestroy = true;
                     trafficLight = false;
                 }
