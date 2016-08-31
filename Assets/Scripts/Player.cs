@@ -43,23 +43,20 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    
         
         // This if statement wakes the player so that even if the player is idle the collisions functions will run
-        if (rb.IsSleeping())
-        {
-            rb.WakeUp();
-        }
-        trail.time += Time.deltaTime;
+
 
         
 
-    }
-
+    
     // Fixed update is called at consistant intervals(for example, every 0.1 seconds) instead of every frame, making the physics smoother.
-    void FixedUpdate()
+    void LateUpdate()
     {
+
+
+     trail.time += Time.deltaTime;
         Move();
         Jump();
     }

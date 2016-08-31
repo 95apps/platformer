@@ -42,11 +42,23 @@ public class Camera : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+   
+    void FixedUpdate()
     {
+        if(!beginRevolving){
+            RotateCamera();
+        }
 
+        Vector3 desiredPosition = lookAt.transform.position + offset;
 
-     
+        if (smooth)
+        {
+            transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+        }
+        else
+        {
+            transform.position = desiredPosition;
+        }
 
         if (deathCube.playerDead)
         {
@@ -93,23 +105,8 @@ public class Camera : MonoBehaviour
                 beginRevolving = true;
             }
         }
-    }
-    void LateUpdate()
-    {
-        if(!beginRevolving){
-            RotateCamera();
-        }
 
-        Vector3 desiredPosition = lookAt.transform.position + offset;
 
-        if (smooth)
-        {
-            transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
-        }
-        else
-        {
-            transform.position = desiredPosition;
-        }
     }
 
     private void RotateCamera()
