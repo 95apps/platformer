@@ -9,6 +9,10 @@ public class Scroll : MonoBehaviour {
     public GameObject MaxLeft;
     private bool stop = false;
     private bool toMove = false;
+    public RawImage rawImage;
+    public GameObject big;
+    public GameObject Selected;
+    
 
     
    
@@ -16,43 +20,42 @@ public class Scroll : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         rectTransform = GetComponent<RectTransform>();
+        big.GetComponent<Transform>();
 
-    
-    
-     
-	}
+
+
+
+    }
 
     public void StopIt()
     {
+        if(this.transform.position.x != Selected.transform.position.x)
+        {
+            toMove = true;
+        } else
+        {
+            toMove = false;
+        }
 
-        stop = !stop;
         
+
+
+
     }
 	
 	// Update is called once per frame
 
     void Update()
     {
-        toMove = true;
-    }
-	void LateUpdate () {
-
         if (toMove == true)
         {
-
-            if (stop == false)
-            {
-                rectTransform.Translate(Vector3.right * 3);
-            }
-
-
-            if (rectTransform.position.x >= MaxRight.transform.position.x)
-            {
-                rectTransform.position = MaxLeft.transform.position;
-            }
+           
+            big.transform.position = Vector3.MoveTowards(big.transform.position, Selected.transform.position, );
         }
+    }
+  
 
        
 
     }
-}
+
