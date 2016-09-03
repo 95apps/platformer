@@ -18,11 +18,13 @@ public class Player : MonoBehaviour
     // This velocity variable is used in the jump function
     private Vector3 velocity;
     private Vector3 lastFramePosition;
+    private Vector3 firstPlatPos;
     private Raycast Raycast;
     public AudioClip[] bounceSounds;
     private AudioSource mySound;
     private TrailRenderer trail;
     public Skydome skydome;
+    public GameObject mainCamera;
 
 
     // Use this for initialization
@@ -43,20 +45,9 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    
-        
-        // This if statement wakes the player so that even if the player is idle the collisions functions will run
-
-
-        
-
-    
-    // Fixed update is called at consistant intervals(for example, every 0.1 seconds) instead of every frame, making the physics smoother.
-    void LateUpdate()
+    void Update()
     {
-
-
-     trail.time += Time.deltaTime;
+        trail.time += Time.deltaTime;
         Move();
         Jump();
     }
@@ -64,20 +55,14 @@ public class Player : MonoBehaviour
     // Function to move the player.
     private void Move()
     {
-        
-
         // Sets variables to the arrow key inputs
         float moveRightLeft = Input.GetAxis("Horizontal");
         float moveUpDown = Input.GetAxis("Vertical");
+
         // Sets the velocity of the player to moveSpeed times arrow key input (0 to 1 or -1)
-
-        
-
-
         if (platforms.consecutiveJumped < 4)
         {
             rb.velocity = new Vector3(moveRightLeft * movingSpeed, rb.velocity.y, moveUpDown * movingSpeed);
-            
         }
         else if (platforms.consecutiveJumped >= 4 && platforms.consecutiveJumped < 8)
         {
@@ -106,7 +91,6 @@ public class Player : MonoBehaviour
             // If the spacebar is pressed...
             if (Input.GetKey(KeyCode.Space) && Raycast.onGround == true)
             {
-
                 velocity = rb.velocity;
                 // Changes the vertical velocity of the player to jumpSpeed
                 velocity.y = jumpSpeed;
@@ -115,5 +99,18 @@ public class Player : MonoBehaviour
                 mySound.PlayOneShot(bounceSounds[Random.Range(0, bounceSounds.Length)], 0.8f);
             }
         }
+    }
+
+    public void Resurrect()
+    {
+        rb.useGravity = true;
+        rb.isKinematic = false;
+        transform.position = platforms.platforms[0].transform.position + Vector3.up * 2;
+        transform.eulerAngles = Vector3.zero;
+        rb.freezeRotation = true;
+        GetComponent<Renderer>().enabled = true;
+        mainCamera.GetComponent<Camera>().beginRevolving = false;
+        mainCamera.GetComponent<Camera>().deathStep = 0f;
+        mainCamera.GetComponent<Camera>().setPositions = true;
     }
 }

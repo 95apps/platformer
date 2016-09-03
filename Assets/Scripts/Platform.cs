@@ -113,7 +113,7 @@ public class Platform : MonoBehaviour
             swiper.SetActive(true);
         }
 
-        if (UnityEngine.Random.Range(0, 6) == 1 && !swiper.activeInHierarchy && platsSpawned >= 24)
+        if (UnityEngine.Random.Range(0, 6) == 1 && !swiper.activeInHierarchy && platsSpawned >= 0)
         {
             bulletsGroup.SetActive(true);
         }
@@ -390,7 +390,7 @@ public class Platform : MonoBehaviour
         }
     }
 
-    void OnCollisionStay(Collision col)
+    void OnCollisionEnter(Collision col)
     {
         // If the object that collided with this is the player (Which it always is, but its here for safety)...
         if (col.gameObject.tag == "Player")
@@ -407,6 +407,15 @@ public class Platform : MonoBehaviour
 
                 if (trafficLight)
                 {
+                    if(colorCounter == 2)
+                    {
+                        platforms.platforms.Remove(gameObject);
+                        platforms.consecutiveJumped++;
+                        if (platforms.consecutiveJumped % 4 == 0)
+                        {
+                            platforms.rotationAngleMultiplier++;
+                        }
+                    }
                     trafficDestroy = true;
                     trafficLight = false;
                 }
@@ -414,8 +423,13 @@ public class Platform : MonoBehaviour
                 // If the countDown equals initialCountDown (which it will, only the first time that the player touches the platform) then spawn another platform
                 if (countDown == initialCountDown)
                 {
+                    if(platforms.score == 1)
+                    {
+                        Rigidbody playerRb = player.GetComponent<Rigidbody>();
+                        playerRb.velocity = new Vector3(playerRb.velocity.x, 0, playerRb.velocity.z);
+                    }
                     countDown -= Time.deltaTime;
-                    if(platforms.score % 2 == 0)
+                    if (platforms.score % 2 == 0)
                     {
                         clouds.SpawnClouds(); //rekt
                         clouds.SpawnClouds();
@@ -447,6 +461,7 @@ public class Platform : MonoBehaviour
                     }
 
                     platforms.SpawnPlatform();
+                    platforms.platforms.Remove(gameObject);
                 } else if(trafficDestroy){
                     player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 }

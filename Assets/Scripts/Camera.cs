@@ -12,12 +12,12 @@ public class Camera : MonoBehaviour
     public DeathCube deathCube;
     public Vector3 deathRotateTarget;
     public UnityEngine.Camera cameraComponent;
+    public bool beginRevolving = false;
+    public bool setPositions = true;
     
     private int distance;
     private bool smooth = true;
     private bool firstRotate = false;
-    private bool setPositions = true;
-    private bool beginRevolving = false;
     private Vector3 offset = new Vector3(0, 2.75f, -7.5f);
     private Vector3 playerStartPos;
     private Vector3 playerEndPos;
@@ -36,9 +36,6 @@ public class Camera : MonoBehaviour
     void Start()
     {
         playerStartPos = lookAt.transform.position;
-   
-       
-
     }
 
     // Update is called once per frame
@@ -105,23 +102,21 @@ public class Camera : MonoBehaviour
                 beginRevolving = true;
             }
         }
-
-
     }
 
     private void RotateCamera()
     {
         rotateToThis = platforms.rotationAngleMultiplier * 90;
         angle += 720 * Time.deltaTime;
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + 10, transform.eulerAngles.z);
+        transform.eulerAngles = new Vector3(20, transform.eulerAngles.y + 10, 0);
         if (angle >= rotateToThis)
         {
             angle = rotateToThis;
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, rotateToThis - 180, transform.eulerAngles.z);
+            transform.eulerAngles = new Vector3(20, rotateToThis - 180, 0);
         }
-        double x = 7.5 * Mathf.Sin(angle * Mathf.PI / 180f);
-        double z = 7.5 * Mathf.Cos(angle * Mathf.PI / 180f);
-        offset = new Vector3((float)x, 2.75f, (float)z);
+        double x = 5 * Mathf.Sin(angle * Mathf.PI / 180f);
+        double z = 5 * Mathf.Cos(angle * Mathf.PI / 180f);
+        offset = new Vector3((float)x, 2f, (float)z);
     }
 
     public static float Hermite(float start, float end, float value)

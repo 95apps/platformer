@@ -7,16 +7,14 @@ public class Raycast : MonoBehaviour {
 	public bool onGround;
 	public bool touchingSide;
 	public bool toMove;
-	// Update is called once per frame
 
 
 	void Start () {
 
 	}
 
-
-
-	void Update () {
+    // Update is called once per frame
+    void Update () {
 		Vector3 dwn = transform.TransformDirection (new Vector3(0, -0.6f, 0)); // Length and direction of line.
 		// -0.5 would work but we want to give users fluidity when jumping.
 		Vector3 corner1 = new Vector3 (-0.5f, 0, -0.5f);

@@ -6,7 +6,6 @@ public class DeathCube : MonoBehaviour
 
     // This is the player object used to move the platform.
     public Player player;
-    public GameObject playerRef;
     public bool playerDead = false;
     private Rigidbody playerRb;
     private Vector3 initialPos;
@@ -35,18 +34,19 @@ public class DeathCube : MonoBehaviour
          
             canvas.SetActive(true);
           
-
-            if (trail.startWidth <= 0.5)
+            if (trail.startWidth <= 0.5f)
             {
-
                 trail.startWidth = startWidth += Time.deltaTime/2;
                 trail.endWidth = startWidth += Time.deltaTime/2;
-
             }
             //canvas.SetActive(true);
-
-
-            
+        } else
+        {
+            if (trail.startWidth > 0.2f)
+            {
+                trail.startWidth = startWidth -= Time.deltaTime / 2;
+                trail.endWidth = startWidth -= Time.deltaTime / 2;
+            }
         }
         if (player != null)
         {
@@ -72,7 +72,6 @@ public class DeathCube : MonoBehaviour
         {
             //cameraComponent.ViewportPointToRay()
             playerDead = true;
-            playerRef.transform.parent = transform.parent;
             playerVelocity = playerRb.velocity;
             for (int i = 0; i < 20; i++)
             {

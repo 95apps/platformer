@@ -4,12 +4,18 @@ using System.Collections;
 
 public class AdToContinue : MonoBehaviour
 {
-
+    public Player player;
+    public GameObject backGroundButton;
     public DeathCube deathcube;
 
     public void CoinToContinue()
     {
         PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 25);
+        backGroundButton.SetActive(true);
+        gameObject.SetActive(false);
+        Debug.Log("Player continued");
+        deathcube.playerDead = false;
+        player.Resurrect();
     }
 
 
@@ -36,6 +42,7 @@ public class AdToContinue : MonoBehaviour
         Debug.Log("yo");
         if (Advertisement.IsReady())
         {
+            backGroundButton.SetActive(false);
             var options = new ShowOptions { resultCallback = HandleShowResult };
             Advertisement.Show(null, options);
         }
@@ -46,17 +53,20 @@ public class AdToContinue : MonoBehaviour
         switch (result)
         {
             case ShowResult.Finished:
+                backGroundButton.SetActive(true);
+                gameObject.SetActive(false);
                 Debug.Log("Player continued");
                 deathcube.playerDead = false;
-                
+                player.Resurrect();
                 break;
 
             case ShowResult.Skipped:
+                backGroundButton.SetActive(true);
                 Debug.Log("Ad not finished");
                 break;
 
             case ShowResult.Failed:
-               
+                backGroundButton.SetActive(true);
                 break;
         }
     }
