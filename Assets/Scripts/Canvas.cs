@@ -25,6 +25,16 @@ public class Canvas : MonoBehaviour {
             botHeader2.transform.Translate(Vector3.right * 16);
         }
 
+
+
        
     }
+
+    public void ifTouchisNotAButton()
+    {
+        
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
+        
+    }
+
 }

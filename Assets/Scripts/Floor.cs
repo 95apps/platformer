@@ -15,6 +15,8 @@ public class Floor : MonoBehaviour {
 	public Platform platform;
     public Platforms platforms;
     private Rigidbody rb;
+    private BoxCollider bc;
+    
     
 
 	// Use this for initialization
@@ -22,6 +24,7 @@ public class Floor : MonoBehaviour {
         // Defines the platform renderer
 		countDown = initialCountDown;
         rb = GetComponent<Rigidbody>();
+        bc = GetComponent<BoxCollider>();
 	}
 	
 	// Update is called once per frame
@@ -29,11 +32,18 @@ public class Floor : MonoBehaviour {
 		if(platform.startDisappear){
 			DestroyGround();
 		}
+
+        if(transform.position.y < -15)
+        {
+            Destroy(gameObject);
+        }
+
 	}
 
     // This funciton changes the colour of and destroys the platform
     private void DestroyGround()
     {
+            Destroy(bc);
             rb.useGravity = true;
             rb.isKinematic = false;
     }

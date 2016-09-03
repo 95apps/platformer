@@ -2,60 +2,63 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class Scroll : MonoBehaviour {
+public class Scroll : MonoBehaviour
+{
 
+    private float step;
+    private float deltaX;
+    private Vector3 target;
+    private Vector3 startPos;
     private RectTransform rectTransform;
-    public GameObject MaxRight;
-    public GameObject MaxLeft;
     private bool stop = false;
     private bool toMove = false;
     public RawImage rawImage;
     public GameObject big;
-    public GameObject Selected;
-    
+    public GameObject selected;
+    public BigScroll bigScroll; 
 
-    
-   
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         rectTransform = GetComponent<RectTransform>();
-        big.GetComponent<Transform>();
-
-
-
-
     }
 
     public void StopIt()
     {
-        if(this.transform.position.x != Selected.transform.position.x)
+        if (!bigScroll.centering && this.transform.position.x != selected.transform.position.x)
         {
             toMove = true;
-        } else
-        {
-            toMove = false;
+            bigScroll.centering = true;
+            startPos = big.transform.position;
+            deltaX = selected.transform.position.x - transform.position.x;
+            target = startPos + new Vector3(deltaX, 0, 0);
         }
-
-        
-
-
-
     }
-	
-	// Update is called once per frame
+
+    // Update is called once per frame
 
     void Update()
     {
-        if (toMove == true)
+        if (toMove && transform.position.x != selected.transform.position.x)
         {
-           
-            big.transform.position = Vector3.MoveTowards(big.transform.position, Selected.transform.position, );
+            big.transform.position = Vector3.Lerp(startPos, target, Hermite(0f, 1f, step));
+            step += Time.deltaTime;
+            if (step >= 1f)
+            {
+                step = 1f;
+                toMove = false;
+                bigScroll.centering = false;
+            }
+        }
+        else
+        {
+            step = 0f;
+            toMove = false;
         }
     }
-  
-
-       
-
+    //Ease in out
+    public static float Hermite(float start, float end, float value)
+    {
+        return Mathf.Lerp(start, end, value * value * (3.0f - 2.0f * value));
     }
-
+}

@@ -46,10 +46,7 @@ public class DeathCube : MonoBehaviour
             //canvas.SetActive(true);
 
 
-            if (Input.GetMouseButton(0) || Input.GetKey("space"))
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
-            }
+            
         }
         if (player != null)
         {
