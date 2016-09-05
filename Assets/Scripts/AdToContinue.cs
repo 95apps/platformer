@@ -7,16 +7,42 @@ public class AdToContinue : MonoBehaviour
     public Player player;
     public GameObject backGroundButton;
     public DeathCube deathcube;
+    public GameObject continueOption;
+    public GameObject adOption;
+    public GameObject coinOption;
+    public Platforms platforms;
+    public AudioSource src;
+    public AudioClip errorSound;
+  
+   
 
     public void CoinToContinue()
     {
-        PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 25);
-        backGroundButton.SetActive(true);
-        gameObject.SetActive(false);
-        Debug.Log("Player continued");
-        deathcube.playerDead = false;
-        player.Resurrect();
+        if (PlayerPrefs.GetInt("Coins") - 25 + Mathf.CeilToInt(platforms.score / 3) < 0)
+        {
+            if (!src.isPlaying)
+            {
+                src.PlayOneShot(errorSound);
+            }
+            
+            
+        } else
+        {
+            
+            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 25 + Mathf.CeilToInt(platforms.score / 3));
+            backGroundButton.SetActive(true);
+            gameObject.SetActive(false);
+            Debug.Log("Player continued");
+            deathcube.playerDead = false;
+            player.Resurrect();
+            continueOption.SetActive(false);
+            coinOption.SetActive(false);
+            adOption.SetActive(false);
+        }
+        
     }
+
+   
 
 
     void Awake()
@@ -46,6 +72,9 @@ public class AdToContinue : MonoBehaviour
             var options = new ShowOptions { resultCallback = HandleShowResult };
             Advertisement.Show(null, options);
         }
+
+        continueOption.SetActive(false);
+
     }
 
     private void HandleShowResult(ShowResult result)

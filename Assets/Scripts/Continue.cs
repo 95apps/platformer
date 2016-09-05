@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Continue : MonoBehaviour {
@@ -9,11 +10,17 @@ public class Continue : MonoBehaviour {
     private bool toggle = false;
     private RectTransform adOptionRect;
     private RectTransform coinOptionRect;
+    public Platforms platforms;
+    private UnityEngine.UI.Text coinText;
+
 	// Use this for initialization
 	void Start () {
         adOptionRect = adOption.GetComponent<RectTransform>();
         coinOptionRect = coinOption.GetComponent<RectTransform>();
-	}
+        coinOption.GetComponentInChildren<UnityEngine.UI.Text>().text = (25 + Mathf.CeilToInt(platforms.score/3)) + " Coins";
+
+
+    }
 	
     public void ShowOptions()
     {
@@ -35,8 +42,14 @@ public class Continue : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+
+
         if (toggle == true)
         {
+
+            
+
             if (coinOption.transform.position.x <= 170)
             {
                 

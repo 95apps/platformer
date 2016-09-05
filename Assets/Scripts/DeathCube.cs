@@ -73,10 +73,7 @@ public class DeathCube : MonoBehaviour
             //cameraComponent.ViewportPointToRay()
             playerDead = true;
             playerVelocity = playerRb.velocity;
-            for (int i = 0; i < 20; i++)
-            {
-                platforms.SpawnPlatform();
-            }
+           
         }
     }
 }

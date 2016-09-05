@@ -45,9 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AdToContinue.cs" />
-     <Compile Include="Assets\Continue.cs" />
-     <Compile Include="Assets\PlayAd.cs" />
+     <Compile Include="Assets\Scripts\AdToContinue.cs" />
      <Compile Include="Assets\Scripts\BigScroll.cs" />
      <Compile Include="Assets\Scripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\Bullets.cs" />
@@ -55,6 +53,7 @@
      <Compile Include="Assets\Scripts\Canvas.cs" />
      <Compile Include="Assets\Scripts\Clouds.cs" />
      <Compile Include="Assets\Scripts\Coin.cs" />
+     <Compile Include="Assets\Scripts\Continue.cs" />
      <Compile Include="Assets\Scripts\DeathCube.cs" />
      <Compile Include="Assets\Scripts\DisplayAmountOfCoins.cs" />
      <Compile Include="Assets\Scripts\Floor.cs" />
@@ -62,6 +61,7 @@
      <Compile Include="Assets\Scripts\Jukebox.cs" />
      <Compile Include="Assets\Scripts\Platform.cs" />
      <Compile Include="Assets\Scripts\Platforms.cs" />
+     <Compile Include="Assets\Scripts\PlayAd.cs" />
      <Compile Include="Assets\Scripts\Player.cs" />
      <Compile Include="Assets\Scripts\Raycast.cs" />
      <Compile Include="Assets\Scripts\RotaryBlade.cs" />
