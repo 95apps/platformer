@@ -74,6 +74,8 @@ public class AdToContinue : MonoBehaviour
         }
 
         continueOption.SetActive(false);
+        coinOption.SetActive(false);
+        adOption.SetActive(false);
 
     }
 
