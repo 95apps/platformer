@@ -26,6 +26,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
     public static string PRODUCT_1000_GOLD = "gold1000";
     public static string PRODUCT_2000_GOLD = "gold2000";
     public static string PRODUCT_3000_GOLD = "gold3000";
+    private DisplayAmountOfCoins displayCoins;
 
     // Apple App Store-specific product identifier for the subscription product.
     private static string kProductNameAppleSubscription = "com.unity3d.subscription.new";
@@ -200,16 +201,25 @@ public class IAPManager : MonoBehaviour, IStoreListener
         if (String.Equals(args.purchasedProduct.definition.id, PRODUCT_1000_GOLD, StringComparison.Ordinal))
         {
             Debug.Log("You bought 1000 Gold!");
+            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 1000);
+            displayCoins = GameObject.Find("storeCanvas").GetComponent<DisplayAmountOfCoins>();
+            displayCoins.SetCoin();
         }
 
         else if (String.Equals(args.purchasedProduct.definition.id, PRODUCT_2000_GOLD, StringComparison.Ordinal))
         {
             Debug.Log("You bought 2000 Gold!");
+            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 2000);
+            displayCoins = GameObject.Find("storeCanvas").GetComponent<DisplayAmountOfCoins>();
+            displayCoins.SetCoin();
         }
 
         else if (String.Equals(args.purchasedProduct.definition.id, PRODUCT_3000_GOLD, StringComparison.Ordinal))
         {
             Debug.Log("You bought 3000 Gold!");
+            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 3000);
+            displayCoins = GameObject.Find("storeCanvas").GetComponent<DisplayAmountOfCoins>();
+            displayCoins.SetCoin();
         }
 
         // Or ... an unknown product has been purchased by this user. Fill in additional products here....

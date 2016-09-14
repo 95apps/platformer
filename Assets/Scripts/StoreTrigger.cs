@@ -10,6 +10,8 @@ public class StoreTrigger : MonoBehaviour {
 	
 	}
 	
+   
+
 	// Update is called once per frame
 	void Update () {
 	

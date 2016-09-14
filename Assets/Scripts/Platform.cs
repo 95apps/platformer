@@ -113,7 +113,7 @@ public class Platform : MonoBehaviour
             swiper.SetActive(true);
         }
 
-        if (UnityEngine.Random.Range(0, 6) == 1 && !swiper.activeInHierarchy && platsSpawned >= 0)
+        if (UnityEngine.Random.Range(0, 6) == 1 && !swiper.activeInHierarchy && platsSpawned >= 24)
         {
             bulletsGroup.SetActive(true);
         }
@@ -423,17 +423,11 @@ public class Platform : MonoBehaviour
                 // If the countDown equals initialCountDown (which it will, only the first time that the player touches the platform) then spawn another platform
                 if (countDown == initialCountDown)
                 {
-                    if(platforms.score == 1)
-                    {
-                        Rigidbody playerRb = player.GetComponent<Rigidbody>();
-                        playerRb.velocity = new Vector3(playerRb.velocity.x, 0, playerRb.velocity.z);
-                    }
+                    
                     countDown -= Time.deltaTime;
                     if (platforms.score % 2 == 0)
                     {
                         clouds.SpawnClouds(); //rekt
-                        clouds.SpawnClouds();
-                        clouds.SpawnClouds();
                         clouds.SpawnClouds();
                         clouds.SpawnClouds();
                     }

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 
@@ -25,6 +26,9 @@ public class Player : MonoBehaviour
     private TrailRenderer trail;
     public Skydome skydome;
     public GameObject mainCamera;
+    public float trailLength;
+    
+
 
 
     // Use this for initialization
@@ -34,7 +38,7 @@ public class Player : MonoBehaviour
         // Assigns rb to the RigidBody component of the player
         rb = GetComponent<Rigidbody>();
         // Stops forces from affecting player rotation
-        rb.freezeRotation = true;
+       
         // Line I got from the internet, makes it so that jumpSpeed is euqal to the amount of force required to jump up to jumpHeight
         jumpSpeed = Mathf.Sqrt(-2 * Physics.gravity.y *jumpHeight) + 0.1f;
         Raycast = GetComponent<Raycast>();
@@ -42,15 +46,23 @@ public class Player : MonoBehaviour
         trail = GetComponent<TrailRenderer>();
         skydome = GameObject.Find("SkyDome").GetComponent<Skydome>();
         skydome.SetPlayer(gameObject);
+        rb.freezeRotation = true;
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        trailLength += Vector3.Distance(lastFramePosition, transform.position)/3;
+        lastFramePosition = transform.position;
         trail.time += Time.deltaTime;
         Move();
         Jump();
+       
+        
     }
+
+    
 
     // Function to move the player.
     private void Move()
@@ -95,9 +107,12 @@ public class Player : MonoBehaviour
                 // Changes the vertical velocity of the player to jumpSpeed
                 velocity.y = jumpSpeed;
                 rb.velocity = velocity;
-
+                
                 mySound.PlayOneShot(bounceSounds[Random.Range(0, bounceSounds.Length)], 0.8f);
             }
+
+            
+
         }
     }
 

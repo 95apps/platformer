@@ -17,7 +17,11 @@ public class Floor : MonoBehaviour {
     private Rigidbody rb;
     private BoxCollider bc;
     
-    
+    void Awake ()
+    {
+        Application.targetFrameRate = 300;
+  
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -29,11 +33,12 @@ public class Floor : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(platform.startDisappear){
-			DestroyGround();
-		}
+        if (platform.startDisappear)
+        {
+            DestroyGround();
+        }
 
-        if(transform.position.y < -15)
+        if (transform.position.y < -15)
         {
             Destroy(gameObject);
         }

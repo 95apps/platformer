@@ -7,6 +7,7 @@ public class IAPModel : MonoBehaviour {
     public IAPManager iapManager;
 
     public Dropdown dropDown;
+    
 
     public void BuyGold (int value)
     {
@@ -27,4 +28,7 @@ public class IAPModel : MonoBehaviour {
                 break;
         }
     }
+
+   
+
 }

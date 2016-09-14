@@ -21,7 +21,7 @@ public class Clouds : MonoBehaviour {
     public void SpawnClouds()
     {
         GameObject cloud = Instantiate(clouds[Random.Range(0, clouds.Length - 1)]) as GameObject;
-        cloud.transform.position = new Vector3(Random.Range(-400, 400), Random.Range(60, 1000), Random.Range(-400, 400));
+        cloud.transform.position = new Vector3(Random.Range(-400, 400), Random.Range(-500, 1000), Random.Range(-400, 400));
         cloud.transform.parent = transform;
     }
 
