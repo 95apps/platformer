@@ -57,23 +57,24 @@ public class DeathCube : MonoBehaviour
                 transform.position = new Vector3(playerPos.x, playerPos.y + initialPos.y, playerPos.z);
             }
             float deltaY = playerPos.y - transform.position.y;
-            if (deltaY < -10f)
+            if (deltaY < -10f && playerDead)
             {
                 playerRb.isKinematic = true;
                 playerRb.useGravity = false;
                 player.GetComponent<Renderer>().enabled = false;
+            } else
+            {
+                player.GetComponent<Renderer>().enabled = true;
             }
         }
     }
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" && !player.isResurrecting)
         {
-            //cameraComponent.ViewportPointToRay()
             playerDead = true;
             playerVelocity = playerRb.velocity;
-           
         }
     }
 }
