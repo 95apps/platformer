@@ -88,22 +88,22 @@ public class Platforms : MonoBehaviour
         if (direction == 0)
         {
             // Positions the newly created platform respectively
-            newPlat.transform.position = new Vector3(lastPlatPosition.x + randomCord, lastPlatPosition.y + 1f, lastPlatPosition.z + 4);
+            newPlat.transform.position = new Vector3(lastPlatPosition.x + randomCord, lastPlatPosition.y + 1.5f, lastPlatPosition.z + 4);
             newPlat.transform.eulerAngles = new Vector3(0, 0, 0);
         }
         if (direction == 1)
         {
-            newPlat.transform.position = new Vector3(lastPlatPosition.x + 4, lastPlatPosition.y + 1f, lastPlatPosition.z + randomCord);
+            newPlat.transform.position = new Vector3(lastPlatPosition.x + 4, lastPlatPosition.y + 1.5f, lastPlatPosition.z + randomCord);
             newPlat.transform.eulerAngles = new Vector3(0, 90, 0);
         }
         if (direction == 2)
         {
-            newPlat.transform.position = new Vector3(lastPlatPosition.x + randomCord, lastPlatPosition.y + 1f, lastPlatPosition.z - 4);
+            newPlat.transform.position = new Vector3(lastPlatPosition.x + randomCord, lastPlatPosition.y + 1.5f, lastPlatPosition.z - 4);
             newPlat.transform.eulerAngles = new Vector3(0, 180, 0);
         }
         if (direction == 3)
         {
-            newPlat.transform.position = new Vector3(lastPlatPosition.x - 4, lastPlatPosition.y + 1f, lastPlatPosition.z + randomCord);
+            newPlat.transform.position = new Vector3(lastPlatPosition.x - 4, lastPlatPosition.y + 1.5f, lastPlatPosition.z + randomCord);
             newPlat.transform.eulerAngles = new Vector3(0, 270, 0);
         }
         // Makes this (the "Platforms" empty) the parent of the newly created platform

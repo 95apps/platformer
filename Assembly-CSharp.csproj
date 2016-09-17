@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{CB5AB7AF-45CC-5ED9-92A1-62C3F3F38FC4}</ProjectGuid>
+    <ProjectGuid>{7DF86CE5-98AD-27B9-C81C-95E986E42321}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -166,30 +166,30 @@
  <HintPath>F:/Unity/Editor/Data/UnityExtensions/Unity/UnityPurchasing/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="Common">
- <HintPath>C:/Users/Flashbait/Desktop/Unity/ribbonjump/Assets/Plugins/UnityPurchasing/Bin/Common.dll</HintPath>
+ <HintPath>C:/Users/Flashbait/Desktop/Unity/platformer/Assets/Plugins/UnityPurchasing/Bin/Common.dll</HintPath>
  </Reference>
  <Reference Include="Editor">
- <HintPath>C:/Users/Flashbait/Desktop/Unity/ribbonjump/Assets/Plugins/UnityPurchasing/Bin/Editor.dll</HintPath>
+ <HintPath>C:/Users/Flashbait/Desktop/Unity/platformer/Assets/Plugins/UnityPurchasing/Bin/Editor.dll</HintPath>
  </Reference>
  <Reference Include="Security">
- <HintPath>C:/Users/Flashbait/Desktop/Unity/ribbonjump/Assets/Plugins/UnityPurchasing/Bin/Security.dll</HintPath>
+ <HintPath>C:/Users/Flashbait/Desktop/Unity/platformer/Assets/Plugins/UnityPurchasing/Bin/Security.dll</HintPath>
  </Reference>
  <Reference Include="Stores">
- <HintPath>C:/Users/Flashbait/Desktop/Unity/ribbonjump/Assets/Plugins/UnityPurchasing/Bin/Stores.dll</HintPath>
+ <HintPath>C:/Users/Flashbait/Desktop/Unity/platformer/Assets/Plugins/UnityPurchasing/Bin/Stores.dll</HintPath>
  </Reference>
  <Reference Include="Apple">
- <HintPath>C:/Users/Flashbait/Desktop/Unity/ribbonjump/Assets/Plugins/UnityPurchasing/Bin/Apple/Apple.dll</HintPath>
+ <HintPath>C:/Users/Flashbait/Desktop/Unity/platformer/Assets/Plugins/UnityPurchasing/Bin/Apple/Apple.dll</HintPath>
  </Reference>
  <Reference Include="Tizen">
- <HintPath>C:/Users/Flashbait/Desktop/Unity/ribbonjump/Assets/Plugins/UnityPurchasing/Bin/Tizen/Tizen.dll</HintPath>
+ <HintPath>C:/Users/Flashbait/Desktop/Unity/platformer/Assets/Plugins/UnityPurchasing/Bin/Tizen/Tizen.dll</HintPath>
  </Reference>
  <Reference Include="winrt">
- <HintPath>C:/Users/Flashbait/Desktop/Unity/ribbonjump/Assets/Plugins/UnityPurchasing/winrt/winrt.dll</HintPath>
+ <HintPath>C:/Users/Flashbait/Desktop/Unity/platformer/Assets/Plugins/UnityPurchasing/winrt/winrt.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{43142294-A7CE-7BD5-25FC-AA9E04886067}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{81B4CB8E-DE72-817D-016D-0395A207D63B}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

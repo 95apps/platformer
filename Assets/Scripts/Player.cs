@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         trailLength += Vector3.Distance(lastFramePosition, transform.position)/3;
         lastFramePosition = transform.position;
         trail.time += Time.deltaTime;
@@ -102,8 +103,10 @@ public class Player : MonoBehaviour
     // Function to make the player jump
     private void Jump()
     {
+
+
         // If the player is on the ground (has no vertical velocity)...
-        if (rb.velocity.y > -0.1f && rb.velocity.y < 0.1f)
+        if(rb.velocity.y < 0.3f && rb.velocity.y > - 0.3f)
         {
             // If the spacebar is pressed...
             if (Input.GetKey(KeyCode.Space) && Raycast.onGround == true)
@@ -112,11 +115,17 @@ public class Player : MonoBehaviour
                 // Changes the vertical velocity of the player to jumpSpeed
                 velocity.y = jumpSpeed;
                 rb.velocity = velocity;
-                
+
+
+
+
+
                 mySound.PlayOneShot(bounceSounds[Random.Range(0, bounceSounds.Length)], 0.8f);
             }
         }
     }
+        
+    
 
     public void Resurrect()
     {

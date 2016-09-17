@@ -31,6 +31,8 @@ public class Platform : MonoBehaviour
 
     private Vector3 xPos1;
     private Vector3 xPos2;
+    private Vector3 yPos1;
+    private Vector3 yPos2;
     private Vector3 zPos1;
     private Vector3 zPos2;
     private Vector3 boxColDimensions;
@@ -61,6 +63,8 @@ public class Platform : MonoBehaviour
     public Color32[] trafficColors;
     public Color32 fallColor;
     public Player player;
+    private float bobStep;
+    private bool toBob = true;
 
     // This initialize funciton is called by the "platforms" empty when Instanciating a new platform 
     //in order to pass the empty into the platform's "platforms" variable
@@ -233,8 +237,10 @@ public class Platform : MonoBehaviour
         boxColDimensions = new Vector3(transform.localScale.x * 1.1f, transform.localScale.y, transform.localScale.z * 1.1f);
         xPos1 = new Vector3(transform.position.x + 3f, transform.position.y, transform.position.z);
         xPos2 = new Vector3(transform.position.x - 3f, transform.position.y, transform.position.z);
-        zPos1 = new Vector3(transform.position.x, transform.position.y, transform.position.z + 3f);
-        zPos2 = new Vector3(transform.position.x, transform.position.y, transform.position.z - 3f);
+        zPos1 = new Vector3(transform.position.x, transform.position.y , transform.position.z + 3f);
+        zPos2 = new Vector3(transform.position.x, transform.position.y , transform.position.z - 3f);
+        yPos1 = new Vector3(transform.position.x, transform.position.y + UnityEngine.Random.Range(0, 0.3f), transform.position.z);
+        yPos2 = new Vector3(transform.position.x, transform.position.y + UnityEngine.Random.Range(0, -0.3f), transform.position.z);
         // Defines the platform renderer
         platRender = GetComponent<Renderer>();
         // Defines initialCountDown as the countDown on the "Platforms" empty, set in unity
@@ -249,9 +255,25 @@ public class Platform : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    public static float Hermite(float start, float end, float value)
+    {
+        return Mathf.Lerp(start, end, value * value * (3.0f - 2.0f * value));
+    }
+
+
     void Update()
     {
-        if(trafficLight){
+        if (toBob == true)
+        {
+            transform.position = Vector3.Lerp(yPos1, yPos2, Hermite(0, 1, Mathf.PingPong(bobStep, 1)));
+            bobStep += Time.deltaTime;
+            
+        }
+
+
+
+        if (trafficLight){
             TrafficLight();
         }
         if(highScorePlaying && !src.isPlaying){
@@ -372,8 +394,9 @@ public class Platform : MonoBehaviour
         if (countDown < 0f)
         {
             startMoving = false;
-            rb.isKinematic = false;
+            toBob = false;
             rb.useGravity = true;
+            rb.isKinematic = false;
 
             if (transform.position.y < -20)
             {
@@ -390,7 +413,7 @@ public class Platform : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision col)
+    void OnTriggerEnter(Collider col)
     {
         // If the object that collided with this is the player (Which it always is, but its here for safety)...
         if (col.gameObject.tag == "Player")

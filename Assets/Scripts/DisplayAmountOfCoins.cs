@@ -21,7 +21,7 @@ public class DisplayAmountOfCoins : MonoBehaviour {
 
     public void SetCoin()
     {
-        myText = gameObject.GetComponentInChildren<UnityEngine.UI.Text>();
+        myText = GameObject.FindGameObjectWithTag("CoinDisplayTag").GetComponent<UnityEngine.UI.Text>();
         myText.text = "Coins : " + PlayerPrefs.GetInt("Coins").ToString();
     }
 	

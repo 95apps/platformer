@@ -29,13 +29,15 @@ public class Raycast : MonoBehaviour {
 
 
         if (
-            Physics.Raycast(transform.position, dwn, 0.6f) || //center raycast to fix potential bugs.
+ //center raycast to fix potential bugs.
             Physics.Raycast (transform.position + corner1, dwn, 0.6f) ||
 			Physics.Raycast (transform.position + corner2, dwn, 0.6f) ||
 			Physics.Raycast (transform.position + corner3, dwn, 0.6f) ||
 			Physics.Raycast (transform.position + corner4, dwn, 0.6f)) {
-          
+
+            
 			onGround = true;
+           
 
 		} else {
 

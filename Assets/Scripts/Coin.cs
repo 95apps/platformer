@@ -49,8 +49,11 @@ public class Coin : MonoBehaviour
             Destroy(myMesh2);
             PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 1);
 
-            src.PlayOneShot(coinSound);
 
+            if (!src.isPlaying)
+            {
+                src.PlayOneShot(coinSound);
+            }
 
 
 
