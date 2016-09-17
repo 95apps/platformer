@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public Platforms platforms;
     public DeathCube deathCube;
     public bool isResurrecting = false;
+    public bool canJump = true;
     // Most of these variables are pretty self explanatory
     public float movingSpeed = 5.0f;
     public float jumpHeight;    // Don't change jumpSpeed, jumpHeight is the only one that should be changed for different jump heights
@@ -31,15 +32,18 @@ public class Player : MonoBehaviour
     private TrailRenderer trail;
     public Skydome skydome;
     public GameObject mainCamera;
+    public float flipStep;
     public float trailLength;
     private bool hooking = false;
     private bool setHookEnd = false;
     private bool setHookTarget = false;
+    private bool canFlip = false;
 
 
     // Use this for initialization
     void Start()
     {
+        canFlip = true;
         lastFramePosition = transform.position;
         // Assigns rb to the RigidBody component of the player
         rb = GetComponent<Rigidbody>();
@@ -58,7 +62,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
         trailLength += Vector3.Distance(lastFramePosition, transform.position)/3;
         lastFramePosition = transform.position;
         trail.time += Time.deltaTime;
@@ -67,6 +70,16 @@ public class Player : MonoBehaviour
         if (hooking)
         {
             Hook();
+        }
+
+        if (canJump == false)
+        {
+            transform.eulerAngles = new Vector3(Mathf.Lerp(0, 180, flipStep), 0, 0);
+            flipStep += Time.deltaTime * 2;
+            if(flipStep > 1f)
+            {
+                flipStep = 1f;
+            }
         }
     }
     
@@ -103,25 +116,17 @@ public class Player : MonoBehaviour
     // Function to make the player jump
     private void Jump()
     {
-
-
         // If the player is on the ground (has no vertical velocity)...
-        if(rb.velocity.y < 0.3f && rb.velocity.y > - 0.3f)
-        {
             // If the spacebar is pressed...
-            if (Input.GetKey(KeyCode.Space) && Raycast.onGround == true)
-            {
-                velocity = rb.velocity;
-                // Changes the vertical velocity of the player to jumpSpeed
-                velocity.y = jumpSpeed;
-                rb.velocity = velocity;
-
-
-
-
-
-                mySound.PlayOneShot(bounceSounds[Random.Range(0, bounceSounds.Length)], 0.8f);
-            }
+        if (Input.GetKey(KeyCode.Space) && canJump)
+        {
+            canJump = false;
+            velocity = rb.velocity;
+            // Changes the vertical velocity of the player to jumpSpeed
+            velocity.y = jumpSpeed;
+            rb.velocity = velocity;
+            
+            mySound.PlayOneShot(bounceSounds[Random.Range(0, bounceSounds.Length)], 0.8f);
         }
     }
         

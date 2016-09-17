@@ -86,7 +86,7 @@ public class Platform : MonoBehaviour
 
         if (platsSpawned % 8 == 0)
         {
-            if (platforms.countDown >= 0.5f)
+            if (platforms.countDown >= 1f)
             {
                 platforms.countDown -= 0.1f;
             }
@@ -233,6 +233,7 @@ public class Platform : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        bobStep = UnityEngine.Random.Range(0f, 1f);
         colorCounter = UnityEngine.Random.Range(0, 2);
         boxColDimensions = new Vector3(transform.localScale.x * 1.1f, transform.localScale.y, transform.localScale.z * 1.1f);
         xPos1 = new Vector3(transform.position.x + 3f, transform.position.y, transform.position.z);
@@ -418,72 +419,84 @@ public class Platform : MonoBehaviour
         // If the object that collided with this is the player (Which it always is, but its here for safety)...
         if (col.gameObject.tag == "Player")
         {
+            if(colorCounter != 2)
+            {
+                player.canJump = true;
+                //player.transform.eulerAngles = Vector3.zero;
+                player.flipStep = 0f;
+            }
             // deltas are the differences between the player's xyz and the platform's xys axes
             float deltaX = col.gameObject.transform.position.x - transform.position.x;
             float deltaY = col.gameObject.transform.position.y - transform.position.y;
             float deltaZ = col.gameObject.transform.position.z - transform.position.z;
             Vector3 target = new Vector3(boxColDimensions.x / 2 + 0.5f, 0, boxColDimensions.z / 2 + 0.5f);
+
             // If deltaY is greater than or equal to 0.9 (margin of error, there's probably a better way to do this) and less than or equal to 1 then make the platform start disappearing
             // We need this because when the player lands on the platform it doesn't instantly level out, it goes below for a few frames because of momentum
-            if ((deltaY >= 0.9f) && Math.Abs(deltaX) < target.x && Math.Abs(deltaZ) < target.z)
+
+            if (trafficLight)
             {
-
-                if (trafficLight)
+                if(colorCounter == 2)
                 {
-                    if(colorCounter == 2)
-                    {
-                        platforms.platforms.Remove(gameObject);
-                        platforms.consecutiveJumped++;
-                        if (platforms.consecutiveJumped % 4 == 0)
-                        {
-                            platforms.rotationAngleMultiplier++;
-                        }
-                    }
-                    trafficDestroy = true;
-                    trafficLight = false;
-                }
-
-                // If the countDown equals initialCountDown (which it will, only the first time that the player touches the platform) then spawn another platform
-                if (countDown == initialCountDown)
-                {
-                    
-                    countDown -= Time.deltaTime;
-                    if (platforms.score % 2 == 0)
-                    {
-                        clouds.SpawnClouds(); //rekt
-                        clouds.SpawnClouds();
-                        clouds.SpawnClouds();
-                    }
-
+                    platforms.platforms.Remove(gameObject);
                     platforms.consecutiveJumped++;
                     if (platforms.consecutiveJumped % 4 == 0)
                     {
                         platforms.rotationAngleMultiplier++;
                     }
-                    platforms.score++;
-                    print(platforms.score);
-
-                    if (PlayerPrefs.GetFloat("Highscore") < platforms.score)
-                    {
-
-                        PlayerPrefs.SetFloat("Highscore", platforms.score);
-
-                    }
-
-                    if (platforms.score == highscore)
-                    {
-                        src.pitch = 1f;
-                        src.PlayOneShot(fallSounds[fallSounds.Length - 1], 0.8f);
-                        highScorePlaying = true;
-                    }
-
-                    platforms.SpawnPlatform();
-                    platforms.platforms.Remove(gameObject);
-                } else if(trafficDestroy){
-                    player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
                 }
-                startDisappear = true;
+                trafficDestroy = true;
+                trafficLight = false;
             }
+
+            // If the countDown equals initialCountDown (which it will, only the first time that the player touches the platform) then spawn another platform
+            if (countDown == initialCountDown)
+            {
+                
+                countDown -= Time.deltaTime;
+                if (platforms.score % 2 == 0)
+                {
+                    clouds.SpawnClouds(); //rekt
+                    clouds.SpawnClouds();
+                    clouds.SpawnClouds();
+                }
+
+                platforms.consecutiveJumped++;
+                if (platforms.consecutiveJumped % 4 == 0)
+                {
+                    platforms.rotationAngleMultiplier++;
+                }
+                platforms.score++;
+                print(platforms.score);
+
+                if (PlayerPrefs.GetFloat("Highscore") < platforms.score)
+                {
+
+                    PlayerPrefs.SetFloat("Highscore", platforms.score);
+
+                }
+
+                if (platforms.score == highscore)
+                {
+                    src.pitch = 1f;
+                    src.PlayOneShot(fallSounds[fallSounds.Length - 1], 0.8f);
+                    highScorePlaying = true;
+                }
+
+                platforms.SpawnPlatform();
+                platforms.platforms.Remove(gameObject);
+            } else if(trafficDestroy){
+                player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+            }
+            startDisappear = true;
+        }
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        if(col.gameObject.tag == "Player")
+        {
+            player.canJump = false;
         }
     }
 }
