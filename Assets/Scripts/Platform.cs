@@ -63,6 +63,7 @@ public class Platform : MonoBehaviour
     public Color32[] trafficColors;
     public Color32 fallColor;
     public Player player;
+    public GameObject arrows;
     private float bobStep;
     private bool toBob = true;
 
@@ -90,6 +91,11 @@ public class Platform : MonoBehaviour
             {
                 platforms.countDown -= 0.1f;
             }
+        }
+
+        if(consecutivePlaced == 3)
+        {
+            arrows.SetActive(true);
         }
 
 
@@ -344,6 +350,7 @@ public class Platform : MonoBehaviour
                 break;
             case 3:
                 transform.position = Vector3.Lerp(zPos1, zPos2, Mathf.PingPong(Time.time * platforms.platSpeed, 1.0f));
+
                 break;
             default:
                 Debug.Log("You broke the game");
