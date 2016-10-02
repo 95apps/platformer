@@ -114,13 +114,18 @@ public class Platform : MonoBehaviour
             bot.material = platforms.mats[0];
         }
 
-        if (UnityEngine.Random.Range(0, 8) == 1 && !startMoving && platsSpawned >= 8 && platsSpawned <= 31)
+        if (UnityEngine.Random.Range(0, 8) == 1 && !startMoving && platsSpawned >= 8 && platsSpawned <= 31 && platforms.swiperCounter <= 1)
         {
             swiper.SetActive(true);
+            platforms.swiperCounter++;
         }
-        else if (UnityEngine.Random.Range(0, 6) == 1 && !startMoving && platsSpawned >= 32 && !swiper.activeInHierarchy)
+        else if (UnityEngine.Random.Range(0, 6) == 1 && !startMoving && platsSpawned >= 32 && !swiper.activeInHierarchy && platforms.swiperCounter <= 1)
         {
             swiper.SetActive(true);
+            platforms.swiperCounter++;
+        } else
+        {
+            platforms.swiperCounter = 0;
         }
 
         if (UnityEngine.Random.Range(0, 6) == 1 && !swiper.activeInHierarchy && platsSpawned >= 24)
@@ -461,11 +466,10 @@ public class Platform : MonoBehaviour
             {
                 
                 countDown -= Time.deltaTime;
-                if (platforms.score % 2 == 0)
+                if (platforms.score % 6 == 0)
                 {
                     clouds.SpawnClouds(); //rekt
-                    clouds.SpawnClouds();
-                    clouds.SpawnClouds();
+                  
                 }
 
                 platforms.consecutiveJumped++;

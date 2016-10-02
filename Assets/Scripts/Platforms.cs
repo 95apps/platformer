@@ -22,6 +22,7 @@ public class Platforms : MonoBehaviour
     public Clouds clouds;
     public Material[] mats;
     public Player player;
+    public int swiperCounter;
 
     // Use this for initialization
     void Start()
@@ -63,7 +64,7 @@ public class Platforms : MonoBehaviour
         // Creates a random number in a specified range to be used for platform spawning
         float randomCord = Random.Range(-4f, 4f);
         // Instantiates a new platform prefab
-        GameObject newPlat = Instantiate(Resources.Load("Platform")) as GameObject;
+        GameObject newPlat = Instantiate(Resources.Load("GameEntities/Platform")) as GameObject;
 
         // This line calls the initialize funcition of the newley created platform and passes this to be the "platforms" variable
         newPlat.GetComponent<Platform>().Initialize(this, direction, consecutiveSpawned, consecutivePlaced, clouds, pitch, player);
@@ -114,7 +115,7 @@ public class Platforms : MonoBehaviour
 
         if (Random.Range(0, 2) == 1)
         {
-            GameObject newCoin = Instantiate(Resources.Load("Coin")) as GameObject;
+            GameObject newCoin = Instantiate(Resources.Load("GameEntities/Coin")) as GameObject;
             newCoin.transform.position = newPlat.transform.position + new Vector3(Random.Range(-2.5f,2.5f), 1.6f, Random.Range(-2.5f, 2.5f));
         }
     }

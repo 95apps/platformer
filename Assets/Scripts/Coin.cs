@@ -12,6 +12,7 @@ public class Coin : MonoBehaviour
     public CapsuleCollider myCollider2;
     public MeshRenderer myMesh2;
     private bool startTimer = false;
+    private int randomSpin;
 
 
 
@@ -22,6 +23,8 @@ public class Coin : MonoBehaviour
         src = GetComponent<AudioSource>();
         myCollider = GetComponent<CapsuleCollider>();
         myMesh = GetComponent<MeshRenderer>();
+        randomSpin = Random.Range(0, 2);
+    
        
 
     }
@@ -29,8 +32,18 @@ public class Coin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+   
 
-        transform.Rotate(0, 0, 180 * Time.deltaTime);
+        switch (randomSpin) {
+            case 0:
+                transform.Rotate(0, 0, 180 * Time.deltaTime);
+                break;
+            case 1:
+                transform.Rotate(0, 0, -180 * Time.deltaTime);
+                break;
+        }
+
+        
 
 
         if (startTimer && !src.isPlaying)

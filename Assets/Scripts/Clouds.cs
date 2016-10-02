@@ -5,7 +5,8 @@ public class Clouds : MonoBehaviour {
 
     public GameObject[] clouds;
     private int amountOfClouds;
-    public Platforms platforms; 
+    public Platforms platforms;
+    public GameObject player; 
 
 	// Use this for initialization
 	void Start () {
@@ -21,7 +22,8 @@ public class Clouds : MonoBehaviour {
     public void SpawnClouds()
     {
         GameObject cloud = Instantiate(clouds[Random.Range(0, clouds.Length - 1)]) as GameObject;
-        cloud.transform.position = new Vector3(Random.Range(-400, 400), Random.Range(-500, 1000), Random.Range(-400, 400));
+        cloud.transform.position = new Vector3(Random.Range(-200, 200), player.transform.position.y + Random.Range(25, 50), Random.Range(-200, 200));
+        cloud.transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, Random.Range(0, 360), transform.localEulerAngles.z);
         cloud.transform.parent = transform;
     }
 

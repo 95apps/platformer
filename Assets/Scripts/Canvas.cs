@@ -7,6 +7,7 @@ public class Canvas : MonoBehaviour {
     public GameObject header2;
     public GameObject botHeader1;
     public GameObject botHeader2;
+    public GameObject continueOption;
 
 
     // Use this for initialization
@@ -20,9 +21,10 @@ public class Canvas : MonoBehaviour {
         if (header1.transform.position.x > botHeader1.transform.position.x)
         {
             header1.transform.Translate(Vector3.left * 16);
-            header2.transform.Translate(Vector3.left * 16);
+
             botHeader1.transform.Translate(Vector3.right * 16);
-            botHeader2.transform.Translate(Vector3.right * 16);
+            continueOption.transform.Translate(Vector3.right * 16);
+
         }
 
 

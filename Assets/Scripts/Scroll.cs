@@ -14,13 +14,39 @@ public class Scroll : MonoBehaviour
     private bool toMove = false;
     public RawImage rawImage;
     public GameObject big;
-    public GameObject selected;
-    public BigScroll bigScroll; 
+    public Selected selected;
+    public BigScroll bigScroll;
+    public int value;
+    public int status;
+    public DisplayAmountOfCoins displayAmountOfCoins;
 
     // Use this for initialization
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
+        if (!PlayerPrefs.HasKey(gameObject.name))
+        {
+            PlayerPrefs.SetInt(gameObject.name, status);
+        } 
+    }
+
+    public void Purchase()
+    {
+        PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - value);
+        displayAmountOfCoins.SetCoin();
+        PlayerPrefs.SetInt(gameObject.name, 1);
+    }
+
+    public void Equip()
+    {
+        if (PlayerPrefs.GetInt(gameObject.name) != 1)
+        {
+            PlayerPrefs.SetInt(gameObject.name, 1);
+        } else
+        {
+            PlayerPrefs.SetInt(gameObject.name, 2);
+        }
+        
     }
 
     public void StopIt()
@@ -39,6 +65,13 @@ public class Scroll : MonoBehaviour
 
     void Update()
     {
+        deltaX = selected.transform.position.x - transform.position.x;
+        if (Mathf.Abs(deltaX) <= 40f)
+        {
+            selected.selected = this;
+        }
+
+
         if (toMove && transform.position.x != selected.transform.position.x)
         {
             big.transform.position = Vector3.Lerp(startPos, target, Hermite(0f, 1f, step));
