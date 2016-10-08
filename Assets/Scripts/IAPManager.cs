@@ -25,7 +25,8 @@ public class IAPManager : MonoBehaviour, IStoreListener
     // specific mapping to Unity Purchasing's AddProduct, below.
     public static string PRODUCT_1000_GOLD = "gold1000";
     public static string PRODUCT_2000_GOLD = "gold2000";
-    public static string PRODUCT_3000_GOLD = "gold3000";
+    public static string PRODUCT_4000_GOLD = "gold4000";
+    public static string PRODUCT_8000_GOLD = "gold8000";
     private DisplayAmountOfCoins displayCoins;
 
     // Apple App Store-specific product identifier for the subscription product.
@@ -64,7 +65,8 @@ public class IAPManager : MonoBehaviour, IStoreListener
         // with its store-specific identifiers.
         builder.AddProduct(PRODUCT_1000_GOLD, ProductType.Consumable);
         builder.AddProduct(PRODUCT_2000_GOLD, ProductType.Consumable);
-        builder.AddProduct(PRODUCT_3000_GOLD, ProductType.Consumable);
+        builder.AddProduct(PRODUCT_4000_GOLD, ProductType.Consumable);
+        builder.AddProduct(PRODUCT_8000_GOLD, ProductType.Consumable);
 
         // Kick off the remainder of the set-up with an asynchrounous call, passing the configuration 
         // and this class' instance. Expect a response either in OnInitialized or OnInitializeFailed.
@@ -93,11 +95,18 @@ public class IAPManager : MonoBehaviour, IStoreListener
         BuyProductID(PRODUCT_2000_GOLD);
     }
 
-    public void Buy3000Gold()
+    public void Buy4000Gold()
     {
         // Buy the consumable product using its general identifier. Expect a response either 
         // through ProcessPurchase or OnPurchaseFailed asynchronously.
-        BuyProductID(PRODUCT_3000_GOLD);
+        BuyProductID(PRODUCT_4000_GOLD);
+    }
+
+    public void Buy8000Gold()
+    {
+        // Buy the consumable product using its general identifier. Expect a response either 
+        // through ProcessPurchase or OnPurchaseFailed asynchronously.
+        BuyProductID(PRODUCT_8000_GOLD);
     }
 
 
@@ -214,10 +223,18 @@ public class IAPManager : MonoBehaviour, IStoreListener
             displayCoins.SetCoin();
         }
 
-        else if (String.Equals(args.purchasedProduct.definition.id, PRODUCT_3000_GOLD, StringComparison.Ordinal))
+        else if (String.Equals(args.purchasedProduct.definition.id, PRODUCT_4000_GOLD, StringComparison.Ordinal))
         {
-            Debug.Log("You bought 3000 Gold!");
-            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 3000);
+            Debug.Log("You bought 4000 Gold!");
+            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 4000);
+            displayCoins = GameObject.Find("storeCanvas").GetComponent<DisplayAmountOfCoins>();
+            displayCoins.SetCoin();
+        }
+
+        else if (String.Equals(args.purchasedProduct.definition.id, PRODUCT_8000_GOLD, StringComparison.Ordinal))
+        {
+            Debug.Log("You bought 8000 Gold!");
+            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 8000);
             displayCoins = GameObject.Find("storeCanvas").GetComponent<DisplayAmountOfCoins>();
             displayCoins.SetCoin();
         }

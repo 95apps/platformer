@@ -44,13 +44,16 @@ public class IAPModel : MonoBehaviour {
         print("rash B");
     }
 
-    public void BuyGold3000()
+    public void BuyGold4000()
     {
-        iapManager.Buy3000Gold();
-        print("sick flash");
+        iapManager.Buy4000Gold();
+        print("cyka blyat");
     }
 
-
-
+    public void BuyGold8000()
+    {
+        iapManager.Buy8000Gold();
+        print("ayy lmao");
+    }
 
 }
