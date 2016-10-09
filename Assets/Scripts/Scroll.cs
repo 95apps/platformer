@@ -23,8 +23,12 @@ public class Scroll : MonoBehaviour
     public Text text;
     public Mesh playerModel;
     public Vector3 colDimensions;
+    public Vector3 colPos;
     public Vector3 playerDimensions;
+    public Vector3 modelRotation;
+    public Material modelMat;
     public Player player;
+    public bool isCube = false;
 
     // Use this for initialization
     void Start()
@@ -37,6 +41,11 @@ public class Scroll : MonoBehaviour
         src = GetComponent<AudioSource>();
         text.text = value.ToString();
         bigScroll = big.GetComponent<BigScroll>();
+
+        if (isCube && PlayerPrefs.GetInt(name) == 0)
+        {
+            PlayerPrefs.SetInt(name, 1);
+        }
     }
 
     public void Purchase()
@@ -84,7 +93,10 @@ public class Scroll : MonoBehaviour
     {
         player.GetComponent<MeshFilter>().mesh = playerModel;
         player.GetComponent<BoxCollider>().size = colDimensions;
+        player.GetComponent<BoxCollider>().center = colPos;
         player.transform.localScale = playerDimensions;
+        player.GetComponent<MeshRenderer>().material = modelMat;
+        player.transform.eulerAngles = modelRotation;
     }
 
     public void StopIt()

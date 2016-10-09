@@ -508,6 +508,7 @@ public class Platform : MonoBehaviour
         if(col.gameObject.tag == "Player")
         {
             player.canJump = false;
+            //player.anim.Play(PlayMode.StopSameLayer);
         }
     }
 }

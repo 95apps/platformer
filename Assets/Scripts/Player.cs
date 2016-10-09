@@ -32,8 +32,10 @@ public class Player : MonoBehaviour
     private TrailRenderer trail;
     public Skydome skydome;
     public GameObject mainCamera;
+    public GameObject big;
     public float flipStep;
     public float trailLength;
+    //public Animation anim;
     private bool hooking = false;
     private bool setHookEnd = false;
     private bool setHookTarget = false;
@@ -43,6 +45,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //anim = GetComponent<Animation>();
         canFlip = true;
         lastFramePosition = transform.position;
         // Assigns rb to the RigidBody component of the player
@@ -57,6 +60,14 @@ public class Player : MonoBehaviour
         skydome = GameObject.Find("SkyDome").GetComponent<Skydome>();
         skydome.SetPlayer(gameObject);
         rb.freezeRotation = true;
+
+        foreach(Transform child in big.transform)
+        {
+            if(PlayerPrefs.GetInt(child.name) == 1)
+            {
+                child.GetComponent<Scroll>().EquipModel();
+            }
+        }
     }
 
     // Update is called once per frame
@@ -72,7 +83,7 @@ public class Player : MonoBehaviour
             Hook();
         }
 
-        if (canJump == false)
+        /*if (canJump == false)
         {
             transform.eulerAngles = new Vector3(Mathf.Lerp(0, 180, flipStep), 0, 0);
             flipStep += Time.deltaTime * 2;
@@ -80,7 +91,7 @@ public class Player : MonoBehaviour
             {
                 flipStep = 1f;
             }
-        }
+        }*/
     }
     
     // Function to move the player.
