@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityStandardAssets.CrossPlatformInput;
 
 
 
@@ -12,7 +13,7 @@ public class Player : MonoBehaviour
     public bool isResurrecting = false;
     public bool canJump = true;
     // Most of these variables are pretty self explanatory
-    public float movingSpeed = 5.0f;
+    public float movingSpeed = 0.1f;
     public float jumpHeight;    // Don't change jumpSpeed, jumpHeight is the only one that should be changed for different jump heights
     private float jumpSpeed;
     private float distanceTravelled;
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour
     private bool setHookEnd = false;
     private bool setHookTarget = false;
     private bool canFlip = false;
+
 
 
     // Use this for initialization
@@ -83,6 +85,8 @@ public class Player : MonoBehaviour
             Hook();
         }
 
+        
+
         /*if (canJump == false)
         {
             transform.eulerAngles = new Vector3(Mathf.Lerp(0, 180, flipStep), 0, 0);
@@ -98,8 +102,11 @@ public class Player : MonoBehaviour
     private void Move()
     {
         // Sets variables to the arrow key inputs
-        float moveRightLeft = Input.GetAxis("Horizontal");
-        float moveUpDown = Input.GetAxis("Vertical");
+        //float moveRightLeft = Input.GetAxis("Horizontal");
+        //float moveUpDown = Input.GetAxis("Vertical");
+        float moveRightLeft = (CrossPlatformInputManager.GetAxis("Horizontal"));
+        float moveUpDown = (CrossPlatformInputManager.GetAxis("Vertical"));
+
 
         // Sets the velocity of the player to moveSpeed times arrow key input (0 to 1 or -1)
         if (platforms.consecutiveJumped < 4)

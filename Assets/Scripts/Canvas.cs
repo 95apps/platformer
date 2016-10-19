@@ -23,7 +23,7 @@ public class Canvas : MonoBehaviour {
             header1.transform.Translate(Vector3.left * 16);
 
             botHeader1.transform.Translate(Vector3.right * 16);
-            continueOption.transform.Translate(Vector3.right * 16);
+            
 
         }
 
