@@ -429,7 +429,7 @@ public class Platform : MonoBehaviour
     void OnTriggerEnter(Collider col)
     {
         // If the object that collided with this is the player (Which it always is, but its here for safety)...
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player" && !player.isResurrecting)
         {
             if(colorCounter != 2)
             {
