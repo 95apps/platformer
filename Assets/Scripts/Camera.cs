@@ -18,7 +18,7 @@ public class Camera : MonoBehaviour
     private int distance;
     private bool smooth = true;
     private bool firstRotate = false;
-    private Vector3 offset = new Vector3(0, 2.75f, -7.5f);
+    private Vector3 offset = new Vector3(0, 2.75f, -3f);
     private Vector3 playerStartPos;
     private Vector3 playerEndPos;
     private Vector3 playerAvgPos;

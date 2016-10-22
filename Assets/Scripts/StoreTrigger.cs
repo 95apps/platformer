@@ -4,9 +4,9 @@ using System.Collections;
 public class StoreTrigger : MonoBehaviour {
 
     public GameObject storeCanvas;
-
-	// Use this for initialization
-	void Start () {
+    public GameObject settingsCanvas;
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -17,21 +17,34 @@ public class StoreTrigger : MonoBehaviour {
 	
 	}
 
-    void OnTriggerStay(Collider col)
+    public void Leave()
     {
-        if (col.gameObject.tag == "Player")
-        {
-            storeCanvas.SetActive(true);
-        }
+
+        storeCanvas.SetActive(false);
+        settingsCanvas.SetActive(false);
+
     }
 
-    void OnTriggerExit(Collider col)
+    public void StoreCanvasActive()
     {
-        if (col.gameObject.tag == "Player")
+        settingsCanvas.SetActive(false);
+        storeCanvas.SetActive(true);
+   
+        
+    }
+
+    public void SettingsCanvasActive()
+    {
+
+        if (settingsCanvas.activeInHierarchy == false)
         {
-           
-            storeCanvas.SetActive(false);
+            settingsCanvas.SetActive(true);
+        } else
+        {
+            settingsCanvas.SetActive(false);
         }
+
+        
 
     }
 

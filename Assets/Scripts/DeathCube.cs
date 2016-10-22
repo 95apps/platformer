@@ -11,6 +11,9 @@ public class DeathCube : MonoBehaviour
     private Vector3 initialPos;
     private Vector3 playerVelocity;
     public GameObject canvas;
+    public StoreTrigger StoreTrigger;
+    public GameObject FloorCanvas;
+
 
 
     private TrailRenderer trail;
@@ -31,7 +34,8 @@ public class DeathCube : MonoBehaviour
     {
         if (playerDead)
         {
-         
+            StoreTrigger.Leave();
+            FloorCanvas.SetActive(false);
             canvas.SetActive(true);
           
             if (trail.startWidth <= 0.5f)

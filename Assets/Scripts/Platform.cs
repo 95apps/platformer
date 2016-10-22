@@ -15,7 +15,7 @@ public class Platform : MonoBehaviour
     private int platsSpawned;
     private int platsPlaced;
     private int colorCounter;
-
+    public GameObject FloorCanvas;
     // The renderer component of the platform used to change the color
     private Renderer platRender;
     private Rigidbody rb;
@@ -492,6 +492,11 @@ public class Platform : MonoBehaviour
                     src.pitch = 1f;
                     src.PlayOneShot(fallSounds[fallSounds.Length - 1], 0.8f);
                     highScorePlaying = true;
+                }
+
+                if (platforms.score == 0)
+                {
+                    FloorCanvas.SetActive(false);
                 }
 
                 platforms.SpawnPlatform();
