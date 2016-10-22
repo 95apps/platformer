@@ -79,7 +79,10 @@ public class Player : MonoBehaviour
         lastFramePosition = transform.position;
         trail.time += Time.deltaTime;
         Move();
-        Jump();
+        if (Input.GetKey("space"))
+        {
+            Jump();
+        }
         if (hooking)
         {
             Hook();
@@ -132,11 +135,11 @@ public class Player : MonoBehaviour
     }
 
     // Function to make the player jump
-    private void Jump()
+    public void Jump()
     {
         // If the player is on the ground (has no vertical velocity)...
             // If the spacebar is pressed...
-        if (Input.GetKey(KeyCode.Space) && canJump)
+        if (canJump)
         {
             canJump = false;
             velocity = rb.velocity;
