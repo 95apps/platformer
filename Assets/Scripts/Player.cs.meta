@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e08bbfeacd80b4d919dfeb1f8dae65a7
+timeCreated: 1472108885
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - platforms: {instanceID: 0}
+  - bounceSound: {fileID: 8300000, guid: 7404ece12fa454977be245a1a30e9106, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
