@@ -15,6 +15,7 @@ public class Jukebox : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        src = GetComponent<AudioSource>();
         if (!PlayerPrefs.HasKey("muteMusic"))
         {
             PlayerPrefs.SetInt("muteMusic", 0);
@@ -29,7 +30,6 @@ public class Jukebox : MonoBehaviour
             settingImage.sprite = muteSprites[1];
             src.mute = true;
         }
-        src = GetComponent<AudioSource>();
     }
 
     void Awake()
@@ -54,22 +54,6 @@ public class Jukebox : MonoBehaviour
             src.clip = backgroundSounds[UnityEngine.Random.Range(0, backgroundSounds.Length - 1)];
             src.Play();
 
-        }
-    }
-
-    public void Mute()
-    {
-        if (PlayerPrefs.GetInt("muteMusic") == 0)
-        {
-            settingImage.sprite = muteSprites[1];
-            src.mute = true;
-            PlayerPrefs.SetInt("muteMusic", 1);
-        }
-        else if (PlayerPrefs.GetInt("muteMusic") == 1)
-        {
-            settingImage.sprite = muteSprites[0];
-            src.mute = false;
-            PlayerPrefs.SetInt("muteMusic", 0);
         }
     }
 }

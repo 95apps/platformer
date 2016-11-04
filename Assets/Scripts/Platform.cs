@@ -359,7 +359,6 @@ public class Platform : MonoBehaviour
                 break;
             case 3:
                 transform.position = Vector3.Lerp(zPos1, zPos2, Mathf.PingPong(Time.time * platforms.platSpeed, 1.0f));
-
                 break;
             default:
                 Debug.Log("You broke the game");
@@ -410,6 +409,26 @@ public class Platform : MonoBehaviour
         // If countDown reaches 0, drop the platform
         if (countDown < 0f)
         {
+            if(startMoving){
+                switch (direction)
+                {
+                    case 0:
+                        transform.position = Vector3.Lerp(xPos1, xPos2, Mathf.PingPong(Time.time * platforms.platSpeed, 1.0f));
+                        break;
+                    case 1:
+                        transform.position = Vector3.Lerp(zPos1, zPos2, Mathf.PingPong(Time.time * platforms.platSpeed, 1.0f));
+                        break;
+                    case 2:
+                        transform.position = Vector3.Lerp(xPos1, xPos2, Mathf.PingPong(Time.time * platforms.platSpeed, 1.0f));
+                        break;
+                    case 3:
+                        transform.position = Vector3.Lerp(zPos1, zPos2, Mathf.PingPong(Time.time * platforms.platSpeed, 1.0f));
+                        break;
+                    default:
+                        Debug.Log("You broke the game");
+                        break;
+                }
+            }
             startMoving = false;
             toBob = false;
             rb.useGravity = true;
