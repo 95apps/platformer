@@ -46,12 +46,28 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
+     <None Include="Assets\Suriyun\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
+     <None Include="Assets\Suriyun\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
      <None Include="Assets\SimpleTown\Changelog.txt" />
      <None Include="Assets\SimpleSky\ReadMe.txt" />
+     <None Include="Assets\Suriyun\README.txt" />
+     <None Include="Assets\Animal Friends 2\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\read me.txt" />
+     <None Include="Assets\Suriyun\UnityChanShader\Shader\CharaMain.cginc" />
+     <None Include="Assets\Suriyun\UnityChanShader\Shader\Unitychan_chara_fuku_ds.shader" />
+     <None Include="Assets\Suriyun\UnityChanShader\Shader\CharaSkin.cginc" />
+     <None Include="Assets\Suriyun\UnityChanShader\Shader\Unitychan_chara_eye_blend.shader" />
+     <None Include="Assets\Suriyun\UnityChanShader\Shader\Unitychan_chara_hair_ds.shader" />
+     <None Include="Assets\Suriyun\UnityChanShader\Shader\Unitychan_chara_akarami_blend.shader" />
      <None Include="Assets\Standard Assets\Fonts\OpenSans\License!.txt" />
      <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
+     <None Include="Assets\Suriyun\UnityChanShader\Shader\Unitychan_chara_hair.shader" />
+     <None Include="Assets\Suriyun\UnityChanShader\Shader\Unitychan_chara_eyelash_blend.shader" />
+     <None Include="Assets\Suriyun\UnityChanShader\Shader\CharaOutline.cginc" />
      <None Include="Assets\Visuals\Shaders\Text Shader.shader" />
+     <None Include="Assets\Suriyun\UnityChanShader\Shader\readme.txt" />
+     <None Include="Assets\Suriyun\UnityChanShader\Shader\Unitychan_chara_hada.shader" />
+     <None Include="Assets\Suriyun\UnityChanShader\Shader\Unitychan_chara_hada_blend.shader" />
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
  </Reference>
