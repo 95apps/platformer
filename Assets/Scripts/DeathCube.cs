@@ -46,7 +46,7 @@ public class DeathCube : MonoBehaviour
             //canvas.SetActive(true);
         } else
         {
-            if (trail.startWidth > 0.2f)
+            if (trail.startWidth > 0.4f)
             {
                 trail.startWidth = startWidth -= Time.deltaTime / 2;
                 trail.endWidth = startWidth -= Time.deltaTime / 2;
