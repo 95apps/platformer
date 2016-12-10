@@ -15,11 +15,13 @@ namespace UnityStandardAssets.CrossPlatformInput
         }
 
         public GameObject joystickSprite;
+        public GameObject joystickPlatform;
         public int MovementRange = 100;
         public AxisOption axesToUse = AxisOption.Both; // The options for the axes that the still will use
         public string horizontalAxisName = "Horizontal"; // The name given to the horizontal axis for the cross platform input
         public string verticalAxisName = "Vertical"; // The name given to the vertical axis for the cross platform input
         private bool moveToCenter = false;
+        private bool setPlatformPos = false;
 
         Vector3 m_StartPos;
         bool m_UseX; // Toggle for using the x axis
@@ -35,6 +37,9 @@ namespace UnityStandardAssets.CrossPlatformInput
         void Start()
         {
             m_StartPos = transform.position;
+            joystickPlatform.GetComponent<RectTransform>().sizeDelta = new Vector2(MovementRange * (8/3), MovementRange * (8/3));
+            Debug.Log(MovementRange);
+            Debug.Log(new Vector2(MovementRange * 2.5f, MovementRange * 2.5f));
         }
 
         void UpdateVirtualAxes(Vector3 value)
@@ -78,7 +83,6 @@ namespace UnityStandardAssets.CrossPlatformInput
         {
             Vector3 newPos = Vector3.zero;
 
-            joystickSprite.transform.position = transform.position;
 
             if (m_UseX)
             {
@@ -94,6 +98,11 @@ namespace UnityStandardAssets.CrossPlatformInput
                 newPos.y = delta;
             }
             transform.position = Vector3.ClampMagnitude(new Vector3(newPos.x, newPos.y, newPos.z), MovementRange) + m_StartPos;
+            joystickSprite.transform.position = transform.position;
+            if(setPlatformPos){
+                joystickPlatform.transform.position = transform.position;
+                setPlatformPos = false;
+            }
             UpdateVirtualAxes(transform.position);
         }
 
@@ -101,7 +110,7 @@ namespace UnityStandardAssets.CrossPlatformInput
         {
             if (moveToCenter)
             {
-                transform.position = Vector3.MoveTowards(transform.position, m_StartPos, 3);
+                transform.position = Vector3.MoveTowards(transform.position, m_StartPos, MovementRange / 25);
                 UpdateVirtualAxes(transform.position);
                 if (transform.position == m_StartPos)
                 {
@@ -115,16 +124,18 @@ namespace UnityStandardAssets.CrossPlatformInput
         {
             UpdateVirtualAxes(transform.position);
             joystickSprite.SetActive(false);
+            joystickPlatform.SetActive(false);
             moveToCenter = true;
         }
 
 
         public void OnPointerDown(PointerEventData data)
         {
+            setPlatformPos = true;
             moveToCenter = false;
             m_StartPos = new Vector3(data.position.x, data.position.y, 0);
             joystickSprite.SetActive(true);
-            joystickSprite.transform.position = new Vector3(data.position.x, data.position.y, 0);
+            joystickPlatform.SetActive(true);
             OnDrag(data);
         }
 

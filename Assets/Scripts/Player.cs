@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public bool isResurrecting = false;
     public bool canJump = true;
     public bool tapJumping = false;
+    public bool rainbowTrail = false;
     // Most of these variables are pretty self explanatory
     public float movingSpeed = 0.1f;
     public float jumpHeight;    // Don't change jumpSpeed, jumpHeight is the only one that should be changed for different jump heights
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
     private float distanceTravelled;
     private float hookTimer;
     private float hookAngle;
+    private float trailTimer;
     public float asteroidTimer;
     // rb is the RigidBody component of the player
     private Rigidbody rb;
@@ -39,18 +41,24 @@ public class Player : MonoBehaviour
     public GameObject asteroidPrefab;
     public float flipStep;
     public float trailLength;
-    //public Animation anim;
+    public Color32[] trailColors;
     private bool hooking = false;
     private bool setHookEnd = false;
     private bool setHookTarget = false;
     private bool canFlip = false;
+    private int currentTrailColor;
+    private int nextTrailColor;
 
 
 
     // Use this for initialization
     void Start()
     {
-        //anim = GetComponent<Animation>();
+        currentTrailColor = Random.Range(0, 6);
+        nextTrailColor = currentTrailColor + 1;
+        if(nextTrailColor >= 7){
+            nextTrailColor = 0;
+        }
         canFlip = true;
         lastFramePosition = transform.position;
         // Assigns rb to the RigidBody component of the player
@@ -78,6 +86,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         trailLength += Vector3.Distance(lastFramePosition, transform.position) / 3;
         lastFramePosition = transform.position;
         trail.time += Time.deltaTime;
@@ -91,6 +100,7 @@ public class Player : MonoBehaviour
             Hook();
         }
 
+        /*
         asteroidTimer += Time.deltaTime;
 
         if (asteroidTimer >= 2)
@@ -98,7 +108,27 @@ public class Player : MonoBehaviour
             asteroidTimer = 0;
             SpawnAsteroid();
         }
+        */
 
+        if(rainbowTrail){
+                trailTimer += Time.deltaTime;
+
+            if(trailTimer >= 1){
+                trailTimer = 0;
+                currentTrailColor ++;
+                if(currentTrailColor >= 7){
+                    currentTrailColor = 0;
+                }
+                nextTrailColor ++;
+                if(nextTrailColor >= 7){
+                    nextTrailColor = 0;
+                }
+            }
+
+            trail.material.color = Color32.Lerp(trailColors[currentTrailColor], trailColors[nextTrailColor], trailTimer);
+
+        }
+        
         /*if (canJump == false)
         {
             transform.eulerAngles = new Vector3(Mathf.Lerp(0, 180, flipStep), 0, 0);
@@ -110,6 +140,7 @@ public class Player : MonoBehaviour
         }*/
     }
 
+    /*
     private void SpawnAsteroid()
     {
         GameObject asteroid = Instantiate(asteroidPrefab);
@@ -231,15 +262,16 @@ public class Player : MonoBehaviour
             }
         }
     }
+    */
 
     // Function to move the player.
     private void Move()
     {
         // Sets variables to the arrow key inputs
-        float moveRightLeft = Input.GetAxis("Horizontal");
-        float moveUpDown = Input.GetAxis("Vertical");
-        //float moveRightLeft = (CrossPlatformInputManager.GetAxis("Horizontal"));
-        //float moveUpDown = (CrossPlatformInputManager.GetAxis("Vertical"));
+        //float moveRightLeft = Input.GetAxis("Horizontal");
+        //float moveUpDown = Input.GetAxis("Vertical");
+        float moveRightLeft = (CrossPlatformInputManager.GetAxis("Horizontal"));
+        float moveUpDown = (CrossPlatformInputManager.GetAxis("Vertical"));
 
 
         // Sets the velocity of the player to moveSpeed times arrow key input (0 to 1 or -1)
