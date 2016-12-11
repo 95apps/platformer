@@ -27,8 +27,11 @@ public class Scroll : MonoBehaviour
     public Vector3 playerDimensions;
     public Vector3 modelRotation;
     public Material modelMat;
+    public Material trailMat;
+    public float trailWidth;
     public Player player;
     public bool isCube = false;
+    public bool isTrail = false;
 
     // Use this for initialization
     void Start()
@@ -50,43 +53,94 @@ public class Scroll : MonoBehaviour
 
     public void Purchase()
     {
-        if(PlayerPrefs.GetInt("Coins") - value >= 0)
+        if (!isTrail)
         {
-            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - value);
-            displayAmountOfCoins.SetCoin();
-            foreach (Transform child in big.transform)
+            if (PlayerPrefs.GetInt("Coins") - value >= 0)
             {
-                if (PlayerPrefs.GetInt(child.gameObject.name) == 1)
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - value);
+                displayAmountOfCoins.SetCoin();
+                foreach (Transform child in big.transform)
                 {
-                    PlayerPrefs.SetInt(child.gameObject.name, 2);
+                    if (PlayerPrefs.GetInt(child.gameObject.name) == 1 && !child.gameObject.GetComponent<Scroll>().isTrail)
+                    {
+                        PlayerPrefs.SetInt(child.gameObject.name, 2);
+                    }
                 }
+                PlayerPrefs.SetInt(gameObject.name, 1);
+                EquipModel();
             }
-            PlayerPrefs.SetInt(gameObject.name, 1);
-            EquipModel();
-        } else if(!src.isPlaying)
-        {
-            src.PlayOneShot(src.clip);
+            else if (!src.isPlaying)
+            {
+                src.PlayOneShot(src.clip);
+            }
         }
+        else
+        {
+            if (PlayerPrefs.GetInt("Coins") - value >= 0)
+            {
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - value);
+                displayAmountOfCoins.SetCoin();
+                foreach (Transform child in big.transform)
+                {
+                    if (PlayerPrefs.GetInt(child.gameObject.name) == 1 && child.gameObject.GetComponent<Scroll>().isTrail)
+                    {
+                        PlayerPrefs.SetInt(child.gameObject.name, 2);
+                    }
+                }
+                PlayerPrefs.SetInt(gameObject.name, 1);
+                EquipTrail();
+            }
+            else if (!src.isPlaying)
+            {
+                src.PlayOneShot(src.clip);
+            }
+        }
+
+        selected.DisplayPrompt();
     }
 
     public void Equip()
     {
-        foreach (Transform child in big.transform)
+        if (!isTrail)
         {
-            if (PlayerPrefs.GetInt(child.gameObject.name) == 1)
+            foreach (Transform child in big.transform)
             {
-                PlayerPrefs.SetInt(child.gameObject.name, 2);
+                if (PlayerPrefs.GetInt(child.gameObject.name) == 1 && !child.gameObject.GetComponent<Scroll>().isTrail)
+                {
+                    PlayerPrefs.SetInt(child.gameObject.name, 2);
+                }
+            }
+            if (PlayerPrefs.GetInt(gameObject.name) != 1)
+            {
+                PlayerPrefs.SetInt(gameObject.name, 1);
+                EquipModel();
+            }
+            else
+            {
+                PlayerPrefs.SetInt(gameObject.name, 2);
             }
         }
-        if (PlayerPrefs.GetInt(gameObject.name) != 1)
+        else
         {
-            PlayerPrefs.SetInt(gameObject.name, 1);
-            EquipModel();
-        } else
-        {
-            PlayerPrefs.SetInt(gameObject.name, 2);
+            foreach (Transform child in big.transform)
+            {
+                if (PlayerPrefs.GetInt(child.gameObject.name) == 1 && child.gameObject.GetComponent<Scroll>().isTrail)
+                {
+                    PlayerPrefs.SetInt(child.gameObject.name, 2);
+                }
+            }
+            if (PlayerPrefs.GetInt(gameObject.name) != 1)
+            {
+                PlayerPrefs.SetInt(gameObject.name, 1);
+                EquipTrail();
+            }
+            else
+            {
+                PlayerPrefs.SetInt(gameObject.name, 2);
+            }
         }
-        
+
+        selected.DisplayPrompt();
     }
 
     public void EquipModel()
@@ -97,6 +151,13 @@ public class Scroll : MonoBehaviour
         player.transform.localScale = playerDimensions;
         player.GetComponent<MeshRenderer>().material = modelMat;
         player.transform.eulerAngles = modelRotation;
+    }
+
+    public void EquipTrail()
+    {
+        player.GetComponent<TrailRenderer>().material = trailMat;
+        player.GetComponent<TrailRenderer>().startWidth = trailWidth;
+        player.GetComponent<TrailRenderer>().endWidth = trailWidth;
     }
 
     public void StopIt()
@@ -119,6 +180,7 @@ public class Scroll : MonoBehaviour
         if (Mathf.Abs(deltaX) <= 40f)
         {
             selected.selected = this;
+            selected.DisplayPrompt();
         }
 
 
