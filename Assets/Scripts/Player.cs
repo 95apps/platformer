@@ -76,9 +76,13 @@ public class Player : MonoBehaviour
 
         foreach (Transform child in big.transform)
         {
-            if (PlayerPrefs.GetInt(child.name) == 1)
+            if (PlayerPrefs.GetInt(child.name) == 1 && !child.gameObject.GetComponent<Scroll>().isTrail)
             {
                 child.GetComponent<Scroll>().EquipModel();
+            }
+            else if(PlayerPrefs.GetInt(child.name) == 1 && child.gameObject.GetComponent<Scroll>().isTrail)
+            {
+                child.GetComponent<Scroll>().EquipTrail();
             }
         }
     }
@@ -270,7 +274,7 @@ public class Player : MonoBehaviour
         // Sets variables to the arrow key inputs
         float moveRightLeft = Input.GetAxis("Horizontal");
         float moveUpDown = Input.GetAxis("Vertical");
-       // float moveRightLeft = (CrossPlatformInputManager.GetAxis("Horizontal"));
+        //float moveRightLeft = (CrossPlatformInputManager.GetAxis("Horizontal"));
         //float moveUpDown = (CrossPlatformInputManager.GetAxis("Vertical"));
 
 

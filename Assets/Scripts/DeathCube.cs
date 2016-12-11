@@ -17,7 +17,6 @@ public class DeathCube : MonoBehaviour
 
 
     private TrailRenderer trail;
-    private float startWidth;
     public Platforms platforms;
     // Use this for initialization
     void Start()
@@ -38,19 +37,12 @@ public class DeathCube : MonoBehaviour
             FloorCanvas.SetActive(false);
             canvas.SetActive(true);
           
-            if (trail.startWidth <= 0.5f)
+            if (trail.startWidth <= 0.8f)
             {
-                trail.startWidth = startWidth += Time.deltaTime/2;
-                trail.endWidth = startWidth += Time.deltaTime/2;
+                trail.startWidth += Time.deltaTime/2;
+                trail.endWidth += Time.deltaTime/2;
             }
             //canvas.SetActive(true);
-        } else
-        {
-            if (trail.startWidth > 0.4f)
-            {
-                trail.startWidth = startWidth -= Time.deltaTime / 2;
-                trail.endWidth = startWidth -= Time.deltaTime / 2;
-            }
         }
         if (player != null)
         {

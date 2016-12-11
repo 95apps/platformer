@@ -35,6 +35,10 @@ public class Selected : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+    }
+
+    public void DisplayPrompt()
+    {
         switch (PlayerPrefs.GetInt(selected.gameObject.name))
         {
             case 0:
