@@ -93,7 +93,10 @@ public class AdToContinue : MonoBehaviour
 
             case ShowResult.Skipped:
                 backGroundButton.SetActive(true);
-                Debug.Log("Ad not finished");
+                gameObject.SetActive(false);
+                Debug.Log("Player continued");
+                deathcube.playerDead = false;
+                player.Resurrect();
                 break;
 
             case ShowResult.Failed:

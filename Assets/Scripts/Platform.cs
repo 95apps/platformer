@@ -8,7 +8,7 @@ public class Platform : MonoBehaviour
     // countDown variable that will change over time once the player has landed on top of the platform
     public float countDown;
     // countDown variable to be used as reference by the code as the beginning of the countDown time, this is set to the countdown variable of the "Platforms" empty
-    private float initialCountDown =2;
+    private float initialCountDown = 2;
     private float audioPitch;
     private float trafficTimer;
     public int direction;
@@ -75,14 +75,15 @@ public class Platform : MonoBehaviour
         this.clouds = clouds;
         platforms = plats;
         audioPitch = pitch;
-        if(pitch >= 4f){
+        if (pitch >= 4f)
+        {
             platforms.pitch = 0.5f;
             audioPitch = 4f;
         }
         direction = dir;
         platsSpawned = consecutiveSpawned;
         platsPlaced = consecutivePlaced;
-       
+
 
 
         if (platsSpawned % 8 == 0)
@@ -93,7 +94,7 @@ public class Platform : MonoBehaviour
             }
         }
 
-        if(consecutivePlaced == 3)
+        if (consecutivePlaced == 3)
         {
             arrows.SetActive(true);
         }
@@ -123,7 +124,8 @@ public class Platform : MonoBehaviour
         {
             swiper.SetActive(true);
             platforms.swiperCounter++;
-        } else
+        }
+        else
         {
             platforms.swiperCounter = 0;
         }
@@ -249,14 +251,14 @@ public class Platform : MonoBehaviour
         boxColDimensions = new Vector3(transform.localScale.x * 1.1f, transform.localScale.y, transform.localScale.z * 1.1f);
         xPos1 = new Vector3(transform.position.x + 3f, transform.position.y, transform.position.z);
         xPos2 = new Vector3(transform.position.x - 3f, transform.position.y, transform.position.z);
-        zPos1 = new Vector3(transform.position.x, transform.position.y , transform.position.z + 3f);
-        zPos2 = new Vector3(transform.position.x, transform.position.y , transform.position.z - 3f);
+        zPos1 = new Vector3(transform.position.x, transform.position.y, transform.position.z + 3f);
+        zPos2 = new Vector3(transform.position.x, transform.position.y, transform.position.z - 3f);
         yPos1 = new Vector3(transform.position.x, transform.position.y + UnityEngine.Random.Range(0, 0.3f), transform.position.z);
         yPos2 = new Vector3(transform.position.x, transform.position.y + UnityEngine.Random.Range(0, -0.3f), transform.position.z);
         // Defines the platform renderer
         platRender = GetComponent<Renderer>();
         // Defines initialCountDown as the countDown on the "Platforms" empty, set in unity
-      
+
         rb = GetComponent<Rigidbody>();
         src = GetComponent<AudioSource>();
 
@@ -264,7 +266,7 @@ public class Platform : MonoBehaviour
         em.enabled = false;
 
         highscore = PlayerPrefs.GetFloat("Highscore");
-	
+
 
 
 
@@ -284,15 +286,17 @@ public class Platform : MonoBehaviour
         {
             transform.position = Vector3.Lerp(yPos1, yPos2, Hermite(0, 1, Mathf.PingPong(bobStep, 1)));
             bobStep += Time.deltaTime;
-            
+
         }
 
 
 
-        if (trafficLight){
+        if (trafficLight)
+        {
             TrafficLight();
         }
-        if(highScorePlaying && !src.isPlaying){
+        if (highScorePlaying && !src.isPlaying)
+        {
             src.pitch = audioPitch;
         }
         // If the player has landed on the platform, make it start disappearing
@@ -318,10 +322,12 @@ public class Platform : MonoBehaviour
 
     private void Move()
     {
-        if(setIndicatorPosition && (platsSpawned >= 8 && platsSpawned <= 24)){
+        if (setIndicatorPosition && (platsSpawned >= 8 && platsSpawned <= 24))
+        {
             leftIndicator.SetActive(true);
             rightIndicator.SetActive(true);
-            switch(direction){
+            switch (direction)
+            {
                 case 0:
                     leftIndicator.transform.position = new Vector3(transform.position.x - 3.9075f, transform.position.y, transform.position.z);
                     rightIndicator.transform.position = new Vector3(transform.position.x + 3.9075f, transform.position.y, transform.position.z);
@@ -366,7 +372,8 @@ public class Platform : MonoBehaviour
         }
     }
 
-    private void TrafficLight(){
+    private void TrafficLight()
+    {
         platRender.material.color = trafficColors[colorCounter];
         trafficTimer += Time.deltaTime;
 
@@ -383,15 +390,19 @@ public class Platform : MonoBehaviour
         if (trafficTimer >= limit)
         {
             trafficTimer = 0f;
-            colorCounter ++;
-            if(colorCounter > 2){
+            colorCounter++;
+            if (colorCounter > 2)
+            {
                 colorCounter = 0;
             }
         }
-        if(colorCounter == 2){
+        if (colorCounter == 2)
+        {
             countDown = 0;
             gameObject.layer = 2;
-        } else {
+        }
+        else
+        {
             countDown = initialCountDown;
             gameObject.layer = 0;
         }
@@ -401,15 +412,19 @@ public class Platform : MonoBehaviour
     private void DestroyPlatform()
     {
         // Change the colour of the platform by linearly interpoplating between its starting color and white by countDown / initialCountDown which will always return a number between 0 and 1
-        if(trafficDestroy){
+        if (trafficDestroy)
+        {
             platRender.material.color = Color32.Lerp(fallColor, trafficColors[colorCounter], (countDown / initialCountDown));
-        } else{
+        }
+        else
+        {
             platRender.material.color = Color32.Lerp(fallColor, Color.white, (countDown / initialCountDown));
         }
         // If countDown reaches 0, drop the platform
         if (countDown < 0f)
         {
-            if(startMoving){
+            if (startMoving)
+            {
                 switch (direction)
                 {
                     case 0:
@@ -449,29 +464,34 @@ public class Platform : MonoBehaviour
         }
     }
 
+    bool IsPlatformInGroup(GameObject platform)
+    {
+        return platform = this.gameObject;
+    }
+
     void OnTriggerEnter(Collider col)
     {
         // If the object that collided with this is the player (Which it always is, but its here for safety)...
         if (col.gameObject.tag == "Player" && !player.isResurrecting)
         {
-            if(colorCounter != 2)
+            if (platforms.platforms.IndexOf(gameObject) > 0)
+            {
+                for (int i = 0; i < platforms.platforms.IndexOf(gameObject); i++)
+                {
+                    platforms.platforms[0].GetComponent<Platform>().OnTriggerEnter(player.GetComponent<Collider>());
+                }
+            }
+
+            if (colorCounter != 2)
             {
                 player.canJump = true;
                 //player.transform.eulerAngles = Vector3.zero;
                 player.flipStep = 0f;
             }
-            // deltas are the differences between the player's xyz and the platform's xys axes
-            float deltaX = col.gameObject.transform.position.x - transform.position.x;
-            float deltaY = col.gameObject.transform.position.y - transform.position.y;
-            float deltaZ = col.gameObject.transform.position.z - transform.position.z;
-            Vector3 target = new Vector3(boxColDimensions.x / 2 + 0.5f, 0, boxColDimensions.z / 2 + 0.5f);
-
-            // If deltaY is greater than or equal to 0.9 (margin of error, there's probably a better way to do this) and less than or equal to 1 then make the platform start disappearing
-            // We need this because when the player lands on the platform it doesn't instantly level out, it goes below for a few frames because of momentum
 
             if (trafficLight)
             {
-                if(colorCounter == 2)
+                if (colorCounter == 2)
                 {
                     platforms.platforms.Remove(gameObject);
                     platforms.consecutiveJumped++;
@@ -487,12 +507,16 @@ public class Platform : MonoBehaviour
             // If the countDown equals initialCountDown (which it will, only the first time that the player touches the platform) then spawn another platform
             if (countDown == initialCountDown)
             {
-                
+                if (player.isSpawnTrail)
+                {
+                    player.GetComponent<TrailRenderer>().colorGradient = player.playingTrailGradient;
+                    player.isSpawnTrail = false;
+                }
                 countDown -= Time.deltaTime;
                 if (platforms.score % 6 == 0)
                 {
                     clouds.SpawnClouds(); //rekt
-                  
+
                 }
 
                 platforms.consecutiveJumped++;
@@ -524,7 +548,9 @@ public class Platform : MonoBehaviour
 
                 platforms.SpawnPlatform();
                 platforms.platforms.Remove(gameObject);
-            } else if(trafficDestroy){
+            }
+            else if (trafficDestroy)
+            {
                 player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
             }
             startDisappear = true;
@@ -533,7 +559,7 @@ public class Platform : MonoBehaviour
 
     void OnTriggerExit(Collider col)
     {
-        if(col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player")
         {
             player.canJump = false;
             //player.anim.Play(PlayMode.StopSameLayer);

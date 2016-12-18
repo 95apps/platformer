@@ -6,6 +6,9 @@ public class Platforms : MonoBehaviour
 {
     // Declare list of GameObjects called platforms
     public List<GameObject> platforms;
+
+    // List of platforms that have not been jumped on
+    public List<GameObject> platformsAlive;
     // Variable that can be set in unity for the number of seconds before a platforms disappears
     public float countDown;
     public float rotationAngleMultiplier;
@@ -41,7 +44,7 @@ public class Platforms : MonoBehaviour
     }
 
     // Update is called once per frame
-  
+
 
     // Function to spawn a new platform
     public void SpawnPlatform()
@@ -111,12 +114,13 @@ public class Platforms : MonoBehaviour
         newPlat.transform.parent = this.transform;
         // Adds the newly created platform to the platforms list
         platforms.Add(newPlat);
+        platformsAlive.Add(newPlat);
         newPlat.GetComponent<Platform>().scoreText.GetComponent<TextMesh>().text = consecutiveSpawned.ToString();
 
         if (Random.Range(0, 2) == 1)
         {
             GameObject newCoin = Instantiate(Resources.Load("GameEntities/Coin")) as GameObject;
-            newCoin.transform.position = newPlat.transform.position + new Vector3(Random.Range(-2.5f,2.5f), 1.6f, Random.Range(-2.5f, 2.5f));
+            newCoin.transform.position = newPlat.transform.position + new Vector3(Random.Range(-2.5f, 2.5f), 1.6f, Random.Range(-2.5f, 2.5f));
         }
     }
 }

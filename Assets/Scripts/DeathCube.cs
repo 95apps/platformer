@@ -9,15 +9,16 @@ public class DeathCube : MonoBehaviour
     public bool playerDead = false;
     private Rigidbody playerRb;
     private Vector3 initialPos;
-    private Vector3 playerVelocity;
     public GameObject canvas;
     public StoreTrigger StoreTrigger;
     public GameObject FloorCanvas;
-
+    public UnityEngine.UI.Text continueOptionText;
+    private float trailWidth;
 
 
     private TrailRenderer trail;
     public Platforms platforms;
+
     // Use this for initialization
     void Start()
     {
@@ -25,7 +26,7 @@ public class DeathCube : MonoBehaviour
         initialPos.y -= 0.5f;
         playerRb = player.GetComponent<Rigidbody>();
         trail = player.GetComponent<TrailRenderer>();
-        //cameraComponent = mainCamera.GetComponent<UnityEngine.Camera>();
+        trailWidth = trail.startWidth;
     }
 
     // Update is called once per frame
@@ -33,17 +34,21 @@ public class DeathCube : MonoBehaviour
     {
         if (playerDead)
         {
-            StoreTrigger.Leave();
-            FloorCanvas.SetActive(false);
-            canvas.SetActive(true);
-          
+
             if (trail.startWidth <= 0.8f)
             {
-                trail.startWidth += Time.deltaTime/2;
-                trail.endWidth += Time.deltaTime/2;
+                trail.startWidth += Time.deltaTime / 2;
+                trail.endWidth += Time.deltaTime / 2;
             }
-            //canvas.SetActive(true);
+
         }
+
+        else if (trail.startWidth > trailWidth)
+        {
+            trail.startWidth -= Time.deltaTime / 2;
+            trail.endWidth -= Time.deltaTime / 2;
+        }
+
         if (player != null)
         {
             Vector3 playerPos = player.transform.position;
@@ -58,7 +63,8 @@ public class DeathCube : MonoBehaviour
                 playerRb.isKinematic = true;
                 playerRb.useGravity = false;
                 player.GetComponent<Renderer>().enabled = false;
-            } else
+            }
+            else
             {
                 player.GetComponent<Renderer>().enabled = true;
             }
@@ -70,7 +76,10 @@ public class DeathCube : MonoBehaviour
         if (col.gameObject.tag == "Player" && !player.isResurrecting)
         {
             playerDead = true;
-            playerVelocity = playerRb.velocity;
+            StoreTrigger.Leave();
+            FloorCanvas.SetActive(false);
+            canvas.SetActive(true);
+            continueOptionText.text = "Continue\nfrom " + (platforms.score + 1);
         }
     }
 }

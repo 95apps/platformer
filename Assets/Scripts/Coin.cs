@@ -24,8 +24,6 @@ public class Coin : MonoBehaviour
         myCollider = GetComponent<CapsuleCollider>();
         myMesh = GetComponent<MeshRenderer>();
         randomSpin = Random.Range(0, 2);
-    
-       
 
     }
 

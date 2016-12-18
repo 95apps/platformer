@@ -28,16 +28,6 @@ public class Continue : MonoBehaviour {
         
     }
 
-    public void chooseAd()
-    {
-
-    }
-
-    public void chooseCoin()
-    {
-
-    }
-
 	// Update is called once per frame
 	void Update () {
         if (toggle == true)
