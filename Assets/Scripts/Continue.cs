@@ -7,7 +7,7 @@ public class Continue : MonoBehaviour {
     public GameObject coinOption;
     public GameObject adOption;
     public GameObject continueOption;
-    private bool toggle = false;
+	private bool toggle = false;
     private RectTransform adOptionRect;
     private RectTransform coinOptionRect;
     public Platforms platforms;
@@ -32,7 +32,7 @@ public class Continue : MonoBehaviour {
 	void Update () {
         if (toggle == true)
         {
-            if (coinOption.transform.position.x <= 170)
+            if (coinOption.transform.position.x <= 200)
             {
                 
                 coinOption.transform.Translate(Vector3.right * 5);
@@ -40,7 +40,7 @@ public class Continue : MonoBehaviour {
             } 
         } else if (toggle == false)
         {
-            if (coinOption.transform.position.x >= -215)
+            if (coinOption.transform.position.x >= -200)
             {
 
                 coinOption.transform.Translate(Vector3.left * 5);

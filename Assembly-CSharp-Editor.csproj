@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{385CA189-0A77-BFE5-26ED-A6C36C7CAA2C}</ProjectGuid>
+    <ProjectGuid>{ED03D547-704B-B32B-C79D-25B943EDF25A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -46,6 +46,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\DependencyPro\Editor\Data\DependencyBase.cs" />
+     <Compile Include="Assets\DependencyPro\Editor\Data\FileDependency.cs" />
+     <Compile Include="Assets\DependencyPro\Editor\Data\FindDependencies.cs" />
+     <Compile Include="Assets\DependencyPro\Editor\Data\InSceneDependency.cs" />
+     <Compile Include="Assets\DependencyPro\Editor\Data\ResultRow.cs" />
+     <Compile Include="Assets\DependencyPro\Editor\Data\SearchTarget.cs" />
+     <Compile Include="Assets\DependencyPro\Editor\DependencyWindow.cs" />
+     <Compile Include="Assets\DependencyPro\Editor\Styles\ContentStylePair.cs" />
+     <Compile Include="Assets\DependencyPro\Editor\Styles\DependencyStyle.cs" />
      <Compile Include="Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
      <None Include="Assets\Suriyun\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
      <None Include="Assets\Suriyun\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
@@ -54,6 +63,7 @@
      <None Include="Assets\Animal Friends 2\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\read me.txt" />
      <None Include="Assets\Suriyun\UnityChanShader\Shader\CharaMain.cginc" />
+     <None Include="Assets\DependencyPro\AssetUsageFinderGuidelines.txt" />
      <None Include="Assets\Suriyun\UnityChanShader\Shader\Unitychan_chara_fuku_ds.shader" />
      <None Include="Assets\Suriyun\UnityChanShader\Shader\CharaSkin.cginc" />
      <None Include="Assets\Suriyun\UnityChanShader\Shader\Unitychan_chara_eye_blend.shader" />
@@ -123,25 +133,25 @@
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
  <Reference Include="Common">
- <HintPath>/Users/Brendan/Desktop/RibbonJump4/Assets/Plugins/UnityPurchasing/Bin/Common.dll</HintPath>
+ <HintPath>/Users/Brendan/Desktop/RibbonJump5/Assets/Plugins/UnityPurchasing/Bin/Common.dll</HintPath>
  </Reference>
  <Reference Include="Editor">
- <HintPath>/Users/Brendan/Desktop/RibbonJump4/Assets/Plugins/UnityPurchasing/Bin/Editor.dll</HintPath>
+ <HintPath>/Users/Brendan/Desktop/RibbonJump5/Assets/Plugins/UnityPurchasing/Bin/Editor.dll</HintPath>
  </Reference>
  <Reference Include="Security">
- <HintPath>/Users/Brendan/Desktop/RibbonJump4/Assets/Plugins/UnityPurchasing/Bin/Security.dll</HintPath>
+ <HintPath>/Users/Brendan/Desktop/RibbonJump5/Assets/Plugins/UnityPurchasing/Bin/Security.dll</HintPath>
  </Reference>
  <Reference Include="Stores">
- <HintPath>/Users/Brendan/Desktop/RibbonJump4/Assets/Plugins/UnityPurchasing/Bin/Stores.dll</HintPath>
+ <HintPath>/Users/Brendan/Desktop/RibbonJump5/Assets/Plugins/UnityPurchasing/Bin/Stores.dll</HintPath>
  </Reference>
  <Reference Include="Apple">
- <HintPath>/Users/Brendan/Desktop/RibbonJump4/Assets/Plugins/UnityPurchasing/Bin/Apple/Apple.dll</HintPath>
+ <HintPath>/Users/Brendan/Desktop/RibbonJump5/Assets/Plugins/UnityPurchasing/Bin/Apple/Apple.dll</HintPath>
  </Reference>
  <Reference Include="Tizen">
- <HintPath>/Users/Brendan/Desktop/RibbonJump4/Assets/Plugins/UnityPurchasing/Bin/Tizen/Tizen.dll</HintPath>
+ <HintPath>/Users/Brendan/Desktop/RibbonJump5/Assets/Plugins/UnityPurchasing/Bin/Tizen/Tizen.dll</HintPath>
  </Reference>
  <Reference Include="winrt">
- <HintPath>/Users/Brendan/Desktop/RibbonJump4/Assets/Plugins/UnityPurchasing/winrt/winrt.dll</HintPath>
+ <HintPath>/Users/Brendan/Desktop/RibbonJump5/Assets/Plugins/UnityPurchasing/winrt/winrt.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEditor.Graphs.dll</HintPath>
@@ -164,9 +174,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{029B7BA6-BD22-E473-FC4D-8751CE20D93D}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+      <Project>{F0441DD5-54CF-D418-925A-4353C633D8F2}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{3FC4F298-9778-1518-85D9-98BE1E4E8536}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+      <Project>{CF23BDCC-1567-96F6-76A8-8E7906F935CB}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -47,6 +47,8 @@ public class Player : MonoBehaviour
     private bool setHookEnd = false;
     private bool setHookTarget = false;
     private bool canFlip = false;
+	private int asteroidSetting = PlayerPrefs.GetInt("AsteroidSetting");
+	public GameObject asteroidOffPicture;
 
 
 
@@ -79,7 +81,28 @@ public class Player : MonoBehaviour
                 child.GetComponent<Scroll>().EquipTrail();
             }
         }
+
+		if (PlayerPrefs.GetInt ("AsteroidSetting") == 1) {
+			asteroidOffPicture.SetActive (false);
+		} else {
+			asteroidOffPicture.SetActive (true);
+		}
+
     }
+
+	public void ToggleAsteroidSetting(){
+
+
+		if (PlayerPrefs.GetInt("AsteroidSetting")==0) {
+			
+			PlayerPrefs.SetInt ("AsteroidSetting", 1);
+			asteroidOffPicture.SetActive (false);
+		} else {
+			
+			PlayerPrefs.SetInt ("AsteroidSetting", 0);
+			asteroidOffPicture.SetActive (true);
+		}
+	}
 
     // Update is called once per frame
     void Update()
@@ -102,15 +125,15 @@ public class Player : MonoBehaviour
             Hook();
         }
 
-        /*
-        asteroidTimer += Time.deltaTime;
+    
+		if (PlayerPrefs.GetInt("AsteroidSetting") == 1) {
+			asteroidTimer += Time.deltaTime;
 
-        if (asteroidTimer >= 2)
-        {
-            asteroidTimer = 0;
-            SpawnAsteroid();
-        }
-        */
+			if (asteroidTimer >= 2) {
+				asteroidTimer = 0;
+				SpawnAsteroid ();
+			}
+		}
         
         /*if (canJump == false)
         {
@@ -123,7 +146,7 @@ public class Player : MonoBehaviour
         }*/
     }
 
-    /*
+    
     private void SpawnAsteroid()
     {
         GameObject asteroid = Instantiate(asteroidPrefab);
@@ -245,7 +268,7 @@ public class Player : MonoBehaviour
             }
         }
     }
-    */
+    
 
     // Function to move the player.
     private void Move()

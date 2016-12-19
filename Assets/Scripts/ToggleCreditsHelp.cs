@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ToggleCreditsHelp : MonoBehaviour {
 
-	public GameObject credits;
+
 	public GameObject help;
 
 
@@ -12,21 +12,17 @@ public class ToggleCreditsHelp : MonoBehaviour {
 	
 	}
 
-	public void ToggleCredits(){
-		credits.SetActive(!credits.activeInHierarchy);
-		if (help.activeInHierarchy) {
+	public void ToggleHelp(){
+
+		if (!help.activeInHierarchy) {
+			help.SetActive (true);
+		} else {
 			help.SetActive (false);
 		}
 
 	}
 
-	public void ToggleHelp(){
-		help.SetActive (!help.activeInHierarchy);
-		if(credits.activeInHierarchy) {
-			credits.SetActive(false);
-		}
-	}
-	
+
 	// Update is called once per frame
 	void Update () {
 	
