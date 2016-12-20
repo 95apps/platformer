@@ -51,6 +51,7 @@
      <Compile Include="Assets\Animal Friends 2\Scripts\CharData.cs" />
      <Compile Include="Assets\Animal Friends 2\Scripts\DataControl.cs" />
      <Compile Include="Assets\Animal Friends 2\Scripts\sctCharRot.cs" />
+     <Compile Include="Assets\JoystickPlatform.cs" />
      <Compile Include="Assets\Scripts\AdToContinue.cs" />
      <Compile Include="Assets\Scripts\Asteroid.cs" />
      <Compile Include="Assets\Scripts\BigScroll.cs" />
@@ -77,6 +78,7 @@
      <Compile Include="Assets\Scripts\RibbonLengthDisplay.cs" />
      <Compile Include="Assets\Scripts\Scroll.cs" />
      <Compile Include="Assets\Scripts\Selected.cs" />
+     <Compile Include="Assets\Scripts\Sensitivity.cs" />
      <Compile Include="Assets\Scripts\SettingsCanvas.cs" />
      <Compile Include="Assets\Scripts\Skydome.cs" />
      <Compile Include="Assets\Scripts\StoreTrigger.cs" />

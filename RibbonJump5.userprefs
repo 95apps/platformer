@@ -1,8 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ToggleCreditsHelp.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/JoystickPlatform.cs">
     <Files>
+      <File FileName="Assets/Standard Assets/CrossPlatformInput/Scripts/Joystick.cs" Line="53" Column="57" />
       <File FileName="Assets/Scripts/ToggleCreditsHelp.cs" Line="16" Column="1" />
+      <File FileName="Assets/Scripts/Sensitivity.cs" Line="16" Column="1" />
+      <File FileName="Assets/Scripts/Player.cs" Line="280" Column="9" />
+      <File FileName="Assets/JoystickPlatform.cs" Line="11" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

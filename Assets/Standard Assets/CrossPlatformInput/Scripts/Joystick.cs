@@ -16,7 +16,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 
         public GameObject joystickSprite;
         public GameObject joystickPlatform;
-        public int MovementRange = 100;
+		public int MovementRange = 150;
         public AxisOption axesToUse = AxisOption.Both; // The options for the axes that the still will use
         public string horizontalAxisName = "Horizontal"; // The name given to the horizontal axis for the cross platform input
         public string verticalAxisName = "Vertical"; // The name given to the vertical axis for the cross platform input
@@ -29,9 +29,13 @@ namespace UnityStandardAssets.CrossPlatformInput
         CrossPlatformInputManager.VirtualAxis m_HorizontalVirtualAxis; // Reference to the joystick in the cross platform input
         CrossPlatformInputManager.VirtualAxis m_VerticalVirtualAxis; // Reference to the joystick in the cross platform input
 
+
+	
+
         void OnEnable()
         {
             CreateVirtualAxes();
+
         }
 
         void Start()
@@ -40,10 +44,14 @@ namespace UnityStandardAssets.CrossPlatformInput
             joystickPlatform.GetComponent<RectTransform>().sizeDelta = new Vector2(MovementRange * (8/3), MovementRange * (8/3));
             Debug.Log(MovementRange);
             Debug.Log(new Vector2(MovementRange * 2.5f, MovementRange * 2.5f));
+			MovementRange = Mathf.RoundToInt(PlayerPrefs.GetFloat ("MovementRange"));
         }
+
 
         void UpdateVirtualAxes(Vector3 value)
         {
+			MovementRange = Mathf.RoundToInt(PlayerPrefs.GetFloat ("MovementRange"));
+
             var delta = m_StartPos - value;
             delta.y = -delta.y;
             delta /= MovementRange;
@@ -117,6 +125,9 @@ namespace UnityStandardAssets.CrossPlatformInput
                     moveToCenter = false;
                 }
             }
+
+
+
         }
 
 
