@@ -38,7 +38,7 @@ public class PlayAd : MonoBehaviour {
         {
             case ShowResult.Finished:
                 Debug.Log("You have claimed your 10 coins!");
-                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 5);
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 5000);
                 displayCoins.SetCoin();
                 break;
 
