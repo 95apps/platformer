@@ -27,3 +27,6 @@
 /Users/ShayanKhalili/Documents/Unity/Platformer/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/ShayanKhalili/Documents/Unity/Platformer/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/ShayanKhalili/Documents/Unity/Platformer/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/ShayanKhalili/Documents/Unity/Platformer/Temp/bin/Debug/UnityEngine.PlaymodeTestsRunner.dll
+/Users/ShayanKhalili/Documents/Unity/Platformer/Temp/bin/Debug/UnityEngine.HoloLens.dll
+/Users/ShayanKhalili/Documents/Unity/Platformer/Temp/bin/Debug/UnityEngine.VR.dll

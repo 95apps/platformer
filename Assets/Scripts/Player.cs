@@ -134,7 +134,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		Debug.Log ("velocity:"+rb.velocity.ToString());
         if (platforms.score >= 0)
         {
             trailLength += Vector3.Distance(lastFramePosition, transform.position) / 3;
