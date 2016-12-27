@@ -1,0 +1,17 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Player.cs" Line="50" Column="33" />
+      <File FileName="Assets/Scripts/Platforms.cs" Line="118" Column="1" />
+      <File FileName="Assets/Scripts/BigScroll.cs" Line="12" Column="48" />
+      <File FileName="Assets/Scripts/PlayAd.cs" Line="41" Column="79" />
+      <File FileName="Assets/Scripts/Canvas.cs" Line="69" Column="2" />
+      <File FileName="Assets/Scripts/Continue.cs" Line="65" Column="2" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
