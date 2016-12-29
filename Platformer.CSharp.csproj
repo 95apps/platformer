@@ -113,7 +113,6 @@
     <Compile Include="Assets\Animal Friends 2\Scripts\CharData.cs" />
     <Compile Include="Assets\Animal Friends 2\Scripts\DataControl.cs" />
     <Compile Include="Assets\Animal Friends 2\Scripts\sctCharRot.cs" />
-    <Compile Include="Assets\JoystickPlatform.cs" />
     <Compile Include="Assets\Scripts\AdToContinue.cs" />
     <Compile Include="Assets\Scripts\Asteroid.cs" />
     <Compile Include="Assets\Scripts\BigScroll.cs" />
@@ -131,7 +130,10 @@
     <Compile Include="Assets\Scripts\Highscore.cs" />
     <Compile Include="Assets\Scripts\IAPManager.cs" />
     <Compile Include="Assets\Scripts\IAPModel.cs" />
+    <Compile Include="Assets\Scripts\JoystickController.cs" />
+    <Compile Include="Assets\Scripts\JoystickPlatform.cs" />
     <Compile Include="Assets\Scripts\Jukebox.cs" />
+    <Compile Include="Assets\Scripts\LevelUp.cs" />
     <Compile Include="Assets\Scripts\Platform.cs" />
     <Compile Include="Assets\Scripts\Platforms.cs" />
     <Compile Include="Assets\Scripts\PlayAd.cs" />

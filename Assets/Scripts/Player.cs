@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     public bool canJump = true;
     public bool tapJumping = false;
     public bool isSpawnTrail = true;
+    public bool levelingUp = false;
+    public int currentLevel = 1;
     // Most of these variables are pretty self explanatory
     public float movingSpeed = 0.1f;
     public float jumpHeight;    // Don't change jumpSpeed, jumpHeight is the only one that should be changed for different jump heights
@@ -55,8 +57,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		
-		asteroidSetting = PlayerPrefs.GetInt ("AsteroidSetting");
+        asteroidSetting = PlayerPrefs.GetInt("AsteroidSetting");
         canFlip = true;
         lastFramePosition = transform.position;
         // Assigns rb to the RigidBody component of the player
@@ -134,7 +135,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		Debug.Log ("velocity:"+rb.velocity.ToString());
         if (platforms.score >= 0)
         {
             trailLength += Vector3.Distance(lastFramePosition, transform.position) / 3;
@@ -304,10 +304,10 @@ public class Player : MonoBehaviour
     private void Move()
     {
         // Sets variables to the arrow key inputs
-        //float moveRightLeft = Input.GetAxis("Horizontal");
-        //float moveUpDown = Input.GetAxis("Vertical");
-        float moveRightLeft = (CrossPlatformInputManager.GetAxis("Horizontal"));
-        float moveUpDown = (CrossPlatformInputManager.GetAxis("Vertical"));
+        float moveRightLeft = Input.GetAxis("Horizontal");
+        float moveUpDown = Input.GetAxis("Vertical");
+        //float moveRightLeft = (CrossPlatformInputManager.GetAxis("Horizontal"));
+        //float moveUpDown = (CrossPlatformInputManager.GetAxis("Vertical"));
 
 
         // Sets the velocity of the player to moveSpeed times arrow key input (0 to 1 or -1)
@@ -327,9 +327,9 @@ public class Player : MonoBehaviour
         {
             rb.velocity = new Vector3(-(moveUpDown * movingSpeed), rb.velocity.y, moveRightLeft * movingSpeed);
         }
-        if (platforms.consecutiveJumped == 16)
+        if (platforms.consecutiveJumped >= 16)
         {
-            platforms.consecutiveJumped = 0;
+            platforms.consecutiveJumped -= 16;
         }
     }
 
@@ -350,11 +350,13 @@ public class Player : MonoBehaviour
 
     public void OnPointerDown()
     {
+        Debug.Log("Working");
         tapJumping = true;
     }
 
     public void OnPointerUp()
     {
+        Debug.Log("Working");
         tapJumping = false;
     }
 

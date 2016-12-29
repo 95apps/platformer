@@ -21,8 +21,6 @@ public class Sensitivity : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (MovementRange);
-		Debug.Log(value1);
 	}
 
 	public void changeMovementRange(float value1) {

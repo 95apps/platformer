@@ -64,13 +64,15 @@ public class Platform : MonoBehaviour
     public Color32 fallColor;
     public Player player;
     public GameObject arrows;
+    public LevelUp levelUpText;
     private float bobStep;
     private bool toBob = true;
 
     // This initialize funciton is called by the "platforms" empty when Instanciating a new platform 
     //in order to pass the empty into the platform's "platforms" variable
-    public void Initialize(Platforms plats, int dir, int consecutiveSpawned, int consecutivePlaced, Clouds clouds, float pitch, Player player)
+    public void Initialize(Platforms plats, int dir, int consecutiveSpawned, int consecutivePlaced, Clouds clouds, float pitch, Player player, LevelUp levelUpText)
     {
+        this.levelUpText = levelUpText;
         this.player = player;
         this.clouds = clouds;
         platforms = plats;
@@ -464,16 +466,12 @@ public class Platform : MonoBehaviour
         }
     }
 
-    bool IsPlatformInGroup(GameObject platform)
-    {
-        return platform = this.gameObject;
-    }
-
     void OnTriggerEnter(Collider col)
     {
         // If the object that collided with this is the player (Which it always is, but its here for safety)...
         if (col.gameObject.tag == "Player" && !player.isResurrecting)
         {
+
             if (platforms.platforms.IndexOf(gameObject) > 0)
             {
                 for (int i = 0; i < platforms.platforms.IndexOf(gameObject); i++)
@@ -507,6 +505,7 @@ public class Platform : MonoBehaviour
             // If the countDown equals initialCountDown (which it will, only the first time that the player touches the platform) then spawn another platform
             if (countDown == initialCountDown)
             {
+
                 if (player.isSpawnTrail)
                 {
                     player.GetComponent<TrailRenderer>().colorGradient = player.playingTrailGradient;
@@ -526,6 +525,14 @@ public class Platform : MonoBehaviour
                 }
                 platforms.score++;
                 print(platforms.score);
+
+                if (platforms.score % 16 == 0 && platforms.score != 0)
+                {
+                    player.currentLevel++;
+                    player.levelingUp = true;
+                    levelUpText.UpLevel();
+                    Debug.Log(platforms.score);
+                }
 
                 if (PlayerPrefs.GetFloat("Highscore") < platforms.score)
                 {

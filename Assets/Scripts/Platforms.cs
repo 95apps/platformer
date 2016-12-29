@@ -26,6 +26,7 @@ public class Platforms : MonoBehaviour
     public Material[] mats;
     public Player player;
     public int swiperCounter;
+    public LevelUp levelUpText;
 
     // Use this for initialization
     void Start()
@@ -70,7 +71,7 @@ public class Platforms : MonoBehaviour
         GameObject newPlat = Instantiate(Resources.Load("GameEntities/Platform")) as GameObject;
 
         // This line calls the initialize funcition of the newley created platform and passes this to be the "platforms" variable
-        newPlat.GetComponent<Platform>().Initialize(this, direction, consecutiveSpawned, consecutivePlaced, clouds, pitch, player);
+        newPlat.GetComponent<Platform>().Initialize(this, direction, consecutiveSpawned, consecutivePlaced, clouds, pitch, player, levelUpText);
         pitch += 0.2f;
 
         if (consecutiveSpawned < 8)
