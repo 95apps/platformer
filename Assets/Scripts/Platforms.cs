@@ -115,8 +115,25 @@ public class Platforms : MonoBehaviour
         newPlat.transform.parent = this.transform;
         // Adds the newly created platform to the platforms list
         platforms.Add(newPlat);
-        platformsAlive.Add(newPlat);
+
         newPlat.GetComponent<Platform>().scoreText.GetComponent<TextMesh>().text = consecutiveSpawned.ToString();
+
+        if (!((consecutiveSpawned - Mathf.Floor(consecutiveSpawned / 272) * 272) < 16) && Mathf.FloorToInt(consecutiveSpawned / 272) <= 16)
+        {
+            newPlat.GetComponent<Platform>().top.material = mats[Mathf.FloorToInt((consecutiveSpawned - Mathf.Floor(consecutiveSpawned / 272) * 272) / 16)];
+            newPlat.GetComponent<Platform>().bot.material = mats[Mathf.FloorToInt((consecutiveSpawned - Mathf.Floor(consecutiveSpawned / 272) * 272) / 16)];
+        }
+
+        if (!(consecutiveSpawned < 272) && Mathf.FloorToInt(consecutiveSpawned / 272) <= 16)
+        {
+            newPlat.GetComponent<MeshRenderer>().material = mats[Mathf.FloorToInt(consecutiveSpawned / 272)];
+        }
+        else if (!(Mathf.FloorToInt(consecutiveSpawned / 272) <= 16))
+        {
+            newPlat.GetComponent<MeshRenderer>().material = mats[16];
+            newPlat.GetComponent<Platform>().top.material = mats[16];
+            newPlat.GetComponent<Platform>().bot.material = mats[16];
+        }
 
         if (Random.Range(0, 2) == 1)
         {

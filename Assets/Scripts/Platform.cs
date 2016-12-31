@@ -12,7 +12,7 @@ public class Platform : MonoBehaviour
     private float audioPitch;
 	public float trafficTimer;
     public int direction;
-    private int platsSpawned;
+    public int platsSpawned;
     private int platsPlaced;
 	public int colorCounter;
     public GameObject FloorCanvas;
@@ -140,108 +140,6 @@ public class Platform : MonoBehaviour
         if (UnityEngine.Random.Range(0, 8) == 1 && !swiper.activeInHierarchy && !bulletsGroup.activeInHierarchy)
         {
             trafficLight = true;
-        }
-
-        if (platsSpawned >= 16)
-        {
-            top.material = platforms.mats[1];
-            bot.material = platforms.mats[1];
-        }
-
-        if (platsSpawned >= 24)
-        {
-            top.material = platforms.mats[2];
-            bot.material = platforms.mats[2];
-        }
-
-        if (platsSpawned >= 32)
-        {
-            top.material = platforms.mats[3];
-            bot.material = platforms.mats[3];
-        }
-
-        if (platsSpawned >= 40)
-        {
-            top.material = platforms.mats[4];
-            bot.material = platforms.mats[4];
-        }
-
-        if (platsSpawned >= 48)
-        {
-            top.material = platforms.mats[5];
-            bot.material = platforms.mats[5];
-        }
-
-        if (platsSpawned >= 56)
-        {
-            top.material = platforms.mats[6];
-            bot.material = platforms.mats[6];
-        }
-
-        if (platsSpawned >= 64)
-        {
-            top.material = platforms.mats[7];
-            bot.material = platforms.mats[7];
-        }
-
-        if (platsSpawned >= 72)
-        {
-            top.material = platforms.mats[8];
-            bot.material = platforms.mats[8];
-        }
-
-        if (platsSpawned >= 80)
-        {
-            top.material = platforms.mats[9];
-            bot.material = platforms.mats[9];
-        }
-
-        if (platsSpawned >= 88)
-        {
-            top.material = platforms.mats[10];
-            bot.material = platforms.mats[10];
-        }
-
-        if (platsSpawned >= 96)
-        {
-            top.material = platforms.mats[11];
-            bot.material = platforms.mats[11];
-        }
-
-        if (platsSpawned >= 104)
-        {
-            top.material = platforms.mats[12];
-            bot.material = platforms.mats[12];
-        }
-
-        if (platsSpawned >= 112)
-        {
-            top.material = platforms.mats[13];
-            bot.material = platforms.mats[13];
-        }
-
-        if (platsSpawned >= 120)
-        {
-            top.material = platforms.mats[14];
-            bot.material = platforms.mats[14];
-        }
-
-        if (platsSpawned >= 128)
-        {
-            top.material = platforms.mats[15];
-            bot.material = platforms.mats[15];
-        }
-
-        if (platsSpawned >= 136)
-        {
-            top.material = platforms.mats[16];
-            bot.material = platforms.mats[16];
-        }
-
-        if (platsSpawned >= 144)
-        {
-            top.material = platforms.mats[16];
-            bot.material = platforms.mats[16];
         }
     }
 
@@ -464,6 +362,14 @@ public class Platform : MonoBehaviour
                 playSound = false;
             }
         }
+    }
+
+    public void NotTraffic()
+    {
+        colorCounter = 0;
+        trafficTimer = 0f;
+        TrafficLight();
+        trafficLight = false;
     }
 
     void OnTriggerEnter(Collider col)

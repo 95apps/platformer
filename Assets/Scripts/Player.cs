@@ -480,10 +480,7 @@ public class Player : MonoBehaviour
 				Platform firstPlat = platforms.platforms[0].GetComponent<Platform>();
 				if (firstPlat.trafficLight)
 				{
-					firstPlat.colorCounter = 0;
-					firstPlat.trafficTimer = 0f;
-					firstPlat.TrafficLight();
-					firstPlat.trafficLight = false;
+                    firstPlat.NotTraffic();
 				}
 
 
