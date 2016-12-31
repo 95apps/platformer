@@ -18,15 +18,19 @@ public class Continue : MonoBehaviour {
 	public Vector2 adOptionEndPos;
 	public Vector2 coinOptionEndPos;
 	private float optionStep;
+	public Player player;
+
 
 
 	// Use this for initialization
 	void Start () {
+
 		optionStep = 0f;
 		adOptionRect = adOption.GetComponent<RectTransform>();
 		coinOptionRect = coinOption.GetComponent<RectTransform>();
 		coinOption.GetComponentInChildren<UnityEngine.UI.Text>().text = (25 + Mathf.CeilToInt(platforms.score/3)) + " Coins";
 	}
+
 
 	public void ShowOptions()
 	{
@@ -38,6 +42,9 @@ public class Continue : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+
+
 		if (toggle == true)
 		{
 			coinOptionRect.anchoredPosition = new Vector2(Mathf.Lerp(coinOptionStartPos.x, coinOptionEndPos.x, Hermite(0, 1, optionStep)), 0);

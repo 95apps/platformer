@@ -8,11 +8,15 @@ public class RibbonLengthDisplay : MonoBehaviour {
     public Player player;
     // Use this for initialization
     void Start () {
-        ribbonLength.text = "You have travelled : " + Mathf.Round(player.trailLength) + " meters";
+		if (player.platforms.score != -1) {
+			ribbonLength.text = "You have travelled " + Mathf.Round (player.trailLength) + " meters and reached block " + player.platforms.score;
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		ribbonLength.text = "You have travelled : " + Mathf.Round(player.trailLength) + " meters";
+		if (player.platforms.score != -1) {
+			ribbonLength.text = "You have travelled : " + Mathf.Round (player.trailLength) + " meters and reached block " + player.platforms.score;
+		}
 	}
 }

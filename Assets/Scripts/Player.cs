@@ -389,6 +389,9 @@ public class Player : MonoBehaviour
 
     private void Hook()
     {
+
+
+
         if (setHookTarget)
         {
             if (platforms.consecutiveJumped < 4)
@@ -415,6 +418,9 @@ public class Player : MonoBehaviour
         }
         if (hookTimer <= 3f)
         { //SET hookTimer TO ZERO
+
+
+
             if (hookTimer <= 2f)
             {
                 if (platforms.consecutiveJumped < 4)
@@ -450,7 +456,39 @@ public class Player : MonoBehaviour
                     hookEnd = transform.position;
                     setHookEnd = false; //SET TO TRUE ONCE RESURRECTION IS COMPLETE
                 }
-                transform.position = Vector3.Lerp(hookEnd, platforms.platforms[0].transform.position + Vector3.up * 2, hookTimer - 2f);
+
+//				int i = 0;
+//
+//				foreach (Transform child in platforms.platforms[i])
+//				{
+//					if (child.name == "Swiper" && child.gameObject.activeSelf || child.name == "Bullets Row" && child.gameObject.activeSelf) {
+//						i += 1;
+//					} 
+//				}
+
+				foreach (Transform child in platforms.platforms[0].GetComponentsInChildren<Transform>()) {
+
+
+					if (child.gameObject.name == "Bullets Row") {
+						child.gameObject.SetActive (false);
+					} else if (child.gameObject.name == "Swiper") {
+						child.gameObject.SetActive (false);
+					} 
+
+				}
+
+				Platform firstPlat = platforms.platforms[0].GetComponent<Platform>();
+				if (firstPlat.trafficLight)
+				{
+					firstPlat.colorCounter = 0;
+					firstPlat.trafficTimer = 0f;
+					firstPlat.TrafficLight();
+					firstPlat.trafficLight = false;
+				}
+
+
+				transform.position = Vector3.Lerp(hookEnd, platforms.platforms[0].transform.position + Vector3.up * 2, hookTimer - 2f);
+               
             }
             hookTimer += Time.deltaTime;
         }

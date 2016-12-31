@@ -1,0 +1,15 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/LevelUp.cs">
+    <Files>
+      <File FileName="Assets/Scripts/LevelUp.cs" Line="62" Column="78" />
+      <File FileName="Assets/Scripts/RibbonLengthDisplay.cs" Line="20" Column="4" />
+      <File FileName="Assets/Scripts/Continue.cs" Line="46" Column="1" />
+      <File FileName="Assets/Scripts/Player.cs" Line="454" Column="4" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

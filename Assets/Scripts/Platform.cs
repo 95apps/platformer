@@ -10,11 +10,11 @@ public class Platform : MonoBehaviour
     // countDown variable to be used as reference by the code as the beginning of the countDown time, this is set to the countdown variable of the "Platforms" empty
     private float initialCountDown = 2;
     private float audioPitch;
-    private float trafficTimer;
+	public float trafficTimer;
     public int direction;
     private int platsSpawned;
     private int platsPlaced;
-    private int colorCounter;
+	public int colorCounter;
     public GameObject FloorCanvas;
     // The renderer component of the platform used to change the color
     private Renderer platRender;
@@ -23,7 +23,7 @@ public class Platform : MonoBehaviour
     private bool startMoving = false;
     private bool setIndicatorPosition = true;
     private bool highScorePlaying = false;
-    private bool trafficLight = false;
+	public bool trafficLight = false;
     private bool trafficDestroy = false;
     private AudioSource src;
 
@@ -293,10 +293,10 @@ public class Platform : MonoBehaviour
 
 
 
-        if (trafficLight)
-        {
-            TrafficLight();
-        }
+		if (trafficLight) {
+			TrafficLight ();
+
+		} 
         if (highScorePlaying && !src.isPlaying)
         {
             src.pitch = audioPitch;
@@ -374,7 +374,7 @@ public class Platform : MonoBehaviour
         }
     }
 
-    private void TrafficLight()
+	public void TrafficLight()
     {
         platRender.material.color = trafficColors[colorCounter];
         trafficTimer += Time.deltaTime;
