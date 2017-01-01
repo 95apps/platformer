@@ -418,9 +418,9 @@ public class Platform : MonoBehaviour
                     player.isSpawnTrail = false;
                 }
                 countDown -= Time.deltaTime;
-                if (platforms.score % 6 == 0)
+                if (platforms.score % 4 == 0 && platforms.score <= 60)
                 {
-                    clouds.SpawnClouds(); //rekt
+                    clouds.SpawnClouds(); 
 
                 }
 
