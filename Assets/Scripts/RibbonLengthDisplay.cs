@@ -16,7 +16,7 @@ public class RibbonLengthDisplay : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (player.platforms.score != -1) {
-			ribbonLength.text = "You have travelled : " + Mathf.Round (player.trailLength) + " meters and reached block " + player.platforms.score;
-		}
+			ribbonLength.text = "You reached block " + player.platforms.score + ", travelling " + Mathf.Round (player.trailLength) + " meters. ";
 	}
+}
 }
