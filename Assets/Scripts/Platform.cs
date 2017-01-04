@@ -8,7 +8,7 @@ public class Platform : MonoBehaviour
     // countDown variable that will change over time once the player has landed on top of the platform
     public float countDown;
     // countDown variable to be used as reference by the code as the beginning of the countDown time, this is set to the countdown variable of the "Platforms" empty
-    private float initialCountDown = 2;
+    private float initialCountDown = 2.2f;
     private float audioPitch;
 	public float trafficTimer;
     public int direction;
@@ -56,7 +56,7 @@ public class Platform : MonoBehaviour
     private ParticleSystem.EmissionModule em;
     float highscore;
 
-    public Clouds clouds;
+    public Butts butts;
     public GameObject swiper;
     public GameObject bulletsGroup;
     public GameObject coin;
@@ -70,11 +70,11 @@ public class Platform : MonoBehaviour
 
     // This initialize funciton is called by the "platforms" empty when Instanciating a new platform 
     //in order to pass the empty into the platform's "platforms" variable
-    public void Initialize(Platforms plats, int dir, int consecutiveSpawned, int consecutivePlaced, Clouds clouds, float pitch, Player player, LevelUp levelUpText)
+    public void Initialize(Platforms plats, int dir, int consecutiveSpawned, int consecutivePlaced, Butts butts, float pitch, Player player, LevelUp levelUpText)
     {
         this.levelUpText = levelUpText;
         this.player = player;
-        this.clouds = clouds;
+        this.butts = butts;
         platforms = plats;
         audioPitch = pitch;
         if (pitch >= 4f)
@@ -420,7 +420,7 @@ public class Platform : MonoBehaviour
                 countDown -= Time.deltaTime;
                 if (platforms.score % 4 == 0 && platforms.score <= 60)
                 {
-                    clouds.SpawnClouds(); 
+                    butts.SpawnButts(); 
 
                 }
 
