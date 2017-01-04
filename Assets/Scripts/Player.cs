@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Screen.SetResolution(1920, 1080, true);
         asteroidSetting = PlayerPrefs.GetInt("AsteroidSetting");
         canFlip = true;
         lastFramePosition = transform.position;

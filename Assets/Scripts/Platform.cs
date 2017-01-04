@@ -90,7 +90,7 @@ public class Platform : MonoBehaviour
 
         if (platsSpawned % 8 == 0)
         {
-            if (platforms.countDown >= 1f)
+            if (platforms.countDown >= 1.5f)
             {
                 platforms.countDown -= 0.1f;
             }
