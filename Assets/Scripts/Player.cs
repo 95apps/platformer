@@ -114,12 +114,14 @@ public class Player : MonoBehaviour
         {
 
             PlayerPrefs.SetInt("AsteroidSetting", 1);
+            asteroidSetting = 1;
             asteroidOffPicture.SetActive(false);
         }
         else
         {
 
             PlayerPrefs.SetInt("AsteroidSetting", 0);
+            asteroidSetting = 0;
             asteroidOffPicture.SetActive(true);
             foreach (GameObject asteroid in GameObject.FindGameObjectsWithTag("Asteroid"))
             {
@@ -151,8 +153,7 @@ public class Player : MonoBehaviour
             Hook();
         }
 
-
-        if (PlayerPrefs.GetInt("AsteroidSetting") == 1)
+        if(asteroidSetting == 1)
         {
             asteroidTimer += Time.deltaTime;
 
