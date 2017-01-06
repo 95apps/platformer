@@ -17,11 +17,11 @@ public class Bullets : MonoBehaviour {
 		timer += Time.deltaTime;
 		if(timer >= 2f){
 			timer = 0f;
-			SpawnBullets(0f);
+			SpawnBullets(0);
 		}
 	}
 
-	public void SpawnBullets(float localY){
+	public void SpawnBullets(int localY){
 		GameObject bullet1 = Instantiate(Resources.Load("GameEntities/Bullet")) as GameObject;
 		bullet1.transform.parent = transform;
 		bullet1.transform.localPosition = new Vector3(-2, localY, 0);

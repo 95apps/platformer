@@ -38,7 +38,7 @@ public class Platforms : MonoBehaviour
         // Add the first platforms already in the scene to the list of platforms
         platforms.Add(transform.GetChild(0).gameObject);
         // Spawn 10 platforms
-        for (int i = 0; i < 70; i++)
+        for (int i = 0; i < 10; i++)
         {
             SpawnPlatform();
         }
