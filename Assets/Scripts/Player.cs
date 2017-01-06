@@ -33,7 +33,6 @@ public class Player : MonoBehaviour
     private Vector3 firstPlatPos;
     private Vector3 hookTarget;
     private Vector3 hookEnd;
-    private Raycast Raycast;
     public AudioClip[] bounceSounds;
     private AudioSource mySound;
     private TrailRenderer trail;
@@ -48,7 +47,6 @@ public class Player : MonoBehaviour
     private bool hooking = false;
     private bool setHookEnd = false;
     private bool setHookTarget = false;
-    private bool canFlip = false;
     private int asteroidSetting;
     public GameObject asteroidOffPicture;
 
@@ -57,9 +55,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Screen.SetResolution(1920, 1080, true);
         asteroidSetting = PlayerPrefs.GetInt("AsteroidSetting");
-        canFlip = true;
         lastFramePosition = transform.position;
         // Assigns rb to the RigidBody component of the player
         rb = GetComponent<Rigidbody>();
@@ -67,7 +63,6 @@ public class Player : MonoBehaviour
 
         // Line I got from the internet, makes it so that jumpSpeed is euqal to the amount of force required to jump up to jumpHeight
         jumpSpeed = Mathf.Sqrt(-2 * Physics.gravity.y * jumpHeight) + 0.1f;
-        Raycast = GetComponent<Raycast>();
         mySound = GetComponent<AudioSource>();
         trail = GetComponent<TrailRenderer>();
         skydome = GameObject.Find("SkyDome").GetComponent<Skydome>();
@@ -136,6 +131,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (platforms.score >= 0)
         {
             trailLength += Vector3.Distance(lastFramePosition, transform.position) / 3;
@@ -149,6 +145,7 @@ public class Player : MonoBehaviour
         {
             Jump();
         }
+
         if (hooking)
         {
             Hook();
@@ -165,16 +162,6 @@ public class Player : MonoBehaviour
                 SpawnAsteroid();
             }
         }
-
-        /*if (canJump == false)
-        {
-            transform.eulerAngles = new Vector3(Mathf.Lerp(0, 180, flipStep), 0, 0);
-            flipStep += Time.deltaTime * 2;
-            if(flipStep > 1f)
-            {
-                flipStep = 1f;
-            }
-        }*/
     }
 
 
@@ -391,8 +378,6 @@ public class Player : MonoBehaviour
     private void Hook()
     {
 
-
-
         if (setHookTarget)
         {
             if (platforms.consecutiveJumped < 4)
@@ -417,10 +402,9 @@ public class Player : MonoBehaviour
             }
             setHookTarget = false;
         }
+
         if (hookTimer <= 3f)
-        { //SET hookTimer TO ZERO
-
-
+        {
 
             if (hookTimer <= 2f)
             {

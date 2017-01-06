@@ -138,7 +138,6 @@
     <Compile Include="Assets\Scripts\Platforms.cs" />
     <Compile Include="Assets\Scripts\PlayAd.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
-    <Compile Include="Assets\Scripts\Raycast.cs" />
     <Compile Include="Assets\Scripts\RibbonLengthDisplay.cs" />
     <Compile Include="Assets\Scripts\Scroll.cs" />
     <Compile Include="Assets\Scripts\Selected.cs" />

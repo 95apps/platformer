@@ -9,7 +9,7 @@ public class DisplayAmountOfCoins : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-  
+
         SetCoin();
     }
 

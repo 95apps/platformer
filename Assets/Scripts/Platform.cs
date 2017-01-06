@@ -8,7 +8,7 @@ public class Platform : MonoBehaviour
     // countDown variable that will change over time once the player has landed on top of the platform
     public float countDown;
     // countDown variable to be used as reference by the code as the beginning of the countDown time, this is set to the countdown variable of the "Platforms" empty
-    private float initialCountDown = 2;
+    private float initialCountDown = 2.2f;
     private float audioPitch;
 	public float trafficTimer;
     public int direction;

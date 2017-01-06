@@ -11,4 +11,8 @@ public class BigScroll : MonoBehaviour {
         rectTrans = GetComponent<RectTransform>();
         rectTrans.sizeDelta = new Vector2(8980, 100);
     }
+
+    void Update()
+    {
+    }
 }

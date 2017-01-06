@@ -58,7 +58,6 @@ public class AdToContinue : MonoBehaviour
             {
                 Advertisement.Initialize("1126579", false);
             }
-
         }
 
     }

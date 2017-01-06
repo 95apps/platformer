@@ -21,7 +21,6 @@ public class Floor : MonoBehaviour
 
     void Awake()
     {
-        Application.targetFrameRate = 300;
 
     }
 
