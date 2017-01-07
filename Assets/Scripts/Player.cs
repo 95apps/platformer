@@ -132,7 +132,10 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {        if (Input.GetKey(KeyCode.G))
+        {
+            transform.position = platforms.platforms[10].transform.position + Vector3.up;
+        }
 
         if (platforms.score >= 0)
         {
@@ -293,10 +296,10 @@ public class Player : MonoBehaviour
     private void Move()
     {
         // Sets variables to the arrow key inputs
-        //float moveRightLeft = Input.GetAxis("Horizontal");
-        //float moveUpDown = Input.GetAxis("Vertical");
-        float moveRightLeft = (CrossPlatformInputManager.GetAxis("Horizontal"));
-        float moveUpDown = (CrossPlatformInputManager.GetAxis("Vertical"));
+        float moveRightLeft = Input.GetAxis("Horizontal");
+        float moveUpDown = Input.GetAxis("Vertical");
+        //float moveRightLeft = (CrossPlatformInputManager.GetAxis("Horizontal"));
+        //float moveUpDown = (CrossPlatformInputManager.GetAxis("Vertical"));
 
 
         // Sets the velocity of the player to moveSpeed times arrow key input (0 to 1 or -1)

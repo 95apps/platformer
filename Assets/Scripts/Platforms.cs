@@ -84,7 +84,7 @@ public class Platforms : MonoBehaviour
             newPlat.transform.localScale = new Vector3(1.8f, 1, 1.8f);
         }
 
-        if (consecutiveSpawned >= 16 && consecutiveSpawned < 24)
+        if (consecutiveSpawned >= 16)
         {
             newPlat.transform.localScale = new Vector3(1.65f, 1, 1.65f);
         }

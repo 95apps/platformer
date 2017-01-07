@@ -9,6 +9,7 @@ public class DeathCube : MonoBehaviour
     public bool playerDead = false;
     private Rigidbody playerRb;
     private Vector3 initialPos;
+    private Vector3 currentPlat;
     public GameObject canvas;
     public StoreTrigger StoreTrigger;
     public GameObject FloorCanvas;
@@ -52,13 +53,15 @@ public class DeathCube : MonoBehaviour
         if (player != null)
         {
             Vector3 playerPos = player.transform.position;
-            transform.position = new Vector3(playerPos.x, transform.position.y, playerPos.z);
-            if (!(playerPos.y + initialPos.y <= transform.position.y))
+            transform.position = new Vector3(playerPos.x, currentPlat.y - 10, playerPos.z);
+            /*
+            if (!(currentPlat.y + initialPos.y <= transform.position.y))
             {
-                transform.position = new Vector3(playerPos.x, playerPos.y + initialPos.y, playerPos.z);
+                transform.position = new Vector3(currentPlat.x, currentPlat.y + initialPos.y, currentPlat.z);
             }
+            */
             float deltaY = playerPos.y - transform.position.y;
-            if (deltaY < -10f && playerDead)
+            if (deltaY < -5 && playerDead)
             {
                 playerRb.isKinematic = true;
                 playerRb.useGravity = false;
@@ -69,6 +72,11 @@ public class DeathCube : MonoBehaviour
                 player.GetComponent<Renderer>().enabled = true;
             }
         }
+    }
+
+    public void UpdatePosition()
+    {
+        currentPlat = platforms.platforms[0].transform.position;
     }
 
     void OnTriggerEnter(Collider col)

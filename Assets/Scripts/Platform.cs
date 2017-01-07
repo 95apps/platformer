@@ -167,9 +167,6 @@ public class Platform : MonoBehaviour
 
         highscore = PlayerPrefs.GetFloat("Highscore");
 
-
-
-
     }
 
     // Update is called once per frame
@@ -361,6 +358,8 @@ public class Platform : MonoBehaviour
                 src.PlayOneShot(fallSounds[0], 0.8f);
                 playSound = false;
             }
+
+            player.deathCube.UpdatePosition();
         }
     }
 
@@ -377,14 +376,6 @@ public class Platform : MonoBehaviour
         // If the object that collided with this is the player (Which it always is, but its here for safety)...
         if (col.gameObject.tag == "Player" && !player.isResurrecting)
         {
-
-            if (platforms.platforms.IndexOf(gameObject) > 0)
-            {
-                for (int i = 0; i < platforms.platforms.IndexOf(gameObject); i++)
-                {
-                    platforms.platforms[0].GetComponent<Platform>().OnTriggerEnter(player.GetComponent<Collider>());
-                }
-            }
 
             if (colorCounter != 2)
             {
@@ -411,6 +402,14 @@ public class Platform : MonoBehaviour
             // If the countDown equals initialCountDown (which it will, only the first time that the player touches the platform) then spawn another platform
             if (countDown == initialCountDown)
             {
+
+                if (Array.IndexOf(platforms.GetComponentsInChildren<Platform>(), this) > 0)
+                {
+                    for (int i = 0; i < Array.IndexOf(platforms.GetComponentsInChildren<Platform>(), this); i++)
+                    {
+                        platforms.GetComponentsInChildren<Platform>()[i].OnTriggerEnter(player.GetComponent<Collider>());
+                    }
+                }
 
                 if (player.isSpawnTrail)
                 {
