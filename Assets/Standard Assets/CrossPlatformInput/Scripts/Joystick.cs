@@ -40,6 +40,10 @@ namespace UnityStandardAssets.CrossPlatformInput
 
         void Start()
         {
+            if (!PlayerPrefs.HasKey("MovementRange"))
+            {
+                PlayerPrefs.SetFloat("MovementRange", 225);
+            }
             m_StartPos = transform.position;
             joystickPlatform.GetComponent<RectTransform>().sizeDelta = new Vector2(MovementRange * (8/3), MovementRange * (8/3));
             Debug.Log(MovementRange);
@@ -50,7 +54,6 @@ namespace UnityStandardAssets.CrossPlatformInput
 
         void UpdateVirtualAxes(Vector3 value)
         {
-			MovementRange = Mathf.RoundToInt(PlayerPrefs.GetFloat ("MovementRange"));
 
             var delta = m_StartPos - value;
             delta.y = -delta.y;
@@ -142,6 +145,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 
         public void OnPointerDown(PointerEventData data)
         {
+            MovementRange = Mathf.RoundToInt(PlayerPrefs.GetFloat("MovementRange"));
             setPlatformPos = true;
             moveToCenter = false;
             m_StartPos = new Vector3(data.position.x, data.position.y, 0);

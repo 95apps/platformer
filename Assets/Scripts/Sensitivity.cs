@@ -5,9 +5,10 @@ using UnityEngine;
 public class Sensitivity : MonoBehaviour {
 
 	public GameObject Joystick;
-	public float MovementRange =150;
+	public float MovementRange = 150;
 	public UnityEngine.UI.Slider slider;
 	public RectTransform JoystickPlatform;
+    public UnityEngine.UI.Slider visibleSlider;
 	private int value1 = 150;
 
 	// Use this for initialization
@@ -25,7 +26,7 @@ public class Sensitivity : MonoBehaviour {
 
 	public void changeMovementRange(float value1) {
 		MovementRange = value1;
-		//JoystickPlatform.sizeDelta = new Vector2 ((PlayerPrefs.GetFloat ("MovementRange") / 150)*100, (PlayerPrefs.GetFloat ("MovementRange") / 150)*100);
+        visibleSlider.value = value1;
 		JoystickPlatform.transform.localScale = new Vector3 (PlayerPrefs.GetFloat ("MovementRange") / 150, PlayerPrefs.GetFloat ("MovementRange") / 150, PlayerPrefs.GetFloat ("MovementRange") / 75);
 		PlayerPrefs.SetFloat ("MovementRange", MovementRange);
 	}
