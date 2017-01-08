@@ -24,7 +24,7 @@ public class IAPModel : MonoBehaviour {
             Selected.SetActive(true);
 			graybox.SetActive (true);
 			background.SetActive (true);
-			floorCanvas.SetActive (true);
+			//floorCanvas.SetActive (true);
             text.text = "Buy More Coins";
 
         } else
@@ -34,7 +34,7 @@ public class IAPModel : MonoBehaviour {
             Selected.SetActive(false);
 			graybox.SetActive (false);
 			background.SetActive (false);
-			floorCanvas.SetActive (false);
+			//floorCanvas.SetActive (false);
             text.text = "Back To Shop";
         }
     }
