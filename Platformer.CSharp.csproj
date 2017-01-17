@@ -108,11 +108,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Animal Friends 2\Scripts\AniControl.cs" />
-    <Compile Include="Assets\Animal Friends 2\Scripts\CharControl.cs" />
-    <Compile Include="Assets\Animal Friends 2\Scripts\CharData.cs" />
-    <Compile Include="Assets\Animal Friends 2\Scripts\DataControl.cs" />
-    <Compile Include="Assets\Animal Friends 2\Scripts\sctCharRot.cs" />
     <Compile Include="Assets\Scripts\AdToContinue.cs" />
     <Compile Include="Assets\Scripts\Asteroid.cs" />
     <Compile Include="Assets\Scripts\BigScroll.cs" />
@@ -150,8 +145,7 @@
     <Compile Include="Assets\Scripts\rotation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Animal Friends 2\Standard Assets\Skyboxes\_skybox info.txt" />
-    <None Include="Assets\DependencyPro\AssetUsageFinderGuidelines.txt" />
+    <None Include="Assets\Editor\DependencyPro\AssetUsageFinderGuidelines.txt" />
     <None Include="Assets\SimpleSky\ReadMe.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Standard Assets\Fonts\OpenSans\License!.txt" />
