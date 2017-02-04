@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private float distanceTravelled;
     private float hookTimer;
     private float hookAngle;
-    private float trailTimer;
+    private float trailLengthTimer;
     public float asteroidTimer;
     // rb is the RigidBody component of the player
     private Rigidbody rb;
@@ -49,6 +49,8 @@ public class Player : MonoBehaviour
     private bool setHookTarget = false;
     private int asteroidSetting;
     public GameObject asteroidOffPicture;
+    public GameObject extraLight1;
+    public GameObject extraLight2;
 
 
 
@@ -95,12 +97,16 @@ public class Player : MonoBehaviour
         if (!PlayerPrefs.HasKey("quality") || PlayerPrefs.GetInt("quality") == 2 || System.Array.IndexOf(qualityList, PlayerPrefs.GetInt("quality")) == -1)
         {
             trail.minVertexDistance = 0.1f;
+            extraLight1.SetActive(true);
+            extraLight2.SetActive(true);
             QualitySettings.SetQualityLevel(2, true);
             PlayerPrefs.SetInt("quality", 2);
         }
         else if (PlayerPrefs.GetInt("quality") == 0)
         {
             trail.minVertexDistance = 1;
+            extraLight1.SetActive(false);
+            extraLight2.SetActive(false);
             QualitySettings.SetQualityLevel(0, true);
         }
 
@@ -139,8 +145,18 @@ public class Player : MonoBehaviour
 
         if (platforms.score >= 0)
         {
-            trailLength += Vector3.Distance(lastFramePosition, transform.position) / 3;
-            lastFramePosition = transform.position;
+            if (trailLengthTimer == 0)
+            {
+                lastFramePosition = transform.position;
+            }
+            trailLengthTimer += Time.deltaTime;
+            if (trailLengthTimer >= 1)
+            {
+                trailLengthTimer = 0f;
+                trailLength += Vector3.Distance(lastFramePosition, transform.position) / 3;
+            }
+            //trailLength += Vector3.Distance(lastFramePosition, transform.position) / 3;
+            //lastFramePosition = transform.position;
             trail.time += Time.deltaTime;
         }
 
@@ -296,10 +312,10 @@ public class Player : MonoBehaviour
     private void Move()
     {
         // Sets variables to the arrow key inputs
-        //float moveRightLeft = Input.GetAxis("Horizontal");
-        //float moveUpDown = Input.GetAxis("Vertical");
-        float moveRightLeft = (CrossPlatformInputManager.GetAxis("Horizontal"));
-        float moveUpDown = (CrossPlatformInputManager.GetAxis("Vertical"));
+        float moveRightLeft = Input.GetAxis("Horizontal");
+        float moveUpDown = Input.GetAxis("Vertical");
+        //float moveRightLeft = (CrossPlatformInputManager.GetAxis("Horizontal"));
+        //float moveUpDown = (CrossPlatformInputManager.GetAxis("Vertical"));
 
 
         // Sets the velocity of the player to moveSpeed times arrow key input (0 to 1 or -1)

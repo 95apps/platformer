@@ -12,6 +12,8 @@ public class SettingsCanvas : MonoBehaviour
     public Player player;
     public GameObject HQImage;
     public GameObject LQImage;
+    public GameObject extraLight1;
+    public GameObject extraLight2;
 
     private AudioSource src;
 
@@ -57,6 +59,8 @@ public class SettingsCanvas : MonoBehaviour
             player.GetComponent<TrailRenderer>().minVertexDistance = 1;
             QualitySettings.SetQualityLevel(0, true);
             PlayerPrefs.SetInt("quality", 0);
+            extraLight1.SetActive(false);
+            extraLight2.SetActive(false);
             LQImage.SetActive(true);
             HQImage.SetActive(false);
             Debug.Log(QualitySettings.GetQualityLevel());
@@ -67,9 +71,11 @@ public class SettingsCanvas : MonoBehaviour
             player.GetComponent<TrailRenderer>().minVertexDistance = 0.1f;
             QualitySettings.SetQualityLevel(2, true);
             PlayerPrefs.SetInt("quality", 2);
-            Debug.Log(QualitySettings.GetQualityLevel());
+            extraLight1.SetActive(true);
+            extraLight2.SetActive(true);
             LQImage.SetActive(false);
             HQImage.SetActive(true);
+            Debug.Log(QualitySettings.GetQualityLevel());
         }
     }
 }
