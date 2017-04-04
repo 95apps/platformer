@@ -5,20 +5,20 @@ using System;
 public class Camera : MonoBehaviour
 {
 
-    public Transform lookAt;
+    public Player player;
     public float smoothSpeed = 0.125f;
     public float deathStep;
     public Platforms platforms;
     public DeathCube deathCube;
     public Vector3 deathRotateTarget;
     public UnityEngine.Camera cameraComponent;
+    public bool smooth;
     public bool beginRevolving = false;
     public bool setPositions = true;
     
     private int distance;
-    private bool smooth = true;
     private bool firstRotate = false;
-    private Vector3 offset = new Vector3(0, 2.75f, -3f);
+    private Vector3 offset = new Vector3(0, 2.75f, 3f);
     private Vector3 playerStartPos;
     private Vector3 playerEndPos;
     private Vector3 playerAvgPos;
@@ -35,33 +35,44 @@ public class Camera : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        playerStartPos = lookAt.transform.position;
+        playerStartPos = player.transform.position;
     }
 
     // Update is called once per frame
    
     void FixedUpdate()
     {
+        /*
         if(!beginRevolving){
             RotateCamera();
         }
+        */
 
-        Vector3 desiredPosition = lookAt.transform.position + offset;
-
-        if (smooth)
+        /*
+        if (platforms.consecutiveJumped < 4)
         {
-            transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
+            transform.position = new Vector3(player.cameraXZ, player.transform.position.y + offset.y, player.transform.position.z - offset.z);
         }
-        else
+        else if (platforms.consecutiveJumped >= 4 && platforms.consecutiveJumped < 8)
         {
-            transform.position = desiredPosition;
+            transform.position = new Vector3(player.transform.position.x - offset.z, player.transform.position.y + offset.y, player.cameraXZ);
         }
+        else if (platforms.consecutiveJumped >= 8 && platforms.consecutiveJumped < 12)
+        {
+            transform.position = new Vector3(player.cameraXZ, player.transform.position.y + offset.y, player.transform.position.z + offset.z);
+        }
+        else if (platforms.consecutiveJumped >= 12 && platforms.consecutiveJumped < 16)
+        {
+            transform.position = new Vector3(player.transform.position.x + offset.z, player.transform.position.y + offset.y, player.cameraXZ);
+        }
+        */
 
+        /*
         if (deathCube.playerDead)
         {
             if (setPositions)
             {
-                playerEndPos = lookAt.position;
+                playerEndPos = player.transform.position;
                 playerAvgPos = Vector3.Lerp(playerStartPos, playerEndPos, 0.5f);
                 midCamDistance = Vector3.Distance(playerAvgPos, transform.position);
                 playerDeadRotateStart = cameraComponent.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, midCamDistance));
@@ -102,6 +113,7 @@ public class Camera : MonoBehaviour
                 beginRevolving = true;
             }
         }
+        */
     }
 
     private void RotateCamera()
@@ -114,8 +126,8 @@ public class Camera : MonoBehaviour
             angle = rotateToThis;
             transform.eulerAngles = new Vector3(20, rotateToThis - 180, 0);
         }
-        double x = 5 * Mathf.Sin(angle * Mathf.PI / 180f);
-        double z = 5 * Mathf.Cos(angle * Mathf.PI / 180f);
+        float x = 5 * Mathf.Sin(angle * Mathf.PI / 180f);
+        float z = 5 * Mathf.Cos(angle * Mathf.PI / 180f);
         offset = new Vector3((float)x, 2f, (float)z);
     }
 

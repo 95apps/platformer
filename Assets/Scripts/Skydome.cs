@@ -41,11 +41,12 @@ public class Skydome : MonoBehaviour {
 
     void Update()
     {
-        
-        transform.position = player.transform.position + new Vector3(0, 118, 0);
+        transform.position = player.transform.position + new Vector3(0, 35, 0);
+        /*
         ChangeColor();
         scrollSpeed += Time.deltaTime * 0.1f;
         rend.material.mainTextureOffset = new Vector2(scrollSpeed, 0);
+        */
     }
     private void ChangeColor()
     {

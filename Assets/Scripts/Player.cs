@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     private float hookAngle;
     private float trailTimer;
     public float asteroidTimer;
+    public float cameraXZ;
     // rb is the RigidBody component of the player
     private Rigidbody rb;
     // This velocity variable is used in the jump function
@@ -55,6 +56,7 @@ public class Player : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        cameraXZ = transform.position.x;
         asteroidSetting = PlayerPrefs.GetInt("AsteroidSetting");
         lastFramePosition = transform.position;
         // Assigns rb to the RigidBody component of the player
@@ -66,7 +68,7 @@ public class Player : MonoBehaviour
         mySound = GetComponent<AudioSource>();
         trail = GetComponent<TrailRenderer>();
         skydome = GameObject.Find("SkyDome").GetComponent<Skydome>();
-        skydome.SetPlayer(gameObject);
+        skydome.SetPlayer(mainCamera);
         rb.freezeRotation = true;
 
         foreach (Transform child in big.transform)
@@ -296,10 +298,10 @@ public class Player : MonoBehaviour
     private void Move()
     {
         // Sets variables to the arrow key inputs
-        //float moveRightLeft = Input.GetAxis("Horizontal");
-        //float moveUpDown = Input.GetAxis("Vertical");
-        float moveRightLeft = (CrossPlatformInputManager.GetAxis("Horizontal"));
-        float moveUpDown = (CrossPlatformInputManager.GetAxis("Vertical"));
+        float moveRightLeft = Input.GetAxis("Horizontal");
+        float moveUpDown = Input.GetAxis("Vertical");
+        //float moveRightLeft = (CrossPlatformInputManager.GetAxis("Horizontal"));
+        //float moveUpDown = (CrossPlatformInputManager.GetAxis("Vertical"));
 
 
         // Sets the velocity of the player to moveSpeed times arrow key input (0 to 1 or -1)

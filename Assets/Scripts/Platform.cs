@@ -16,6 +16,7 @@ public class Platform : MonoBehaviour
     private int platsPlaced;
 	public int colorCounter;
     public GameObject FloorCanvas;
+    public CameraController cameraController;
     // The renderer component of the platform used to change the color
     private Renderer platRender;
     private Rigidbody rb;
@@ -70,8 +71,9 @@ public class Platform : MonoBehaviour
 
     // This initialize funciton is called by the "platforms" empty when Instanciating a new platform 
     //in order to pass the empty into the platform's "platforms" variable
-    public void Initialize(Platforms plats, int dir, int consecutiveSpawned, int consecutivePlaced, Clouds clouds, float pitch, Player player, LevelUp levelUpText)
+    public void Initialize(Platforms plats, int dir, int consecutiveSpawned, int consecutivePlaced, Clouds clouds, float pitch, Player player, LevelUp levelUpText, CameraController camController)
     {
+        cameraController = camController;
         this.levelUpText = levelUpText;
         this.player = player;
         this.clouds = clouds;
@@ -427,7 +429,26 @@ public class Platform : MonoBehaviour
                 if (platforms.consecutiveJumped % 4 == 0)
                 {
                     platforms.rotationAngleMultiplier++;
+                    if (platforms.consecutiveJumped < 4)
+                    {
+                        player.cameraXZ = player.transform.position.x;
+                    }
+                    else if (platforms.consecutiveJumped >= 4 && platforms.consecutiveJumped < 8)
+                    {
+                        player.cameraXZ = player.transform.position.z;
+                    }
+                    else if (platforms.consecutiveJumped >= 8 && platforms.consecutiveJumped < 12)
+                    {
+                        player.cameraXZ = player.transform.position.x;
+                    }
+                    else if (platforms.consecutiveJumped >= 12 && platforms.consecutiveJumped <= 16)
+                    {
+                        player.cameraXZ = player.transform.position.z;
+                    }
+                    cameraController.beginRotating = true;
                 }
+
+
                 platforms.score++;
                 print(platforms.score);
 
