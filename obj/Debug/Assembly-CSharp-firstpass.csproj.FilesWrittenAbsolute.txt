@@ -25,3 +25,6 @@
 /Users/ShayanKhalili/Documents/Unity/Platformer/Temp/bin/Debug/Apple.dll
 /Users/ShayanKhalili/Documents/Unity/Platformer/Temp/bin/Debug/Tizen.dll
 /Users/ShayanKhalili/Documents/Unity/Platformer/Temp/bin/Debug/winrt.dll
+/Users/ShayanKhalili/Documents/Unity/Platformer/Temp/bin/Debug/UnityEngine.PlaymodeTestsRunner.dll
+/Users/ShayanKhalili/Documents/Unity/Platformer/Temp/bin/Debug/UnityEngine.HoloLens.dll
+/Users/ShayanKhalili/Documents/Unity/Platformer/Temp/bin/Debug/UnityEngine.VR.dll

@@ -11,6 +11,7 @@ public class Platforms : MonoBehaviour
     public List<GameObject> platformsAlive;
     // Variable that can be set in unity for the number of seconds before a platforms disappears
     public float countDown;
+    public float tutorialTimer;
     public float rotationAngleMultiplier;
     public float platSpeed;
     public float pitch = 1f;
@@ -27,10 +28,16 @@ public class Platforms : MonoBehaviour
     public Player player;
     public int swiperCounter;
     public LevelUp levelUpText;
+    public UnityEngine.UI.Text tutorialText;
+
+    public bool firstSwiper = false;
+    public bool firstBullet = false;
+    public bool firstTraffic = false;
 
     // Use this for initialization
     void Start()
     {
+        tutorialTimer = 0f;
         rotationAngleMultiplier = 2;
         score = -1;
         // Define the platforms list as a new List of GameObjects
@@ -45,7 +52,14 @@ public class Platforms : MonoBehaviour
     }
 
     // Update is called once per frame
+    void Update(){
+        tutorialTimer -= Time.deltaTime;
+        tutorialTimer = Mathf.Max(0f, tutorialTimer);
+        if (tutorialTimer == 0f){
+            tutorialText.text = "";
+        }
 
+    }
 
     // Function to spawn a new platform
     public void SpawnPlatform()

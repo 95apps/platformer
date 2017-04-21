@@ -58,7 +58,9 @@ public class Platform : MonoBehaviour
 
     public Clouds clouds;
     public GameObject swiper;
+    public bool swiperActive = false;
     public GameObject bulletsGroup;
+    public bool bulletsActive = false;
     public GameObject coin;
     public Color32[] trafficColors;
     public Color32 fallColor;
@@ -120,11 +122,13 @@ public class Platform : MonoBehaviour
         if (UnityEngine.Random.Range(0, 8) == 1 && !startMoving && platsSpawned >= 8 && platsSpawned <= 31 && platforms.swiperCounter <= 1)
         {
             swiper.SetActive(true);
+            swiperActive = true;
             platforms.swiperCounter++;
         }
         else if (UnityEngine.Random.Range(0, 6) == 1 && !startMoving && platsSpawned >= 32 && !swiper.activeInHierarchy && platforms.swiperCounter <= 1)
         {
             swiper.SetActive(true);
+            swiperActive = true;
             platforms.swiperCounter++;
         }
         else
@@ -135,9 +139,10 @@ public class Platform : MonoBehaviour
         if (UnityEngine.Random.Range(0, 6) == 1 && !swiper.activeInHierarchy && platsSpawned >= 24)
         {
             bulletsGroup.SetActive(true);
+            bulletsActive = true;
         }
 
-        if (UnityEngine.Random.Range(0, 8) == 1 && !swiper.activeInHierarchy && !bulletsGroup.activeInHierarchy)
+        if (UnityEngine.Random.Range(0, 8) == 1 && !swiper.activeInHierarchy && !bulletsGroup.activeInHierarchy && platsSpawned >= 4)
         {
             trafficLight = true;
         }
@@ -402,6 +407,22 @@ public class Platform : MonoBehaviour
             // If the countDown equals initialCountDown (which it will, only the first time that the player touches the platform) then spawn another platform
             if (countDown == initialCountDown)
             {
+                int platformIndex = Array.IndexOf(platforms.GetComponentsInChildren<Platform>(), this);
+                if (platforms.GetComponentsInChildren<Platform>()[platformIndex + 1].swiperActive && !platforms.firstSwiper){
+                    platforms.tutorialText.text += "The glass will knock you off the block!\n";
+                    platforms.tutorialTimer += 4;
+                    platforms.firstSwiper = true;
+                }
+                if (platforms.GetComponentsInChildren<Platform>()[platformIndex + 1].bulletsActive && !platforms.firstBullet){
+                    platforms.tutorialText.text += "The red bullets will make you spin!\n";
+                    platforms.tutorialTimer += 4;
+                    platforms.firstBullet = true;
+                }
+                if (platforms.GetComponentsInChildren<Platform>()[platformIndex + 1].trafficLight && !platforms.firstTraffic){
+                    platforms.tutorialText.text += "Don't land on the block when its red!\n";
+                    platforms.tutorialTimer += 4;
+                    platforms.firstTraffic = true;
+                }
 
                 if (Array.IndexOf(platforms.GetComponentsInChildren<Platform>(), this) > 0)
                 {

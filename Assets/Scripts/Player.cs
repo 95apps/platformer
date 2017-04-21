@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public bool tapJumping = false;
     public bool isSpawnTrail = true;
     public bool levelingUp = false;
+    public bool firstMovement = false;
     public int currentLevel = 1;
     // Most of these variables are pretty self explanatory
     public float movingSpeed = 0.1f;
@@ -49,6 +50,7 @@ public class Player : MonoBehaviour
     private bool setHookTarget = false;
     private int asteroidSetting;
     public GameObject asteroidOffPicture;
+    public GameObject movementTutorial;
 
 
 
@@ -132,7 +134,8 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {        if (Input.GetKey(KeyCode.G))
+    {        
+        if (Input.GetKey(KeyCode.G))
         {
             transform.position = platforms.platforms[10].transform.position + Vector3.up;
         }
@@ -296,10 +299,10 @@ public class Player : MonoBehaviour
     private void Move()
     {
         // Sets variables to the arrow key inputs
-        //float moveRightLeft = Input.GetAxis("Horizontal");
-        //float moveUpDown = Input.GetAxis("Vertical");
-        float moveRightLeft = (CrossPlatformInputManager.GetAxis("Horizontal"));
-        float moveUpDown = (CrossPlatformInputManager.GetAxis("Vertical"));
+        float moveRightLeft = Input.GetAxis("Horizontal");
+        float moveUpDown = Input.GetAxis("Vertical");
+        //float moveRightLeft = (CrossPlatformInputManager.GetAxis("Horizontal"));
+        //float moveUpDown = (CrossPlatformInputManager.GetAxis("Vertical"));
 
 
         // Sets the velocity of the player to moveSpeed times arrow key input (0 to 1 or -1)
@@ -331,10 +334,14 @@ public class Player : MonoBehaviour
         if (canJump)
         {
             canJump = false;
-            velocity = rb.velocity;
+            firstMovement = true;
+            movementTutorial.SetActive(false);
+            //velocity = rb.velocity;
             // Changes the vertical velocity of the player to jumpSpeed
-            velocity.y = jumpSpeed;
-            rb.velocity = velocity;
+            //velocity.y = jumpSpeed;
+            //rb.velocity = velocity;
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.y);
+            rb.AddForce(new Vector3(0, jumpSpeed, 0), ForceMode.Impulse);
 
             mySound.PlayOneShot(bounceSounds[Random.Range(0, bounceSounds.Length)], 0.8f);
         }
